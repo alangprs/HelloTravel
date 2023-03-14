@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1DACDA55EFD19FDFC03F76E5 /* Pods_HelloTravel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 599C18BAE141390F80B95B07 /* Pods_HelloTravel.framework */; };
+		295026EFAEA1F1E46B3C2D0B /* Pods_HelloTravelTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8C334B444D78BA5B13A0755 /* Pods_HelloTravelTests.framework */; };
 		6E216EF729C017FD00BE1BB1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E216EF629C017FD00BE1BB1 /* AppDelegate.swift */; };
 		6E216EF929C017FD00BE1BB1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E216EF829C017FD00BE1BB1 /* SceneDelegate.swift */; };
 		6E216EFB29C017FD00BE1BB1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E216EFA29C017FD00BE1BB1 /* ViewController.swift */; };
@@ -14,6 +16,7 @@
 		6E216F0029C0180000BE1BB1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6E216EFF29C0180000BE1BB1 /* Assets.xcassets */; };
 		6E216F0329C0180000BE1BB1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E216F0129C0180000BE1BB1 /* LaunchScreen.storyboard */; };
 		6E216F0E29C0180000BE1BB1 /* HelloTravelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E216F0D29C0180000BE1BB1 /* HelloTravelTests.swift */; };
+		6E216F2729C01BA500BE1BB1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6E216F2629C01BA500BE1BB1 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,6 +30,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1616DA02C14855527A54C15A /* Pods-HelloTravelTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HelloTravelTests.debug.xcconfig"; path = "Target Support Files/Pods-HelloTravelTests/Pods-HelloTravelTests.debug.xcconfig"; sourceTree = "<group>"; };
+		599C18BAE141390F80B95B07 /* Pods_HelloTravel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HelloTravel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6DD33825AD2BE8B3E603DF1F /* Pods-HelloTravelTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HelloTravelTests.release.xcconfig"; path = "Target Support Files/Pods-HelloTravelTests/Pods-HelloTravelTests.release.xcconfig"; sourceTree = "<group>"; };
 		6E216EF329C017FD00BE1BB1 /* HelloTravel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HelloTravel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E216EF629C017FD00BE1BB1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6E216EF829C017FD00BE1BB1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -37,6 +43,10 @@
 		6E216F0429C0180000BE1BB1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6E216F0929C0180000BE1BB1 /* HelloTravelTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HelloTravelTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E216F0D29C0180000BE1BB1 /* HelloTravelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelloTravelTests.swift; sourceTree = "<group>"; };
+		6E216F2629C01BA500BE1BB1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		9BCF00734D1A76B4375EB4EF /* Pods-HelloTravel.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HelloTravel.release.xcconfig"; path = "Target Support Files/Pods-HelloTravel/Pods-HelloTravel.release.xcconfig"; sourceTree = "<group>"; };
+		D8C334B444D78BA5B13A0755 /* Pods_HelloTravelTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HelloTravelTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA6DE97EDBC1D4160FA79B3D /* Pods-HelloTravel.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HelloTravel.debug.xcconfig"; path = "Target Support Files/Pods-HelloTravel/Pods-HelloTravel.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,6 +54,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1DACDA55EFD19FDFC03F76E5 /* Pods_HelloTravel.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -51,18 +62,33 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				295026EFAEA1F1E46B3C2D0B /* Pods_HelloTravelTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1C07AD2A4CDF5F515F51C746 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				DA6DE97EDBC1D4160FA79B3D /* Pods-HelloTravel.debug.xcconfig */,
+				9BCF00734D1A76B4375EB4EF /* Pods-HelloTravel.release.xcconfig */,
+				1616DA02C14855527A54C15A /* Pods-HelloTravelTests.debug.xcconfig */,
+				6DD33825AD2BE8B3E603DF1F /* Pods-HelloTravelTests.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		6E216EEA29C017FD00BE1BB1 = {
 			isa = PBXGroup;
 			children = (
 				6E216EF529C017FD00BE1BB1 /* HelloTravel */,
 				6E216F0C29C0180000BE1BB1 /* HelloTravelTests */,
 				6E216EF429C017FD00BE1BB1 /* Products */,
+				1C07AD2A4CDF5F515F51C746 /* Pods */,
+				B0FCC204A5B80717E427734A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -85,6 +111,7 @@
 				6E216EFF29C0180000BE1BB1 /* Assets.xcassets */,
 				6E216F0129C0180000BE1BB1 /* LaunchScreen.storyboard */,
 				6E216F0429C0180000BE1BB1 /* Info.plist */,
+				6E216F2629C01BA500BE1BB1 /* GoogleService-Info.plist */,
 			);
 			path = HelloTravel;
 			sourceTree = "<group>";
@@ -97,6 +124,15 @@
 			path = HelloTravelTests;
 			sourceTree = "<group>";
 		};
+		B0FCC204A5B80717E427734A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				599C18BAE141390F80B95B07 /* Pods_HelloTravel.framework */,
+				D8C334B444D78BA5B13A0755 /* Pods_HelloTravelTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -104,9 +140,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6E216F1D29C0180000BE1BB1 /* Build configuration list for PBXNativeTarget "HelloTravel" */;
 			buildPhases = (
+				A9FB3799B452F19DA00E7487 /* [CP] Check Pods Manifest.lock */,
 				6E216EEF29C017FD00BE1BB1 /* Sources */,
 				6E216EF029C017FD00BE1BB1 /* Frameworks */,
 				6E216EF129C017FD00BE1BB1 /* Resources */,
+				B1F07C457C670709E865BC3B /* [CP] Embed Pods Frameworks */,
+				1D6F09414E93749BDFEA14FA /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -121,6 +160,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6E216F2029C0180000BE1BB1 /* Build configuration list for PBXNativeTarget "HelloTravelTests" */;
 			buildPhases = (
+				D28FEAE7D3F5C26232B92DA3 /* [CP] Check Pods Manifest.lock */,
 				6E216F0529C0180000BE1BB1 /* Sources */,
 				6E216F0629C0180000BE1BB1 /* Frameworks */,
 				6E216F0729C0180000BE1BB1 /* Resources */,
@@ -179,6 +219,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6E216F0329C0180000BE1BB1 /* LaunchScreen.storyboard in Resources */,
+				6E216F2729C01BA500BE1BB1 /* GoogleService-Info.plist in Resources */,
 				6E216F0029C0180000BE1BB1 /* Assets.xcassets in Resources */,
 				6E216EFE29C017FD00BE1BB1 /* Main.storyboard in Resources */,
 			);
@@ -192,6 +233,87 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1D6F09414E93749BDFEA14FA /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-HelloTravel/Pods-HelloTravel-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-HelloTravel/Pods-HelloTravel-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-HelloTravel/Pods-HelloTravel-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A9FB3799B452F19DA00E7487 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-HelloTravel-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B1F07C457C670709E865BC3B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-HelloTravel/Pods-HelloTravel-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-HelloTravel/Pods-HelloTravel-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-HelloTravel/Pods-HelloTravel-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D28FEAE7D3F5C26232B92DA3 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-HelloTravelTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		6E216EEF29C017FD00BE1BB1 /* Sources */ = {
@@ -292,7 +414,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -346,7 +468,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -358,6 +480,7 @@
 		};
 		6E216F1E29C0180000BE1BB1 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DA6DE97EDBC1D4160FA79B3D /* Pods-HelloTravel.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -386,6 +509,7 @@
 		};
 		6E216F1F29C0180000BE1BB1 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9BCF00734D1A76B4375EB4EF /* Pods-HelloTravel.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -414,6 +538,7 @@
 		};
 		6E216F2129C0180000BE1BB1 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1616DA02C14855527A54C15A /* Pods-HelloTravelTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -434,6 +559,7 @@
 		};
 		6E216F2229C0180000BE1BB1 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6DD33825AD2BE8B3E603DF1F /* Pods-HelloTravelTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
