@@ -23,8 +23,16 @@ class ViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
+        viewModel.handleAuth()
+
         // TODO: 註冊可成功
 //        viewModel.creatUser(mail: "willwengtest@gmail.com", password: "123456")
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        viewModel.removeAuthHandle()
     }
 }
 

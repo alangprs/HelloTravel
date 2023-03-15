@@ -14,11 +14,22 @@ class FirebaseAuthenticationAdapter {
     private var authHandle: AuthStateDidChangeListenerHandle?
 
     /// 監控使用者登入狀態
-    func handleUseState() {
-        // TODO: 監控使用者登入狀態
+    /// true = 登入狀態, false = 未登入
+    func handleUseState(completion: @escaping ((Bool) -> Void)) {
+        
         authHandle = Auth.auth().addStateDidChangeListener({ auth, user in
-            Logger.log(message: "auth: \(auth), user: \(String(describing: user))")
+            if user != nil {
+                completion(true)
+            } else {
+                completion(false)
+            }
         })
+    }
+
+    /// 移除帳號 登入/登出 狀態監聽
+    func removeAuthHandle() {
+        guard let authHandle = authHandle else { return }
+        Auth.auth().removeStateDidChangeListener(authHandle)
     }
 
     /// 創新使用者

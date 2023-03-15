@@ -20,6 +20,21 @@ class ViewModel {
         return FirebaseAuthenticationAdapter()
     }()
 
+    func handleAuth() {
+        authenticationAdapter.handleUseState { isLogin in
+
+            if isLogin {
+                Logger.log(message: "登入狀態")
+            } else {
+                Logger.log(message: "未登入")
+            }
+        }
+    }
+
+    func removeAuthHandle() {
+        authenticationAdapter.removeAuthHandle()
+    }
+
     /// 創建帳號
     func creatUser(mail: String, password: String) {
         authenticationAdapter.createUser(mail: mail,
