@@ -20,6 +20,11 @@ class ViewModel {
         return FirebaseAuthenticationAdapter()
     }()
 
+    /// 資料庫
+    private lazy var realtimeDatabaseAdapter: RealtimeDatabaseAdapter = {
+        return RealtimeDatabaseAdapter()
+    }()
+
     func handleAuth() {
         authenticationAdapter.handleUseState { isLogin in
 
@@ -74,4 +79,10 @@ class ViewModel {
         }
     }
 
+    // MARK: - Database
+
+    /// 即時取得 database 資料
+    func referenceData() {
+        realtimeDatabaseAdapter.referenceData()
+    }
 }

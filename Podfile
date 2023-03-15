@@ -23,6 +23,7 @@ source 'https://github.com/CocoaPods/Specs.git'
  pod 'FirebaseAnalytics'
  pod 'FirebaseFirestore', :git => 'https://github.com/invertase/firestore-ios-sdk-frameworks.git', :tag => '10.0.0'
  pod 'FirebaseCrashlytics', '10.0.0'
+ pod 'FirebaseDatabase', '10.6.0'
 
 
 end
