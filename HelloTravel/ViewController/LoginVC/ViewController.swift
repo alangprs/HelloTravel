@@ -27,6 +27,10 @@ class ViewController: UIViewController {
 
         // TODO: 註冊可成功
 //        viewModel.creatUser(mail: "willwengtest@gmail.com", password: "123456")
+        // TODO: 登入可成功
+//        viewModel.signInWithEMail(mail: "willwengtest@gmail.com", password: "123456")
+        // TODO: 登出可成功
+//        viewModel.singOut()
     }
 
     override func viewWillDisappear(_ animated: Bool) {

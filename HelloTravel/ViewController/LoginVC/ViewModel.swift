@@ -48,4 +48,30 @@ class ViewModel {
         }
     }
 
+    /// 登入
+    func signInWithEMail(mail: String, password: String) {
+        authenticationAdapter.signInWithEMail(mail: mail, password: password) { result in
+
+            switch result {
+                case .success(let success):
+                    Logger.log(message: success)
+                case .failure(let failure):
+                    Logger.errorLog(message: failure)
+            }
+        }
+    }
+
+    /// 登出
+    func singOut() {
+        authenticationAdapter.singOut { result in
+
+            switch result {
+                case .success(_):
+                    Logger.log(message: "登出成功")
+                case .failure(let error):
+                    Logger.errorLog(message: error)
+            }
+        }
+    }
+
 }
