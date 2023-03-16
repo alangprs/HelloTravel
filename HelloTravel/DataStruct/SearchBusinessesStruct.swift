@@ -64,9 +64,9 @@ struct Location: Codable {
     let address1: String
     let address2: String?
     let address3: Address3?
-    let city: City
+    let city: String
     let zipCode: String
-    let country, state: Country
+    let country, state: String
     let displayAddress: [String]
 
     enum CodingKeys: String, CodingKey {
@@ -81,14 +81,6 @@ enum Address3: String, Codable {
     case empty = ""
     case maxwellFoodCenter = "Maxwell Food Center"
     case parkviewSquare = "Parkview Square"
-}
-
-enum City: String, Codable {
-    case singapore = "Singapore"
-}
-
-enum Country: String, Codable {
-    case sg = "SG"
 }
 
 // MARK: - Region
