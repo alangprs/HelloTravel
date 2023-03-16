@@ -14,16 +14,49 @@ class SearchBusinessesUseCase {
         return AlamofireAdapter()
     }()
 
+    private var businesses: String
+    private var search: String
+    private var location: String?
+    /// 搜尋範圍
+    private var radius: String
+    /// 結果數量
+    private var limit: Int
+    private var sortType: String
+    /// 緯度
+    private var latitude: Double?
+    /// 經度
+    private var longitude: Double?
+    private var query: String
+
+    /// 依名稱搜尋
+    init(location: String) {
+        self.businesses = "/businesses"
+        self.search = "search"
+        self.location = location
+        self.radius = "3000"
+        self.limit = 20
+        self.sortType = "best_match"
+        self.query = "?location=\(location)&radius=\(radius)&sort_by=\(sortType)&limit=\(limit)"
+    }
+
+    /// 依緯經度搜尋
+    init(latitude: Double, longitude: Double) {
+        self.businesses = "/businesses"
+        self.search = "/search"
+        self.radius = "3000"
+        self.limit = 20
+        self.sortType = "best_match"
+        self.latitude = latitude
+        self.longitude = longitude
+        self.query = "?latitude=\(latitude)&longitude=\(longitude)&radius=\(radius)&sort_by=\(sortType)&limit=\(limit)"
+    }
+
     /// 取周圍資料
     func getBusinessesData(completion: @escaping ((Result<SearchBusinessesStruct, Error>) -> Void)) {
 
         let Host: String = "https://api.yelp.com/v3"
-        let businesses: String = "/businesses"
-        let search: String = "/search"
-        let query: String = "?location=Singapore&radius=20000&sort_by=best_match&limit=20"
 
         // 看文件
-        let apiKey: String = ""
 
         let url = Host + businesses + search + query
         let headers = [
