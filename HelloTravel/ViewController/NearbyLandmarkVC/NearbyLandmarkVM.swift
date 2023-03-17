@@ -9,6 +9,8 @@ import UIKit
 
 protocol NearbyLandmarkVMDelegate: AnyObject {
     func noGPSPermission()
+    func getTravelItemSuccess()
+    func getTravelItemError()
 }
 
 class NearbyLandmarkVM {
@@ -21,6 +23,8 @@ class NearbyLandmarkVM {
         return locationManager
     }()
 
+    private(set) var travelList: [Business] = []
+
     /// 取附近資料
     private var searchBusinessesUseCase: SearchBusinessesUseCase?
     
@@ -29,10 +33,18 @@ class NearbyLandmarkVM {
         locationManager.askPermission()
     }
 
+    func getTravelItem(indexPath: IndexPath) -> Business? {
+        guard !travelList.isEmpty else {
+            Logger.errorLog(message: "\(travelList)")
+            return nil
+        }
+        return travelList[indexPath.item]
+    }
+
     /// 計算要顯示的星星圖片
     /// - Parameter starsCount: 星星數量
     /// - Returns: 星星圖片
-    func calculateStarIcon(starsCount: Float) -> UIImage {
+    func calculateStarIcon(starsCount: Double) -> UIImage {
         var image = UIImage()
         switch starsCount {
 
@@ -62,14 +74,18 @@ class NearbyLandmarkVM {
     ///   - longitude: 經度
     private func getNearbyAttractions() {
 
-        searchBusinessesUseCase?.getBusinessesData { result in
+        searchBusinessesUseCase?.getBusinessesData { [weak self] result in
+            guard let self = self else { return }
 
             // TODO: 取得周圍景點後動作
             switch result {
                 case .success(let item):
                     Logger.log(message: item.businesses)
+                    self.travelList = item.businesses
+                    self.delegate?.getTravelItemSuccess()
                 case .failure(let error):
                     Logger.errorLog(message: error)
+                    self.delegate?.getTravelItemError()
             }
         }
     }

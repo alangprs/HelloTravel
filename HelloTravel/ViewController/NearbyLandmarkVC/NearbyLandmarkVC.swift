@@ -99,7 +99,7 @@ class NearbyLandmarkVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        //        viewModel.askPermission()
+        viewModel.askPermission()
     }
 
     // MARK: - 其他
@@ -233,7 +233,7 @@ class NearbyLandmarkVC: UIViewController {
     ///   - bgImageName: 背景圖名稱
     ///   - title: 景點名稱
     ///   - starsCount: 星星數量
-    private func convertCell(cell: TravelCollectionViewCell, bgImageName: String, title: String, starsCount: Float) {
+    private func convertCell(cell: TravelCollectionViewCell, bgImageName: String, title: String, starsCount: Double) {
         cell.bgImageView.image = UIImage(named: bgImageName)
         cell.titleLabel.text = title
         cell.starsCountLabel.text = "\(starsCount)"
@@ -262,6 +262,17 @@ class NearbyLandmarkVC: UIViewController {
 // MARK: - NearbyLandmarkVMDelegate
 
 extension NearbyLandmarkVC: NearbyLandmarkVMDelegate {
+    func getTravelItemSuccess() {
+
+        DispatchQueue.main.async {
+            self.travelCollectionView.reloadData()
+        }
+    }
+
+    func getTravelItemError() {
+        // TODO: error 處理
+    }
+
     func noGPSPermission() {
         locationAlert(title: "未開開啟定位服務", message: "請前往 設定 > 隱私權 > 定位服務，開啟")
     }
@@ -278,18 +289,19 @@ extension NearbyLandmarkVC: UITextFieldDelegate {
 extension NearbyLandmarkVC: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return 10
+        return viewModel.travelList.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 
-        guard let cell = travelCollectionView.dequeueReusableCell(withReuseIdentifier: "\(TravelCollectionViewCell.self)", for: indexPath) as? TravelCollectionViewCell else {
+        guard let cell = travelCollectionView.dequeueReusableCell(withReuseIdentifier: "\(TravelCollectionViewCell.self)", for: indexPath) as? TravelCollectionViewCell,
+              let travelItem = viewModel.getTravelItem(indexPath: indexPath) else {
 
             Logger.errorLog(message: "get CollectionViewCell error")
             return UICollectionViewCell()
         }
 
-        convertCell(cell: cell, bgImageName: "testImage", title: "名稱顯示", starsCount: 1)
+        convertCell(cell: cell, bgImageName: "testImage", title: travelItem.name, starsCount: travelItem.rating)
 
         return cell
     }
