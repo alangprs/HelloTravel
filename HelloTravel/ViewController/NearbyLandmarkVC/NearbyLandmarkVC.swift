@@ -81,6 +81,12 @@ class NearbyLandmarkVC: UIViewController {
         return btn
     }()
 
+    // MARK: - 附近景點清單
+
+    private lazy var travelCollectionView: UICollectionView = {
+        var collectionView = UICollectionView()
+        return collectionView
+    }()
 
     // MARK: - 生命週期
 
@@ -102,6 +108,7 @@ class NearbyLandmarkVC: UIViewController {
         setupTopView()
         setupMiddleButtonContainerView()
         setupSearchBar()
+        setupCollectionView()
     }
 
     /// 搜尋匡
@@ -174,6 +181,42 @@ class NearbyLandmarkVC: UIViewController {
 
     }
 
+    /// CollectionView 相關設定
+    private func setupCollectionView() {
+
+        let layout = UICollectionViewFlowLayout()
+        let getWidth = view.frame.width
+        /// vc 剩餘高度
+        let lastHeight: CGFloat = {
+            let superViewHeight = view.frame.height
+            let topViewHeight = topView.frame.height
+            let buttonContainerViewHeight = middleButtonContainerView.frame.height
+            return superViewHeight - (topViewHeight + buttonContainerViewHeight)
+        }()
+
+        layout.itemSize = CGSize(width: getWidth, height: lastHeight)
+        // 左右間距
+        layout.minimumLineSpacing = CGFloat(integerLiteral: 10)
+        // 水平滑動
+        layout.scrollDirection = .horizontal
+
+        travelCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        // 關閉滾動條
+        travelCollectionView.showsHorizontalScrollIndicator = false
+
+        view.addSubview(travelCollectionView)
+
+        travelCollectionView.delegate = self
+        travelCollectionView.dataSource = self
+
+        travelCollectionView.register(TravelCollectionViewCell.self, forCellWithReuseIdentifier: "\(TravelCollectionViewCell.self)")
+        travelCollectionView.snp.makeConstraints { make in
+            make.top.equalTo(middleButtonContainerView.snp.bottom).inset(0.5)
+            make.bottom.equalTo(self.view.safeAreaLayoutGuide)
+            make.leading.trailing.equalToSuperview()
+        }
+    }
+
     /// 未開啟定位通知
     private func locationAlert(title: String, message: String) {
         let alertControl = UIAlertController(title: title, message: message, preferredStyle: .alert)
@@ -183,6 +226,18 @@ class NearbyLandmarkVC: UIViewController {
         
         alertControl.addAction(okAction)
         present(alertControl, animated: true)
+    }
+
+    /// cell UI 設定
+    /// - Parameters:
+    ///   - bgImageName: 背景圖名稱
+    ///   - title: 景點名稱
+    ///   - starsCount: 星星數量
+    private func convertCell(cell: TravelCollectionViewCell, bgImageName: String, title: String, starsCount: Float) {
+        cell.bgImageView.image = UIImage(named: bgImageName)
+        cell.titleLabel.text = title
+        cell.starsCountLabel.text = "\(starsCount)"
+        cell.starsCountImageView.image = viewModel.calculateStarIcon(starsCount: starsCount)
     }
 
     // MARK: - action
@@ -212,6 +267,33 @@ extension NearbyLandmarkVC: NearbyLandmarkVMDelegate {
     }
 }
 
+// MARK: - UITextFieldDelegate
+
 extension NearbyLandmarkVC: UITextFieldDelegate {
     // TODO: - 文字擷取
 }
+
+// MARK: - CollectionView
+
+extension NearbyLandmarkVC: UICollectionViewDelegate, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        
+        return 10
+    }
+
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+
+        guard let cell = travelCollectionView.dequeueReusableCell(withReuseIdentifier: "\(TravelCollectionViewCell.self)", for: indexPath) as? TravelCollectionViewCell else {
+
+            Logger.errorLog(message: "get CollectionViewCell error")
+            return UICollectionViewCell()
+        }
+
+        convertCell(cell: cell, bgImageName: "testImage", title: "名稱顯示", starsCount: 1)
+
+        return cell
+    }
+
+
+}
+
