@@ -66,7 +66,8 @@ struct Location: Codable {
     let address3: Address3?
     let city: String
     let zipCode: String
-    let country, state: String
+    let country: String
+    let state: String
     let displayAddress: [String]
 
     enum CodingKeys: String, CodingKey {
