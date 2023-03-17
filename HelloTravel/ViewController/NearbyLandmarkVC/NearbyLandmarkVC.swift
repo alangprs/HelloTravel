@@ -20,7 +20,6 @@ class NearbyLandmarkVC: UIViewController {
     // MARK: - 最上方區域
     private lazy var topView: UIView = {
         var view = UIView()
-
         return view
     }()
 
@@ -37,7 +36,51 @@ class NearbyLandmarkVC: UIViewController {
         return label
     }()
 
-    // MARK: -
+    // MARK: - 搜尋匡
+
+    private lazy var textView: UITextField = {
+        var textView = UITextField()
+        textView.placeholder = "請輸入文字"
+        textView.borderStyle = .roundedRect
+        textView.delegate = self
+        return textView
+    }()
+
+    // MARK: - 按鈕區
+
+    /// 按鈕容器
+    private lazy var middleButtonContainerView: UIView = {
+        var view = UIView()
+        return view
+    }()
+
+    /// 餐廳
+    private lazy var restaurantButton: UIButton = {
+        var btn = UIButton()
+        btn.setTitle("餐廳", for: .normal)
+        btn.setTitleColor(.black, for: .normal)
+        btn.addTarget(self, action: #selector(clickRestaurantButton), for: .touchUpInside)
+        return btn
+    }()
+
+    /// 按摩
+    private lazy var massageButton: UIButton = {
+        var btn = UIButton()
+        btn.setTitle("按摩", for: .normal)
+        btn.setTitleColor(.black, for: .normal)
+        btn.addTarget(self, action: #selector(clickMassageButton), for: .touchUpInside)
+        return btn
+    }()
+
+    /// 旅遊
+    private lazy var travelButton: UIButton = {
+        var btn = UIButton()
+        btn.setTitle("旅行", for: .normal)
+        btn.setTitleColor(.black, for: .normal)
+        btn.addTarget(self, action: #selector(clickTravelButton), for: .touchUpInside)
+        return btn
+    }()
+
 
     // MARK: - 生命週期
 
@@ -50,13 +93,28 @@ class NearbyLandmarkVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-//        viewModel.askPermission()
+        //        viewModel.askPermission()
     }
 
     // MARK: - 其他
 
     private func setupUI() {
         setupTopView()
+        setupMiddleButtonContainerView()
+        setupSearchBar()
+    }
+
+    /// 搜尋匡
+    private func setupSearchBar() {
+        view.addSubview(textView)
+        textView.snp.makeConstraints { make in
+            make.leading.equalToSuperview().inset(12)
+            make.trailing.equalToSuperview().offset(-12)
+            let height = 50
+            make.height.equalTo(height)
+            let half = height / 2
+            make.bottom.equalTo(topView.snp.bottom).offset(half)
+        }
     }
 
     private func setupTopView() {
@@ -69,7 +127,6 @@ class NearbyLandmarkVC: UIViewController {
 
         topView.addSubview(bgImage)
         bgImage.backgroundColor = .systemGray
-
         topView.addSubview(topTitleLabel)
 
         bgImage.snp.makeConstraints { make in
@@ -82,6 +139,41 @@ class NearbyLandmarkVC: UIViewController {
         }
     }
 
+    /// 按鈕群
+    private func setupMiddleButtonContainerView() {
+        // TODO: - UI 再調整
+
+        view.addSubview(middleButtonContainerView)
+        middleButtonContainerView.addSubview(restaurantButton)
+        middleButtonContainerView.addSubview(massageButton)
+        middleButtonContainerView.addSubview(travelButton)
+
+        middleButtonContainerView.backgroundColor = .systemRed
+
+        middleButtonContainerView.snp.makeConstraints { make in
+
+            make.top.equalTo(topView.snp.bottom)
+            make.leading.trailing.equalToSuperview()
+            make.height.equalTo(100)
+        }
+
+        restaurantButton.snp.makeConstraints { make in
+            make.leading.equalToSuperview().offset(16)
+            make.bottom.equalToSuperview().offset(-12)
+        }
+
+        massageButton.snp.makeConstraints { make in
+            make.leading.equalTo(restaurantButton.snp.trailing).offset(30)
+            make.bottom.equalToSuperview().offset(-12)
+        }
+
+        travelButton.snp.makeConstraints { make in
+            make.leading.equalTo(massageButton.snp.trailing).offset(30)
+            make.bottom.equalToSuperview().offset(-12)
+        }
+
+    }
+
     /// 未開啟定位通知
     private func locationAlert(title: String, message: String) {
         let alertControl = UIAlertController(title: title, message: message, preferredStyle: .alert)
@@ -92,6 +184,24 @@ class NearbyLandmarkVC: UIViewController {
         alertControl.addAction(okAction)
         present(alertControl, animated: true)
     }
+
+    // MARK: - action
+
+    @objc private func clickRestaurantButton() {
+        // TODO: 點擊後動作
+        Logger.log(message: "clickRestaurantButton")
+    }
+
+    @objc private func clickMassageButton() {
+        // TODO: 點擊後動作
+        Logger.log(message: "clickMassageButton")
+    }
+
+    @objc private func clickTravelButton() {
+        // TODO: 點擊後動作
+        Logger.log(message: "clickTravelButton")
+    }
+
 }
 
 // MARK: - NearbyLandmarkVMDelegate
@@ -100,4 +210,8 @@ extension NearbyLandmarkVC: NearbyLandmarkVMDelegate {
     func noGPSPermission() {
         locationAlert(title: "未開開啟定位服務", message: "請前往 設定 > 隱私權 > 定位服務，開啟")
     }
+}
+
+extension NearbyLandmarkVC: UITextFieldDelegate {
+    // TODO: - 文字擷取
 }
