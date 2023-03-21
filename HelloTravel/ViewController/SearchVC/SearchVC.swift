@@ -20,8 +20,9 @@ class SearchVC: UIViewController {
     // MARK: - topView 區域
 
     private lazy var topView: SearchTopBarView = {
-        /// TODO: 接事件
-        return SearchTopBarView()
+        var view = SearchTopBarView()
+        view.delegate = self
+        return view
     }()
 
     private lazy var mapView: MKMapView = {
@@ -56,4 +57,16 @@ class SearchVC: UIViewController {
 
 }
 
+// MARK: - SearchTopBarViewDelegate
+
+extension SearchVC: SearchTopBarViewDelegate {
+    func goBackViewController() {
+        dismiss(animated: true)
+    }
+
+    func didTypeSwitch() {
+        // TODO: 處理狀態切換
+    }
+
+}
 
