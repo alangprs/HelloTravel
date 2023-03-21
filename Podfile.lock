@@ -43,7 +43,10 @@ PODS:
     - FirebaseFirestore/AutodetectLeveldb (= 10.0.0)
   - FirebaseFirestore/AutodetectLeveldb (10.0.0):
     - FirebaseFirestore/Base
+    - FirebaseFirestore/WithLeveldb
   - FirebaseFirestore/Base (10.0.0)
+  - FirebaseFirestore/WithLeveldb (10.0.0):
+    - FirebaseFirestore/Base
   - FirebaseInstallations (10.5.0):
     - FirebaseCore (~> 10.0)
     - GoogleUtilities/Environment (~> 7.8)
@@ -100,6 +103,9 @@ PODS:
   - nanopb/decode (2.30909.0)
   - nanopb/encode (2.30909.0)
   - PromisesObjC (2.2.0)
+  - SDWebImage (5.15.5):
+    - SDWebImage/Core (= 5.15.5)
+  - SDWebImage/Core (5.15.5)
   - SnapKit (5.6.0)
 
 DEPENDENCIES:
@@ -109,6 +115,7 @@ DEPENDENCIES:
   - FirebaseCrashlytics (= 10.0.0)
   - FirebaseDatabase (= 10.6.0)
   - FirebaseFirestore (from `https://github.com/invertase/firestore-ios-sdk-frameworks.git`, tag `10.0.0`)
+  - SDWebImage (= 5.15.5)
   - SnapKit (= 5.6.0)
 
 SPEC REPOS:
@@ -128,6 +135,7 @@ SPEC REPOS:
     - leveldb-library
     - nanopb
     - PromisesObjC
+    - SDWebImage
     - SnapKit
 
 EXTERNAL SOURCES:
@@ -148,7 +156,7 @@ SPEC CHECKSUMS:
   FirebaseCoreInternal: e463f41bb935cd049505bf7e9a5bdd7dcea90df6
   FirebaseCrashlytics: 6b0613b548fe096221b5ba6d2f7a9732b451233b
   FirebaseDatabase: c3ab8f695e48d4c4431f8406b58ebe543be185d9
-  FirebaseFirestore: bce4ede59168d61ad353fc1fbfefe66ac5e75be5
+  FirebaseFirestore: d1b97d497a6e6c31bb38dff714af8e606395b959
   FirebaseInstallations: 935bc4abb6f7a035cab7a0c31cb777b2be3dd254
   GoogleAppMeasurement: 40c70a7d89013f0eca72006c4b9732163ea4cdae
   GoogleDataTransport: ea169759df570f4e37bdee1623ec32a7e64e67c4
@@ -157,8 +165,9 @@ SPEC CHECKSUMS:
   leveldb-library: 50c7b45cbd7bf543c81a468fe557a16ae3db8729
   nanopb: b552cce312b6c8484180ef47159bc0f65a1f0431
   PromisesObjC: 09985d6d70fbe7878040aa746d78236e6946d2ef
+  SDWebImage: fd7e1a22f00303e058058278639bf6196ee431fe
   SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
 
-PODFILE CHECKSUM: 25def8525ed23be1ed889bf85015f37f6edcb3ab
+PODFILE CHECKSUM: 2804a1241c6b367ac745c84e6cf9e1640a649310
 
 COCOAPODS: 1.11.3
