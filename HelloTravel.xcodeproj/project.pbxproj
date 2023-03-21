@@ -25,6 +25,11 @@
 		6E216F4129C1BCE900BE1BB1 /* SearchBusinessesUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E216F4029C1BCE900BE1BB1 /* SearchBusinessesUseCase.swift */; };
 		6E216F4429C1BF0700BE1BB1 /* SearchBusinessesStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E216F4329C1BF0700BE1BB1 /* SearchBusinessesStruct.swift */; };
 		6E216F4A29C2C65C00BE1BB1 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E216F4929C2C65C00BE1BB1 /* LocationManager.swift */; };
+		6E4DFA5A29C40215004C9177 /* NearbyLandmarkVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4DFA5929C40215004C9177 /* NearbyLandmarkVC.swift */; };
+		6E4DFA5C29C40258004C9177 /* NearbyLandmarkVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4DFA5B29C40258004C9177 /* NearbyLandmarkVM.swift */; };
+		6E4DFA5E29C44058004C9177 /* TravelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4DFA5D29C44058004C9177 /* TravelTableViewCell.swift */; };
+		6E4DFA6029C950AB004C9177 /* SDWebImageAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4DFA5F29C950AB004C9177 /* SDWebImageAdapter.swift */; };
+		BE15496429C494B80032C4BE /* CategoryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE15496329C494B80032C4BE /* CategoryButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,7 +65,12 @@
 		6E216F4029C1BCE900BE1BB1 /* SearchBusinessesUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBusinessesUseCase.swift; sourceTree = "<group>"; };
 		6E216F4329C1BF0700BE1BB1 /* SearchBusinessesStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBusinessesStruct.swift; sourceTree = "<group>"; };
 		6E216F4929C2C65C00BE1BB1 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		6E4DFA5929C40215004C9177 /* NearbyLandmarkVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearbyLandmarkVC.swift; sourceTree = "<group>"; };
+		6E4DFA5B29C40258004C9177 /* NearbyLandmarkVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearbyLandmarkVM.swift; sourceTree = "<group>"; };
+		6E4DFA5D29C44058004C9177 /* TravelTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelTableViewCell.swift; sourceTree = "<group>"; };
+		6E4DFA5F29C950AB004C9177 /* SDWebImageAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SDWebImageAdapter.swift; sourceTree = "<group>"; };
 		9BCF00734D1A76B4375EB4EF /* Pods-HelloTravel.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HelloTravel.release.xcconfig"; path = "Target Support Files/Pods-HelloTravel/Pods-HelloTravel.release.xcconfig"; sourceTree = "<group>"; };
+		BE15496329C494B80032C4BE /* CategoryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryButton.swift; sourceTree = "<group>"; };
 		D8C334B444D78BA5B13A0755 /* Pods_HelloTravelTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HelloTravelTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA6DE97EDBC1D4160FA79B3D /* Pods-HelloTravel.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HelloTravel.debug.xcconfig"; path = "Target Support Files/Pods-HelloTravel/Pods-HelloTravel.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -119,15 +129,16 @@
 		6E216EF529C017FD00BE1BB1 /* HelloTravel */ = {
 			isa = PBXGroup;
 			children = (
+				BE15496229C494160032C4BE /* CustomizedUI */,
 				6E216F4829C2C64400BE1BB1 /* Mannger */,
 				6E216F4229C1BED700BE1BB1 /* DataStruct */,
 				6E216F3F29C1BCBA00BE1BB1 /* SearchBusinessesUseCase */,
 				6E216F3329C16F6300BE1BB1 /* Logger */,
 				6E216F2B29C168EA00BE1BB1 /* Adapter */,
+				6E216F3629C1700E00BE1BB1 /* ViewController */,
 				6E216F2929C14C1E00BE1BB1 /* GoogleService-Info.plist */,
 				6E216EF629C017FD00BE1BB1 /* AppDelegate.swift */,
 				6E216EF829C017FD00BE1BB1 /* SceneDelegate.swift */,
-				6E216F3629C1700E00BE1BB1 /* ViewController */,
 				6E216EFC29C017FD00BE1BB1 /* Main.storyboard */,
 				6E216EFF29C0180000BE1BB1 /* Assets.xcassets */,
 				6E216F0129C0180000BE1BB1 /* LaunchScreen.storyboard */,
@@ -150,6 +161,7 @@
 				6E216F2C29C1692900BE1BB1 /* FirebaseAuthenticationAdapter.swift */,
 				6E216F3B29C1A56200BE1BB1 /* RealtimeDatabaseAdapter.swift */,
 				6E216F3D29C1BB1200BE1BB1 /* AlamofireAdapter.swift */,
+				6E4DFA5F29C950AB004C9177 /* SDWebImageAdapter.swift */,
 			);
 			path = Adapter;
 			sourceTree = "<group>";
@@ -165,6 +177,7 @@
 		6E216F3629C1700E00BE1BB1 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				6E4DFA5829C401F5004C9177 /* NearbyLandmarkVC */,
 				6E216F3729C1701A00BE1BB1 /* LoginVC */,
 			);
 			path = ViewController;
@@ -203,6 +216,16 @@
 			path = Mannger;
 			sourceTree = "<group>";
 		};
+		6E4DFA5829C401F5004C9177 /* NearbyLandmarkVC */ = {
+			isa = PBXGroup;
+			children = (
+				6E4DFA5929C40215004C9177 /* NearbyLandmarkVC.swift */,
+				6E4DFA5D29C44058004C9177 /* TravelTableViewCell.swift */,
+				6E4DFA5B29C40258004C9177 /* NearbyLandmarkVM.swift */,
+			);
+			path = NearbyLandmarkVC;
+			sourceTree = "<group>";
+		};
 		B0FCC204A5B80717E427734A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -210,6 +233,14 @@
 				D8C334B444D78BA5B13A0755 /* Pods_HelloTravelTests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BE15496229C494160032C4BE /* CustomizedUI */ = {
+			isa = PBXGroup;
+			children = (
+				BE15496329C494B80032C4BE /* CategoryButton.swift */,
+			);
+			path = CustomizedUI;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -426,10 +457,15 @@
 				6E216EFB29C017FD00BE1BB1 /* ViewController.swift in Sources */,
 				6E216EF729C017FD00BE1BB1 /* AppDelegate.swift in Sources */,
 				6E216F3E29C1BB1200BE1BB1 /* AlamofireAdapter.swift in Sources */,
+				6E4DFA5A29C40215004C9177 /* NearbyLandmarkVC.swift in Sources */,
+				BE15496429C494B80032C4BE /* CategoryButton.swift in Sources */,
 				6E216F3C29C1A56200BE1BB1 /* RealtimeDatabaseAdapter.swift in Sources */,
 				6E216F3929C1704600BE1BB1 /* ViewModel.swift in Sources */,
 				6E216F4129C1BCE900BE1BB1 /* SearchBusinessesUseCase.swift in Sources */,
+				6E4DFA5E29C44058004C9177 /* TravelTableViewCell.swift in Sources */,
+				6E4DFA6029C950AB004C9177 /* SDWebImageAdapter.swift in Sources */,
 				6E216F4429C1BF0700BE1BB1 /* SearchBusinessesStruct.swift in Sources */,
+				6E4DFA5C29C40258004C9177 /* NearbyLandmarkVM.swift in Sources */,
 				6E216EF929C017FD00BE1BB1 /* SceneDelegate.swift in Sources */,
 				6E216F4A29C2C65C00BE1BB1 /* LocationManager.swift in Sources */,
 			);

@@ -103,6 +103,9 @@ PODS:
   - nanopb/decode (2.30909.0)
   - nanopb/encode (2.30909.0)
   - PromisesObjC (2.2.0)
+  - SDWebImage (5.15.5):
+    - SDWebImage/Core (= 5.15.5)
+  - SDWebImage/Core (5.15.5)
   - SnapKit (5.6.0)
 
 DEPENDENCIES:
@@ -112,6 +115,7 @@ DEPENDENCIES:
   - FirebaseCrashlytics (= 10.0.0)
   - FirebaseDatabase (= 10.6.0)
   - FirebaseFirestore (from `https://github.com/invertase/firestore-ios-sdk-frameworks.git`, tag `10.0.0`)
+  - SDWebImage (= 5.15.5)
   - SnapKit (= 5.6.0)
 
 SPEC REPOS:
@@ -131,6 +135,7 @@ SPEC REPOS:
     - leveldb-library
     - nanopb
     - PromisesObjC
+    - SDWebImage
     - SnapKit
 
 EXTERNAL SOURCES:
@@ -160,8 +165,9 @@ SPEC CHECKSUMS:
   leveldb-library: 50c7b45cbd7bf543c81a468fe557a16ae3db8729
   nanopb: b552cce312b6c8484180ef47159bc0f65a1f0431
   PromisesObjC: 09985d6d70fbe7878040aa746d78236e6946d2ef
+  SDWebImage: fd7e1a22f00303e058058278639bf6196ee431fe
   SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
 
-PODFILE CHECKSUM: 25def8525ed23be1ed889bf85015f37f6edcb3ab
+PODFILE CHECKSUM: 2804a1241c6b367ac745c84e6cf9e1640a649310
 
 COCOAPODS: 1.11.3
