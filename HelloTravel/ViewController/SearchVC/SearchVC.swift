@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import MapKit
 
 /// 搜尋頁面
 class SearchVC: UIViewController {
@@ -23,6 +24,11 @@ class SearchVC: UIViewController {
         return SearchTopBarView()
     }()
 
+    private lazy var mapView: MKMapView = {
+        var mapView = MKMapView()
+        return mapView
+    }()
+
     // MARK: - 生命週期
 
     override func viewDidLoad() {
@@ -31,12 +37,20 @@ class SearchVC: UIViewController {
         setupUI()
     }
 
+
     private func setupUI() {
+        view.addSubview(mapView)
         view.addSubview(topView)
 
         topView.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide)
             make.leading.trailing.equalToSuperview().inset(6)
+        }
+
+        mapView.snp.makeConstraints { make in
+            make.top.equalToSuperview()
+            make.bottom.equalTo(view.safeAreaLayoutGuide)
+            make.leading.trailing.equalToSuperview()
         }
     }
 

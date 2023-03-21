@@ -53,6 +53,7 @@ class SearchTopBarView: UIView {
 
     private func setupTopView() {
 
+        backgroundColor = .white
         addSubview(backButton)
         addSubview(searchTextField)
         addSubview(typeSwitchButton)

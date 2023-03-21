@@ -8,5 +8,11 @@
 import Foundation
 
 class SearchVM {
+
+    private(set) lazy var locationItemList: [Business] = {
+        return [Business]()
+    }()
+
+    
     
 }

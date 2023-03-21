@@ -253,12 +253,22 @@ class NearbyLandmarkVC: UIViewController {
         cell.starsCountLabel.text = "\(starsCount)"
         cell.starsCountImageView.image = viewModel.calculateStarIcon(starsCount: starsCount)
     }
+
+    private func presentToSearchVC() {
+
+        // TODO: 傳遞點擊到的 type string
+        let searchVC = SearchVC()
+        searchVC.modalPresentationStyle = .fullScreen
+        present(searchVC, animated: true)
+    }
     
     // MARK: - action
     
     @objc private func clickRestaurantButton() {
         // TODO: 點擊後動作
         Logger.log(message: "clickRestaurantButton")
+
+        presentToSearchVC()
     }
     
     @objc private func clickMassageButton() {
