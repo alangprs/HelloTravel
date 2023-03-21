@@ -29,6 +29,9 @@
 		6E4DFA5C29C40258004C9177 /* NearbyLandmarkVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4DFA5B29C40258004C9177 /* NearbyLandmarkVM.swift */; };
 		6E4DFA5E29C44058004C9177 /* TravelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4DFA5D29C44058004C9177 /* TravelTableViewCell.swift */; };
 		6E4DFA6029C950AB004C9177 /* SDWebImageAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4DFA5F29C950AB004C9177 /* SDWebImageAdapter.swift */; };
+		6E4DFA6329C95C02004C9177 /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4DFA6229C95C02004C9177 /* SearchVC.swift */; };
+		6E4DFA6529C95EF2004C9177 /* SearchVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4DFA6429C95EF2004C9177 /* SearchVM.swift */; };
+		6E4DFA6729C979F8004C9177 /* SearchTopBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4DFA6629C979F8004C9177 /* SearchTopBar.swift */; };
 		BE15496429C494B80032C4BE /* CategoryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE15496329C494B80032C4BE /* CategoryButton.swift */; };
 /* End PBXBuildFile section */
 
@@ -69,6 +72,9 @@
 		6E4DFA5B29C40258004C9177 /* NearbyLandmarkVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearbyLandmarkVM.swift; sourceTree = "<group>"; };
 		6E4DFA5D29C44058004C9177 /* TravelTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelTableViewCell.swift; sourceTree = "<group>"; };
 		6E4DFA5F29C950AB004C9177 /* SDWebImageAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SDWebImageAdapter.swift; sourceTree = "<group>"; };
+		6E4DFA6229C95C02004C9177 /* SearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
+		6E4DFA6429C95EF2004C9177 /* SearchVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVM.swift; sourceTree = "<group>"; };
+		6E4DFA6629C979F8004C9177 /* SearchTopBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTopBar.swift; sourceTree = "<group>"; };
 		9BCF00734D1A76B4375EB4EF /* Pods-HelloTravel.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HelloTravel.release.xcconfig"; path = "Target Support Files/Pods-HelloTravel/Pods-HelloTravel.release.xcconfig"; sourceTree = "<group>"; };
 		BE15496329C494B80032C4BE /* CategoryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryButton.swift; sourceTree = "<group>"; };
 		D8C334B444D78BA5B13A0755 /* Pods_HelloTravelTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HelloTravelTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -177,6 +183,7 @@
 		6E216F3629C1700E00BE1BB1 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				6E4DFA6129C95BDD004C9177 /* SearchVC */,
 				6E4DFA5829C401F5004C9177 /* NearbyLandmarkVC */,
 				6E216F3729C1701A00BE1BB1 /* LoginVC */,
 			);
@@ -224,6 +231,16 @@
 				6E4DFA5B29C40258004C9177 /* NearbyLandmarkVM.swift */,
 			);
 			path = NearbyLandmarkVC;
+			sourceTree = "<group>";
+		};
+		6E4DFA6129C95BDD004C9177 /* SearchVC */ = {
+			isa = PBXGroup;
+			children = (
+				6E4DFA6229C95C02004C9177 /* SearchVC.swift */,
+				6E4DFA6629C979F8004C9177 /* SearchTopBar.swift */,
+				6E4DFA6429C95EF2004C9177 /* SearchVM.swift */,
+			);
+			path = SearchVC;
 			sourceTree = "<group>";
 		};
 		B0FCC204A5B80717E427734A /* Frameworks */ = {
@@ -464,9 +481,12 @@
 				6E216F4129C1BCE900BE1BB1 /* SearchBusinessesUseCase.swift in Sources */,
 				6E4DFA5E29C44058004C9177 /* TravelTableViewCell.swift in Sources */,
 				6E4DFA6029C950AB004C9177 /* SDWebImageAdapter.swift in Sources */,
+				6E4DFA6529C95EF2004C9177 /* SearchVM.swift in Sources */,
 				6E216F4429C1BF0700BE1BB1 /* SearchBusinessesStruct.swift in Sources */,
 				6E4DFA5C29C40258004C9177 /* NearbyLandmarkVM.swift in Sources */,
 				6E216EF929C017FD00BE1BB1 /* SceneDelegate.swift in Sources */,
+				6E4DFA6729C979F8004C9177 /* SearchTopBar.swift in Sources */,
+				6E4DFA6329C95C02004C9177 /* SearchVC.swift in Sources */,
 				6E216F4A29C2C65C00BE1BB1 /* LocationManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
