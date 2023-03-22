@@ -257,9 +257,9 @@ class NearbyLandmarkVC: UIViewController {
     private func presentToSearchVC(CategoryType at: CategoryType) {
 
         // TODO: 傳遞點擊到的 type string
-        let searchVC = SearchVC()
-        searchVC.modalPresentationStyle = .fullScreen
-        present(searchVC, animated: true)
+        let navigationVC = UINavigationController(rootViewController: SearchVC())
+        navigationVC.modalPresentationStyle = .fullScreen
+        present(navigationVC, animated: true)
     }
     
     // MARK: - action
