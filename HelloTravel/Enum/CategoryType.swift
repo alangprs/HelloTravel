@@ -12,15 +12,18 @@ enum CategoryType {
     case restaurant
     case massage
     case travel
-
+    case none // 不需要傳遞狀態文字
+    
     var typeTitle: String {
         switch self {
-            case .restaurant:
-                return "餐廳"
-            case .massage:
-                return "按摩"
-            case .travel:
-                return "旅遊"
+        case .restaurant:
+            return "餐廳"
+        case .massage:
+            return "按摩"
+        case .travel:
+            return "旅遊"
+        case .none:
+            return ""
         }
     }
 }

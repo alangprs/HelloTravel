@@ -12,6 +12,12 @@ class SearchVM {
     private(set) lazy var locationItemList: [Business] = {
         return [Business]()
     }()
+    
+//    private var searchType: CategoryType
+    
+//    init(searchType: CategoryType) {
+//        self.searchType = searchType
+//    }
 
     
     

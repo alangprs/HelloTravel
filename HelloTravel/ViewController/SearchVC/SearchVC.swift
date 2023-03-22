@@ -19,11 +19,7 @@ class SearchVC: UIViewController {
 
     // MARK: - topView 區域
 
-    private lazy var topView: SearchTopBarView = {
-        var view = SearchTopBarView()
-        view.delegate = self
-        return view
-    }()
+    private var topView: SearchTopBarView
 
     private lazy var mapView: MKMapView = {
         var mapView = MKMapView()
@@ -31,17 +27,25 @@ class SearchVC: UIViewController {
     }()
 
     // MARK: - 生命週期
-
+    
+    init(searchType: CategoryType) {
+        self.topView = SearchTopBarView(searchType: searchType)
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
         setupUI()
     }
-
 
     private func setupUI() {
         view.addSubview(mapView)
         view.addSubview(topView)
+        topView.delegate = self
 
         topView.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide)

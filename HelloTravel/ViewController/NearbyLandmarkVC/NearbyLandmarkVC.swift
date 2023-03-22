@@ -253,11 +253,12 @@ class NearbyLandmarkVC: UIViewController {
         cell.starsCountLabel.text = "\(starsCount)"
         cell.starsCountImageView.image = viewModel.calculateStarIcon(starsCount: starsCount)
     }
+    
+    /// 跳轉地圖頁面
+    /// - Parameter categoryType: 搜尋狀態
+    private func presentToSearchVC(categoryType: CategoryType) {
 
-    private func presentToSearchVC(CategoryType at: CategoryType) {
-
-        // TODO: 傳遞點擊到的 type string
-        let navigationVC = UINavigationController(rootViewController: SearchVC())
+        let navigationVC = UINavigationController(rootViewController: SearchVC(searchType: categoryType))
         navigationVC.modalPresentationStyle = .fullScreen
         present(navigationVC, animated: true)
     }
@@ -265,22 +266,18 @@ class NearbyLandmarkVC: UIViewController {
     // MARK: - action
     
     @objc private func clickRestaurantButton() {
-        // TODO: 點擊後動作
         Logger.log(message: "clickRestaurantButton")
-
-        presentToSearchVC(CategoryType: .restaurant)
+        presentToSearchVC(categoryType: .restaurant)
     }
     
     @objc private func clickMassageButton() {
-        // TODO: 點擊後動作
         Logger.log(message: "clickMassageButton")
-        presentToSearchVC(CategoryType: .massage)
+        presentToSearchVC(categoryType: .massage)
     }
     
     @objc private func clickTravelButton() {
-        // TODO: 點擊後動作
         Logger.log(message: "clickTravelButton")
-        presentToSearchVC(CategoryType: .travel)
+        presentToSearchVC(categoryType: .travel)
     }
     
 }

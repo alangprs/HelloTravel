@@ -40,18 +40,19 @@ class SearchTopBarView: UIView {
         btn.addTarget(self, action: #selector(didClickTypeSwitchButton), for: .touchUpInside)
         return btn
     }()
-
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-
-        setupTopView()
+    
+    init(searchType: CategoryType) {
+        super.init(frame: .zero)
+        
+        setupUI()
+        searchTextField.text = searchType.typeTitle
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    private func setupTopView() {
+    private func setupUI() {
 
         backgroundColor = .white
         addSubview(backButton)
