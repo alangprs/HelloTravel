@@ -11,6 +11,8 @@ protocol SearchVMDelegate: AnyObject {
     func noGPSPermission()
     func getTravelItemSuccess()
     func getTravelItemError()
+    /// 傳遞座標
+    func getLocation(latitude: Double, longitude: Double)
 }
 
 class SearchVM {
@@ -36,7 +38,6 @@ class SearchVM {
     /// 取附近資料
     private var searchBusinessesUseCase: SearchBusinessesUseCase?
     
-    
     init(searchType: CategoryType) {
         self.searchType = searchType
     }
@@ -45,8 +46,7 @@ class SearchVM {
     func askPermission() {
         locationManager.askPermission()
     }
-    
-    
+        
     /// 依當前坐標位置，使用狀態搜尋
     private func searchLocation() {
         
@@ -73,6 +73,7 @@ extension SearchVM: LocationManagerDelegate {
         
         // TODO: - 先寫死在新加坡，不然台灣東西太少
         searchBusinessesUseCase = SearchBusinessesUseCase(term: "restaurant", latitude: 1.284066, longitude: 103.841114)
+        delegate?.getLocation(latitude: latitude, longitude: longitude)
         searchLocation()
     }
     
