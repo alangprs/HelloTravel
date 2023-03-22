@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import MapKit
 
 protocol SearchVMDelegate: AnyObject {
     func noGPSPermission()
@@ -34,6 +35,8 @@ class SearchVM {
     }()
     
     private(set) var travelList: [Business] = []
+    /// 地圖標記
+    private(set) var pintList: [MKPointAnnotation] = []
     
     /// 取附近資料
     private var searchBusinessesUseCase: SearchBusinessesUseCase?
@@ -64,6 +67,24 @@ class SearchVM {
         
     }
     
+    /// 產出地點標記
+    private func createMapPoint() {
+        
+        guard !travelList.isEmpty else { return }
+        for index in 1 ..< travelList.count {
+            
+            let point = MKPointAnnotation()
+            
+            let latitude = travelList[index].coordinates.latitude
+            let longitude = travelList[index].coordinates.longitude
+            
+            point.coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+            point.title = "\(index)"
+            
+            pintList.append(point)
+        }
+    }
+    
 }
 
 // MARK: - 定位
@@ -73,8 +94,8 @@ extension SearchVM: LocationManagerDelegate {
         
         // TODO: - 先寫死在新加坡，不然台灣東西太少
         searchBusinessesUseCase = SearchBusinessesUseCase(term: "restaurant", latitude: 1.284066, longitude: 103.841114)
-        delegate?.getLocation(latitude: latitude, longitude: longitude)
-        searchLocation()
+        delegate?.getLocation(latitude: 1.284066, longitude: 103.841114)
+//        searchLocation()
     }
     
     func noGPSPermission() {

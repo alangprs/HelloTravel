@@ -74,6 +74,14 @@ class SearchVC: UIViewController {
         present(alertControl, animated: true)
     }
 
+    /// 在地圖上標註地點
+    private func showMapPonit() {
+        guard !viewModel.pintList.isEmpty else { return }
+        
+        for pointItem in viewModel.pintList {
+            mapView.addAnnotation(pointItem)
+        }
+    }
 }
 
 // MARK: - SearchTopBarViewDelegate
@@ -97,6 +105,7 @@ extension SearchVC: SearchVMDelegate {
     
     func getTravelItemSuccess() {
         // TODO: 取得 api 資料後處理
+        showMapPonit()
     }
     
     func getTravelItemError() {
@@ -104,7 +113,8 @@ extension SearchVC: SearchVMDelegate {
     }
     
     func getLocation(latitude: Double, longitude: Double) {
-        mapView.region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: latitude, longitude: longitude), latitudinalMeters: 5000, longitudinalMeters: 5000)
+        
+        mapView.region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: latitude, longitude: longitude), latitudinalMeters: 6000, longitudinalMeters: 6000)
     }
 
 }
