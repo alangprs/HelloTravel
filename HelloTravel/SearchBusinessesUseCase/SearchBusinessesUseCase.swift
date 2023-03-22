@@ -14,40 +14,22 @@ class SearchBusinessesUseCase {
         return AlamofireAdapter()
     }()
 
-    private var businesses: String
-    private var search: String
-    private var location: String?
+    private lazy var businesses = "/businesses"
+    private lazy var search = "/search"
     /// 搜尋範圍
-    private var radius: String
+    private var radius = "3000"
     /// 結果數量
-    private var limit: Int
-    private var sortType: String
-    /// 緯度
-    private var latitude: Double?
-    /// 經度
-    private var longitude: Double?
+    private var limit = 20
+    private var sortType = "best_match"
     private var query: String
 
-    /// 依名稱搜尋
-    init(location: String) {
-        self.businesses = "/businesses"
-        self.search = "search"
-        self.location = location
-        self.radius = "3000"
-        self.limit = 20
-        self.sortType = "best_match"
-        self.query = "?location=\(location)&radius=\(radius)&sort_by=\(sortType)&limit=\(limit)"
+    /// 依種類名稱 + 經緯度搜尋
+    init(term: String, latitude: Double, longitude: Double) {
+        self.query = "?latitude=\(latitude)&longitude=\(longitude)&term=\(term)&radius=\(radius)&sort_by=\(sortType)&limit=\(limit)"
     }
 
     /// 依緯經度搜尋
     init(latitude: Double, longitude: Double) {
-        self.businesses = "/businesses"
-        self.search = "/search"
-        self.radius = "3000"
-        self.limit = 20
-        self.sortType = "best_match"
-        self.latitude = latitude
-        self.longitude = longitude
         self.query = "?latitude=\(latitude)&longitude=\(longitude)&radius=\(radius)&sort_by=\(sortType)&limit=\(limit)"
     }
 
@@ -57,6 +39,7 @@ class SearchBusinessesUseCase {
         let Host: String = "https://api.yelp.com/v3"
 
         // 看文件
+        let apiKey = "rtVfPX3G9utzCM1mQEX0vk94aVpUZMm0GZt6Xq6Y-dLBKubWIkFW0cqV9F1O8bzZBQmScmfWWWGUZjzyaTWUYzTLBFnMe1bDz9afhpCdO8zh1BX_rHMIh8uDfvQOZHYx"
 
         let url = Host + businesses + search + query
         let headers = [

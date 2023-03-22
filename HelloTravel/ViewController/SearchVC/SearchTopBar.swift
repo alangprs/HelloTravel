@@ -97,4 +97,11 @@ class SearchTopBarView: UIView {
 
 extension SearchTopBarView: UITextFieldDelegate {
     // TODO: textField 相關設定
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        self.searchTextField.endEditing(true)
+        
+        return true
+    }
 }

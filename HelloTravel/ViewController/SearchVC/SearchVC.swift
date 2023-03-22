@@ -12,12 +12,7 @@ import MapKit
 /// 搜尋頁面
 class SearchVC: UIViewController {
 
-    private lazy var viewModel: SearchVM = {
-        var vm = SearchVM()
-        return vm
-    }()
-
-    // MARK: - topView 區域
+    private var viewModel: SearchVM
 
     private var topView: SearchTopBarView
 
@@ -30,6 +25,7 @@ class SearchVC: UIViewController {
     
     init(searchType: CategoryType) {
         self.topView = SearchTopBarView(searchType: searchType)
+        self.viewModel = SearchVM(searchType: searchType)
         super.init(nibName: nil, bundle: nil)
     }
     
