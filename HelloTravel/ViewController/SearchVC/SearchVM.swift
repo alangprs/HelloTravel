@@ -103,11 +103,6 @@ extension SearchVM: LocationManagerDelegate {
         delegate?.noGPSPermission()
         Logger.log(message: "clickDenied")
     }
-    
-    func haveGPSPermission() {
-        // TODO: 有給過權限相關動作
-        Logger.log(message: "wheninuse")
-    }
 }
 
 // MARK: - 測試資料，記得刪除

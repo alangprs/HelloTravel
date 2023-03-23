@@ -11,8 +11,6 @@ import CoreLocation
 protocol LocationManagerDelegate: AnyObject {
     /// 沒有權限
     func noGPSPermission()
-    /// 允許過權限
-    func haveGPSPermission()
     /// 傳遞座標 緯經度
     func sandLocation(latitude: Double, longitude: Double)
 }
@@ -53,11 +51,22 @@ class LocationManager: NSObject {
                 // 未開啟定位
                 delegate?.noGPSPermission()
             case .authorizedAlways, .authorizedWhenInUse, .authorized:
-                delegate?.haveGPSPermission()
                 locationManger.startUpdatingLocation()
+                getUserCoordinate()
             default:
                 break
         }
+    }
+
+    /// 取得座標
+    private func getUserCoordinate() {
+        guard let lat = userCoordinate?.latitude,
+              let lon = userCoordinate?.longitude else {
+            Logger.errorLog(message: "取得使用者座標失敗")
+            return
+        }
+
+        delegate?.sandLocation(latitude: lat, longitude: lon)
     }
 }
 
@@ -74,14 +83,7 @@ extension LocationManager: CLLocationManagerDelegate {
         userCoordinate = manager.location?.coordinate
         // 更新使用者座標
         manager.stopUpdatingLocation()
-
-        guard let lat = userCoordinate?.latitude,
-              let lon = userCoordinate?.longitude else {
-            Logger.errorLog(message: "取得使用者座標失敗")
-            return
-        }
-        
-        delegate?.sandLocation(latitude: lat, longitude: lon)
+        getUserCoordinate()
 
     }
 
@@ -94,7 +96,7 @@ extension LocationManager: CLLocationManagerDelegate {
             case .authorizedAlways, .authorizedWhenInUse:
                 // 允許過權限
                 locationManger.startUpdatingLocation()
-                delegate?.haveGPSPermission()
+                getUserCoordinate()
             default:
                 break
         }
