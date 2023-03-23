@@ -21,6 +21,12 @@ class SearchVC: UIViewController {
         return mapView
     }()
 
+    /// 地點列表
+    private lazy var businessSheetVC: BusinessSheetVC = {
+        var vc = BusinessSheetVC()
+        return vc
+    }()
+
     // MARK: - 生命週期
     
     init(searchType: CategoryType) {
@@ -50,6 +56,9 @@ class SearchVC: UIViewController {
     private func setupUI() {
         view.addSubview(mapView)
         view.addSubview(topView)
+        self.addChild(businessSheetVC)
+        view.addSubview(businessSheetVC.view)
+
         topView.delegate = self
 
         topView.snp.makeConstraints { make in
@@ -61,6 +70,11 @@ class SearchVC: UIViewController {
             make.top.equalToSuperview()
             make.bottom.equalTo(view.safeAreaLayoutGuide)
             make.leading.trailing.equalToSuperview()
+        }
+
+        businessSheetVC.view.snp.makeConstraints { make in
+            make.leading.trailing.bottom.equalToSuperview()
+            make.height.equalTo(view.frame.height / 3)
         }
     }
     

@@ -1,5 +1,5 @@
 //
-//  TravelTableViewCell.swift
+//  TravelCollectionViewCell.swift
 //  HelloTravel
 //
 //  Created by cm0768 on 2023/3/17.
