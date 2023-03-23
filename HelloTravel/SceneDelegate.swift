@@ -20,9 +20,35 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // 設定可見視圖大小
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
-        window?.rootViewController = UINavigationController(rootViewController: NearbyLandmarkVC())
+        window?.rootViewController = UINavigationController(rootViewController: creatTapBarController())
         // 開啟windowd為可見
         window?.makeKeyAndVisible()
+    }
+
+    private func creatTapBarController() -> UITabBarController {
+        let nearbyLandmarkVC = UINavigationController(rootViewController: NearbyLandmarkVC())
+        nearbyLandmarkVC.tabBarItem = UITabBarItem(title: "附近景點", image: UIImage(systemName: "airplane"), tag: 0)
+
+        let vc2 = UIViewController()
+        vc2.view.backgroundColor = .systemRed
+        vc2.tabBarItem = UITabBarItem(title: "未知2", image: UIImage(systemName: "car"), tag: 1)
+
+        let vc3 = UIViewController()
+        vc3.view.backgroundColor = .green
+        vc3.tabBarItem = UITabBarItem(title: "未知3", image: UIImage(systemName: "tram"), tag: 2)
+
+        let vc4 = UIViewController()
+        vc4.view.backgroundColor = .yellow
+        vc4.tabBarItem = UITabBarItem(title: "未知4", image: UIImage(systemName: "ferry"), tag: 3)
+
+        let tabBarController = UITabBarController()
+        tabBarController.tabBar.backgroundColor = .white
+        tabBarController.viewControllers = [nearbyLandmarkVC, vc2, vc3, vc4]
+        tabBarController.modalPresentationStyle = .fullScreen
+        tabBarController.tabBar.tintColor = .black
+        tabBarController.selectedIndex = 0
+
+        return tabBarController
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
