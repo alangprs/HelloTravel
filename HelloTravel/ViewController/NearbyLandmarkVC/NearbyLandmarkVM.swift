@@ -69,9 +69,6 @@ class NearbyLandmarkVM {
     }
 
     /// 取得周圍景點
-    /// - Parameters:
-    ///   - latitude: 緯度
-    ///   - longitude: 經度
     private func getNearbyAttractions() {
 
         searchBusinessesUseCase?.getBusinessesData { [weak self] result in

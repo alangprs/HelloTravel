@@ -49,19 +49,22 @@ class SearchVM {
     func askPermission() {
         locationManager.askPermission()
     }
-        
+
     /// 依當前坐標位置，使用狀態搜尋
     private func searchLocation() {
         
-        searchBusinessesUseCase?.getBusinessesData(completion: { result in
+        searchBusinessesUseCase?.getBusinessesData(completion: { [weak self] result in
+            guard let self = self else { return }
+            
             switch result {
-            case .success(let item):
-                Logger.log(message: item.businesses)
-                self.travelList = item.businesses
-                self.delegate?.getTravelItemSuccess()
-            case .failure(let error):
-                Logger.errorLog(message: error)
-                self.delegate?.getTravelItemError()
+                case .success(let item):
+                    Logger.log(message: item.businesses)
+                    self.travelList = item.businesses
+                    self.createMapPoint()
+                    self.delegate?.getTravelItemSuccess()
+                case .failure(let error):
+                    Logger.errorLog(message: error)
+                    self.delegate?.getTravelItemError()
             }
         })
         
@@ -95,8 +98,11 @@ extension SearchVM: LocationManagerDelegate {
         // TODO: - 先寫死在新加坡，不然台灣東西太少
         searchBusinessesUseCase = SearchBusinessesUseCase(term: "restaurant", latitude: 1.284066, longitude: 103.841114)
         delegate?.getLocation(latitude: 1.284066, longitude: 103.841114)
-//        searchLocation()
-        decodeJson()
+        searchLocation()
+
+        #if DEBUG
+//        decodeJson()
+        #endif
     }
     
     func noGPSPermission() {

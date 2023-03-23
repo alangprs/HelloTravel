@@ -113,7 +113,7 @@ class NearbyLandmarkVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        //        viewModel.askPermission()
+        viewModel.askPermission()
     }
     
     // MARK: - 其他
