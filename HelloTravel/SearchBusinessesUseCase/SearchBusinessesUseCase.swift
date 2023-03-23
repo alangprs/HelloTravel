@@ -61,8 +61,7 @@ class SearchBusinessesUseCase {
     /// 取周圍資料
     func getBusinessesData(completion: @escaping ((Result<SearchBusinessesStruct, Error>) -> Void)) {
 
-        // 看文件
-        let apiKey = "rtVfPX3G9utzCM1mQEX0vk94aVpUZMm0GZt6Xq6Y-dLBKubWIkFW0cqV9F1O8bzZBQmScmfWWWGUZjzyaTWUYzTLBFnMe1bDz9afhpCdO8zh1BX_rHMIh8uDfvQOZHYx"
+        // api key 看文件
         
         guard let url = components.url else {
             Logger.errorLog(message: "get url error")
