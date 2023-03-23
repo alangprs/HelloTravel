@@ -69,15 +69,11 @@ class NearbyLandmarkVM {
     }
 
     /// 取得周圍景點
-    /// - Parameters:
-    ///   - latitude: 緯度
-    ///   - longitude: 經度
     private func getNearbyAttractions() {
 
         searchBusinessesUseCase?.getBusinessesData { [weak self] result in
             guard let self = self else { return }
 
-            // TODO: 取得周圍景點後動作
             switch result {
                 case .success(let item):
                     Logger.log(message: item.businesses)
@@ -104,10 +100,5 @@ extension NearbyLandmarkVM: LocationManagerDelegate {
     func noGPSPermission() {
         delegate?.noGPSPermission()
         Logger.log(message: "clickDenied")
-    }
-
-    func haveGPSPermission() {
-        // TODO: 有給過權限相關動作
-        Logger.log(message: "wheninuse")
     }
 }

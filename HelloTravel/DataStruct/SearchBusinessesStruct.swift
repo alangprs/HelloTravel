@@ -61,9 +61,9 @@ struct Center: Codable {
 
 // MARK: - Location
 struct Location: Codable {
-    let address1: String
+    let address1: String?
     let address2: String?
-    let address3: Address3?
+    let address3: String?
     let city: String
     let zipCode: String
     let country: String

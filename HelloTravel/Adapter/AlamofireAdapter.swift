@@ -18,7 +18,7 @@ class AlamofireAdapter {
     ///   - parameters: 參數
     ///   - httpHeader: httpHeader
     ///   - completion: 傳遞完成後動作
-    func getNetwork(url: String, parameters: Parameters? = nil, httpHeader: HTTPHeaders? = nil, completion: @escaping ((Data?, HTTPURLResponse?, Error?) -> Void)) {
+    func getNetwork(url: URL, parameters: Parameters? = nil, httpHeader: HTTPHeaders? = nil, completion: @escaping ((Data?, HTTPURLResponse?, Error?) -> Void)) {
         session.request(url, method: .get, parameters: parameters, encoding: URLEncoding.default, headers: httpHeader)
             .response { afResponse in
 

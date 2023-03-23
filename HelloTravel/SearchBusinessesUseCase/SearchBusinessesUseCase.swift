@@ -13,52 +13,61 @@ class SearchBusinessesUseCase {
     private lazy var alamofireAdapoter: AlamofireAdapter = {
         return AlamofireAdapter()
     }()
+    
+    private var components: URLComponents
 
-    private var businesses: String
-    private var search: String
-    private var location: String?
+    private lazy var scheme = "https"
+    private lazy var host = "api.yelp.com"
+    private lazy var path = "/v3/businesses/search"
     /// 搜尋範圍
-    private var radius: String
+    private var radius = "3000"
     /// 結果數量
-    private var limit: Int
-    private var sortType: String
-    /// 緯度
-    private var latitude: Double?
-    /// 經度
-    private var longitude: Double?
-    private var query: String
+    private var limit = 20
+    private var sortType = "best_match"
 
-    /// 依名稱搜尋
-    init(location: String) {
-        self.businesses = "/businesses"
-        self.search = "search"
-        self.location = location
-        self.radius = "3000"
-        self.limit = 20
-        self.sortType = "best_match"
-        self.query = "?location=\(location)&radius=\(radius)&sort_by=\(sortType)&limit=\(limit)"
+
+    /// 依種類名稱 + 經緯度搜尋
+    init(term: String, latitude: Double, longitude: Double) {
+
+        self.components = URLComponents()
+        self.components.scheme = scheme
+        self.components.host = host
+        self.components.path = path
+        self.components.queryItems = [
+            URLQueryItem(name: "term", value: "\(term)"),
+            URLQueryItem(name: "latitude", value: "\(latitude)"),
+            URLQueryItem(name: "longitude", value: "\(longitude)"),
+            URLQueryItem(name: "radius", value: radius),
+            URLQueryItem(name: "sort_by", value: sortType),
+            URLQueryItem(name: "limit", value: "\(limit)")
+        ]
     }
 
     /// 依緯經度搜尋
     init(latitude: Double, longitude: Double) {
-        self.businesses = "/businesses"
-        self.search = "/search"
-        self.radius = "3000"
-        self.limit = 20
-        self.sortType = "best_match"
-        self.latitude = latitude
-        self.longitude = longitude
-        self.query = "?latitude=\(latitude)&longitude=\(longitude)&radius=\(radius)&sort_by=\(sortType)&limit=\(limit)"
+        self.components = URLComponents()
+        self.components.scheme = scheme
+        self.components.host = host
+        self.components.path = path
+        self.components.queryItems = [
+            URLQueryItem(name: "latitude", value: "\(latitude)"),
+            URLQueryItem(name: "longitude", value: "\(longitude)"),
+            URLQueryItem(name: "radius", value: radius),
+            URLQueryItem(name: "sort_by", value: sortType),
+            URLQueryItem(name: "limit", value: "\(limit)")
+        ]
     }
 
     /// 取周圍資料
     func getBusinessesData(completion: @escaping ((Result<SearchBusinessesStruct, Error>) -> Void)) {
 
-        let Host: String = "https://api.yelp.com/v3"
-
-        // 看文件
-
-        let url = Host + businesses + search + query
+        // api key 看文件
+        
+        guard let url = components.url else {
+            Logger.errorLog(message: "get url error")
+            return
+        }
+        
         let headers = [
           "accept": "application/json",
           "Authorization": "Bearer " + apiKey

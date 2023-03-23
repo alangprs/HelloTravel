@@ -57,7 +57,7 @@ class NearbyLandmarkVC: UIViewController {
     /// 餐廳
     private lazy var restaurantButton: CategoryButton = {
         var btn = CategoryButton()
-        btn.setTitle("餐廳", for: .normal)
+        btn.setTitle(CategoryType.restaurant.typeTitle, for: .normal)
         btn.titleLabel?.font = .systemFont(ofSize: 14)
         let image = btn.resizeImage(image: UIImage(named: "icon_restaurant")!,targetSize: CGSize(width: 20, height: 20))
         btn.setImage(image, for: .normal)
@@ -69,7 +69,7 @@ class NearbyLandmarkVC: UIViewController {
     /// 按摩
     private lazy var massageButton: CategoryButton = {
         var btn = CategoryButton()
-        btn.setTitle("按摩", for: .normal)
+        btn.setTitle(CategoryType.massage.typeTitle, for: .normal)
         btn.titleLabel?.font = .systemFont(ofSize: 14)
         let image = btn.resizeImage(image: UIImage(named: "icon_massage")!,targetSize: CGSize(width: 20, height: 20))
         btn.setImage(image, for: .normal)
@@ -81,7 +81,7 @@ class NearbyLandmarkVC: UIViewController {
     /// 旅遊
     private lazy var travelButton: CategoryButton = {
         var btn = CategoryButton()
-        btn.setTitle("旅遊", for: .normal)
+        btn.setTitle(CategoryType.travel.typeTitle, for: .normal)
         btn.titleLabel?.font = .systemFont(ofSize: 14)
         let image = btn.resizeImage(image: UIImage(named: "icon_travel")!,targetSize: CGSize(width: 20, height: 20))
         btn.setImage(image, for: .normal)
@@ -113,7 +113,7 @@ class NearbyLandmarkVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        //        viewModel.askPermission()
+        viewModel.askPermission()
     }
     
     // MARK: - 其他
@@ -254,21 +254,30 @@ class NearbyLandmarkVC: UIViewController {
         cell.starsCountImageView.image = viewModel.calculateStarIcon(starsCount: starsCount)
     }
     
+    /// 跳轉地圖頁面
+    /// - Parameter categoryType: 搜尋狀態
+    private func presentToSearchVC(categoryType: CategoryType) {
+
+        let navigationVC = UINavigationController(rootViewController: SearchVC(searchType: categoryType))
+        navigationVC.modalPresentationStyle = .fullScreen
+        present(navigationVC, animated: true)
+    }
+    
     // MARK: - action
     
     @objc private func clickRestaurantButton() {
-        // TODO: 點擊後動作
         Logger.log(message: "clickRestaurantButton")
+        presentToSearchVC(categoryType: .restaurant)
     }
     
     @objc private func clickMassageButton() {
-        // TODO: 點擊後動作
         Logger.log(message: "clickMassageButton")
+        presentToSearchVC(categoryType: .massage)
     }
     
     @objc private func clickTravelButton() {
-        // TODO: 點擊後動作
         Logger.log(message: "clickTravelButton")
+        presentToSearchVC(categoryType: .travel)
     }
     
 }
