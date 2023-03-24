@@ -14,31 +14,12 @@ class SheetTableViewCell: UITableViewCell {
 
     private lazy var imageView01: UIImageView = {
         var imageView = UIImageView()
-        imageView.image = UIImage(systemName: "1.circle")
+        imageView.image = UIImage(named: "testImage")
         return imageView
-    }()
-
-    private lazy var imageView02: UIImageView = {
-        var imageView = UIImageView()
-        imageView.image = UIImage(systemName: "2.circle")
-        return imageView
-    }()
-
-    private lazy var imageView03: UIImageView = {
-        var imageView = UIImageView()
-        imageView.image = UIImage(systemName: "3.circle")
-        return imageView
-    }()
-
-    private lazy var imageStackView: UIStackView = {
-        var stackView = UIStackView(arrangedSubviews: [imageView01, imageView02, imageView03])
-        stackView.distribution = .fillEqually
-        return stackView
     }()
 
     private lazy var titleLabel: UILabel = {
         var label = UILabel()
-        label.text = "咖啡"
         return label
     }()
 
@@ -63,25 +44,27 @@ class SheetTableViewCell: UITableViewCell {
     private func setupUI() {
         contentView.backgroundColor = .yellow
 
-        contentView.addSubview(imageStackView)
+        contentView.addSubview(imageView01)
         contentView.addSubview(titleLabel)
         contentView.addSubview(starsCountImageView)
 
-        imageStackView.snp.makeConstraints { make in
-            make.top.leading.trailing.equalToSuperview().offset(6)
-            make.width.height.equalTo(40)
+        imageView01.snp.makeConstraints { make in
+            make.top.leading.equalToSuperview().inset(12)
+            make.width.height.equalTo(100)
+            make.bottom.equalTo(titleLabel.snp.top).inset(-6)
         }
-
+        
+        titleLabel.text = "咖啡吧"
         titleLabel.snp.makeConstraints { make in
-            make.top.equalTo(imageStackView).offset(6)
-            make.leading.equalToSuperview().offset(6)
+            make.leading.equalToSuperview().inset(12)
+            make.bottom.equalToSuperview().offset(-6)
         }
 
         starsCountImageView.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel).offset(4)
-            make.leading.equalToSuperview().offset(6)
+            make.leading.equalTo(titleLabel.snp.trailing).inset(-6)
             make.width.equalToSuperview().multipliedBy(0.3)
-            make.bottom.equalToSuperview().offset(6)
+            make.height.equalTo(titleLabel.snp.height)
+            make.centerY.equalTo(titleLabel.snp.centerY)
         }
 
     }
