@@ -56,8 +56,6 @@ class SearchVC: UIViewController {
     private func setupUI() {
         view.addSubview(mapView)
         view.addSubview(topView)
-        self.addChild(businessSheetVC)
-        view.addSubview(businessSheetVC.view)
 
         topView.delegate = self
 
@@ -71,11 +69,26 @@ class SearchVC: UIViewController {
             make.bottom.equalTo(view.safeAreaLayoutGuide)
             make.leading.trailing.equalToSuperview()
         }
-
-        businessSheetVC.view.snp.makeConstraints { make in
-            make.leading.trailing.bottom.equalToSuperview()
-            make.height.equalTo(view.frame.height / 3)
+        
+        presentBusinessSheetVC()
+    }
+    
+    /// 初始高度為最大高度20%
+    private func presentBusinessSheetVC() {
+        
+        if let sheet = businessSheetVC.sheetPresentationController {
+            // 關閉滑倒底移除此 view
+            businessSheetVC.isModalInPresentation = true
+            sheet.largestUndimmedDetentIdentifier = .large
+            sheet.preferredCornerRadius = 20
+            sheet.prefersGrabberVisible = true
+            sheet.detents = [.custom(resolver: { context in
+                context.maximumDetentValue * 0.3
+            }),
+                             .medium(),
+                             .large()]
         }
+        present(businessSheetVC, animated: false)
     }
     
     /// 未開啟定位通知
