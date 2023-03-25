@@ -98,10 +98,10 @@ extension SearchVM: LocationManagerDelegate {
         // TODO: - 先寫死在新加坡，不然台灣東西太少
         searchBusinessesUseCase = SearchBusinessesUseCase(term: "restaurant", latitude: 1.284066, longitude: 103.841114)
         delegate?.getLocation(latitude: 1.284066, longitude: 103.841114)
-        searchLocation()
+//        searchLocation()
 
         #if DEBUG
-//        decodeJson()
+        decodeJson()
         #endif
     }
     
@@ -116,7 +116,7 @@ extension SearchVM: LocationManagerDelegate {
 extension SearchVM {
     
     /// 模擬打api
-    func decodeJson() {
+    private func decodeJson() {
         let jsonStr = testJson()
         
         if let data = jsonStr.data(using: .utf8) {
