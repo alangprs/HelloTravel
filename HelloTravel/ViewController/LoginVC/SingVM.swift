@@ -7,14 +7,14 @@
 
 import Foundation
 
-protocol ViewModelDelegate: AnyObject {
+protocol SingVMDelegate: AnyObject {
     /// 沒有權限
     func noGPSPermission()
 }
 
-class ViewModel {
+class SingVM {
 
-    weak var delegate: ViewModelDelegate?
+    weak var delegate: SingVMDelegate?
 
     private lazy var authenticationAdapter: FirebaseAuthenticationAdapter = {
         return FirebaseAuthenticationAdapter()
