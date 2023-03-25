@@ -29,9 +29,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let nearbyLandmarkVC = UINavigationController(rootViewController: NearbyLandmarkVC())
         nearbyLandmarkVC.tabBarItem = UITabBarItem(title: "附近景點", image: UIImage(systemName: "airplane"), tag: 0)
 
-        let vc2 = UIViewController()
+        let vc2 = UINavigationController(rootViewController: SingVC())
         vc2.view.backgroundColor = .systemRed
-        vc2.tabBarItem = UITabBarItem(title: "未知2", image: UIImage(systemName: "car"), tag: 1)
+        vc2.tabBarItem = UITabBarItem(title: "登入頁面", image: UIImage(systemName: "car"), tag: 1)
 
         let vc3 = UIViewController()
         vc3.view.backgroundColor = .green
@@ -46,7 +46,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         tabBarController.viewControllers = [nearbyLandmarkVC, vc2, vc3, vc4]
         tabBarController.modalPresentationStyle = .fullScreen
         tabBarController.tabBar.tintColor = .black
-        tabBarController.selectedIndex = 0
+        tabBarController.selectedIndex = 1
 
         return tabBarController
     }
