@@ -8,10 +8,10 @@
 import UIKit
 
 /// 未登入狀態頁面
-class ViewController: UIViewController {
+class SingVC: UIViewController {
 
-    private lazy var viewModel: ViewModel = {
-        var vm = ViewModel()
+    private lazy var viewModel: SingVM = {
+        var vm = SingVM()
         return vm
     }()
 
@@ -28,7 +28,7 @@ class ViewController: UIViewController {
         // TODO: 註冊可成功
 //        viewModel.creatUser(mail: "willwengtest@gmail.com", password: "123456")
         // TODO: 登入可成功
-//        viewModel.signInWithEMail(mail: "willwengtest@gmail.com", password: "123456")
+        viewModel.signInWithEMail(mail: "willwengtest@gmail.com", password: "123456")
         // TODO: 登出可成功
 //        viewModel.singOut()
 
