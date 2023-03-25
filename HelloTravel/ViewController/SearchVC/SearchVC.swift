@@ -49,7 +49,7 @@ class SearchVC: UIViewController {
         super.viewWillAppear(animated)
         
         viewModel.askPermission()
-        viewModel.decodeJson()
+//        viewModel.decodeJson()
         
     }
 

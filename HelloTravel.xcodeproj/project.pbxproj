@@ -680,7 +680,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = KWKVL4YQWY;
+				DEVELOPMENT_TEAM = X23B858772;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = HelloTravel/Info.plist;
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "允許永久定位";
@@ -713,7 +713,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = KWKVL4YQWY;
+				DEVELOPMENT_TEAM = X23B858772;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = HelloTravel/Info.plist;
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "允許永久定位";
