@@ -38,6 +38,12 @@ class UserFavoritesVM {
         }
     }
 
+    /// 移除資料庫節點資料
+    func removeDataValue() {
+        // TODO: 節點名稱使用 adapter 內 func 取得
+        realtimeDatabaseAdapter.removeLikeListValue(nodeID: "-NRVoBcZyXMLn3LEf4HL")
+    }
+
     /// 取得 index 物件
     func getLikeItem(index: IndexPath) -> LikeListStructValue? {
         guard !likeList.isEmpty else {

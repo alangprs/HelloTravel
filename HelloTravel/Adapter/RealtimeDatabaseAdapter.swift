@@ -66,7 +66,33 @@ class RealtimeDatabaseAdapter {
         }
         
     }
-    
+
+    /// 移除指定節點ID資料
+    /// - Parameter nodeID: 節點位置ID
+    func removeLikeListValue(nodeID: String) {
+        let ref = Database.database().reference(withPath: ("likeList"))
+        // TODO: 確認資料可刪除後，將ID改為吃參數
+        ref.child("-NRVoBcZyXMLn3LEf4HL").removeValue { error,_  in
+
+            if error != nil {
+                Logger.errorLog(message: "\(String(describing: error))")
+            }
+        }
+    }
+
+    /// 取得指定節點ID
+    func getNodeID() {
+        // 取得 資料節點位置ID
+        let ref = Database.database().reference(withPath: ("likeList"))
+        ref.observeSingleEvent(of: .value) { snapshot in
+            for i in snapshot.children {
+                Logger.log(message: "\(i)")
+                // TODO: 取得節點ID之後動作
+            }
+
+        }
+    }
+
 }
 
 // MARK: - 測試用資料
