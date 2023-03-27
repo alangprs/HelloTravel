@@ -14,16 +14,38 @@ class RealtimeDatabaseAdapter {
     private var database: DatabaseReference?
     
     /// 即時取得 database 資料
-    func referenceData() {
+    func referenceData(completion: @escaping ((Result<[LikeListStructValue], Error>) -> Void)) {
         database?.database.reference()
-        
+
+        // TODO: 取消監聽
+
         /// 監聽名稱這欄位
         let ref = Database.database().reference(withPath: "likeList")
+        var likeList: [LikeListStructValue] = []
         
-        ref.observe(.value) { snapshot in
-            if let output = snapshot.value {
-                Logger.log(message: output)
+        ref.observe(.value) { (snapshot, error) in
+
+            if error != nil {
+                Logger.errorLog(message: error)
+                return
             }
+
+            guard let value = snapshot.value else { return }
+
+            do {
+                let data = try JSONSerialization.data(withJSONObject: value)
+                let items = try JSONDecoder().decode([String: LikeListStructValue].self, from: data)
+
+                for i in items {
+                    likeList.append(i.value)
+                }
+
+                completion(.success(likeList))
+
+            } catch(let error) {
+                completion(.failure(error))
+            }
+
         }
     }
     
