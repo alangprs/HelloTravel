@@ -10,26 +10,26 @@ import SnapKit
 
 class TravelCollectionViewCell: UICollectionViewCell {
 
-    lazy var bgImageView: UIImageView = {
+    private lazy var bgImageView: UIImageView = {
         var imageView = UIImageView()
         return imageView
     }()
 
     /// 景點名稱
-    lazy var titleLabel: UILabel = {
+    private lazy var titleLabel: UILabel = {
         var label = UILabel()
         label.textColor = .white
         return label
     }()
 
     /// 依照星星數量決定圖片
-    lazy var starsCountImageView: UIImageView = {
+    private lazy var starsCountImageView: UIImageView = {
         var imageView = UIImageView()
         return imageView
     }()
 
     /// 顯示星星數量文字
-    lazy var starsCountLabel: UILabel = {
+    private lazy var starsCountLabel: UILabel = {
         var label = UILabel()
         return label
     }()
@@ -41,6 +41,11 @@ class TravelCollectionViewCell: UICollectionViewCell {
         return btn
     }()
 
+    /// 圖片下載器
+    private lazy var sdWebImageAdapter: SDWebImageAdapter = {
+        return SDWebImageAdapter()
+    }()
+
     override init(frame: CGRect) {
         super.init(frame: frame)
 
@@ -49,6 +54,19 @@ class TravelCollectionViewCell: UICollectionViewCell {
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    /// cell UI 設定
+    /// - Parameters:
+    ///   - bgImage: 背景圖
+    ///   - title: 名稱
+    ///   - starsCount: 星星數量
+    ///   - starsImage: 星星圖
+    func convertCell(bgImage: String, title: String, starsCount: Double, starsImage: UIImage) {
+        sdWebImageAdapter.setImage(imageView: bgImageView, imageString: bgImage)
+        titleLabel.text = title
+        starsCountLabel.text = "\(starsCount)"
+        starsCountImageView.image = starsImage
     }
 
     // MARK: - action
