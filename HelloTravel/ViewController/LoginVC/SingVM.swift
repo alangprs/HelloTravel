@@ -20,11 +20,6 @@ class SingVM {
         return FirebaseAuthenticationAdapter()
     }()
 
-    /// 資料庫
-    private lazy var realtimeDatabaseAdapter: RealtimeDatabaseAdapter = {
-        return RealtimeDatabaseAdapter()
-    }()
-
     // MARK: - 登入相關
 
     func handleAuth() {
@@ -79,13 +74,6 @@ class SingVM {
                     Logger.errorLog(message: error)
             }
         }
-    }
-
-    // MARK: - Database
-
-    /// 即時取得 database 資料
-    func referenceData() {
-        realtimeDatabaseAdapter.referenceData()
     }
 
 }

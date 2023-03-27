@@ -33,9 +33,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         vc2.view.backgroundColor = .systemRed
         vc2.tabBarItem = UITabBarItem(title: "登入頁面", image: UIImage(systemName: "car"), tag: 1)
 
-        let vc3 = UIViewController()
+        let vc3 = UserFavoritesVC()
         vc3.view.backgroundColor = .green
-        vc3.tabBarItem = UITabBarItem(title: "未知3", image: UIImage(systemName: "tram"), tag: 2)
+        vc3.tabBarItem = UITabBarItem(title: "收藏頁面", image: UIImage(systemName: "tram"), tag: 2)
 
         let vc4 = UIViewController()
         vc4.view.backgroundColor = .yellow
@@ -46,7 +46,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         tabBarController.viewControllers = [nearbyLandmarkVC, vc2, vc3, vc4]
         tabBarController.modalPresentationStyle = .fullScreen
         tabBarController.tabBar.tintColor = .black
-        tabBarController.selectedIndex = 1
+        tabBarController.selectedIndex = 2
 
         return tabBarController
     }
