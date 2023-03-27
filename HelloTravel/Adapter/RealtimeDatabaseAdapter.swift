@@ -17,8 +17,6 @@ class RealtimeDatabaseAdapter {
     func referenceData(completion: @escaping ((Result<[LikeListStructValue], Error>) -> Void)) {
         database?.database.reference()
 
-        // TODO: 取消監聽
-
         /// 監聽名稱這欄位
         let ref = Database.database().reference(withPath: "likeList")
         var likeList: [LikeListStructValue] = []
@@ -92,6 +90,11 @@ class RealtimeDatabaseAdapter {
             }
 
         }
+    }
+
+    /// 移除監聽
+    func removeAllObservers() {
+        database?.removeAllObservers()
     }
 
 }

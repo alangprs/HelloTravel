@@ -54,6 +54,11 @@ class UserFavoritesVM {
         return likeList[index.row]
     }
 
+    /// 移除監聽
+    func removeAllObservers() {
+        realtimeDatabaseAdapter.removeAllObservers()
+    }
+
     // TODO: 暫時測試使用，先放在這
     /// 上傳收集清單資料
     func postData() {
