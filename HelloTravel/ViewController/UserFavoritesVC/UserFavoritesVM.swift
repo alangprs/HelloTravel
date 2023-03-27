@@ -41,7 +41,7 @@ class UserFavoritesVM {
     /// 移除資料庫節點資料
     func removeDataValue() {
         // TODO: 節點名稱使用 adapter 內 func 取得
-        realtimeDatabaseAdapter.removeLikeListValue(nodeID: "-NRVoBcZyXMLn3LEf4HL")
+        realtimeDatabaseAdapter.removeLikeListValue(nodeID: "wcYmWVGB0kVdjfp3kmovkA")
     }
 
     /// 取得 index 物件
@@ -52,6 +52,14 @@ class UserFavoritesVM {
         }
 
         return likeList[index.row]
+    }
+
+    // TODO: 暫時測試使用，先放在這
+    /// 上傳收集清單資料
+    func postData() {
+        guard let data = realtimeDatabaseAdapter.encodeJson() else { return }
+        // TODO: 取得點擊到的 Business 結構的 ID
+        realtimeDatabaseAdapter.postLiktListData(nodeID: "wcYmWVGB0kVdjfp3kmovkA", data: data)
     }
 
 }

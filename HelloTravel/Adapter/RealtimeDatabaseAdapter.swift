@@ -51,15 +51,15 @@ class RealtimeDatabaseAdapter {
     
     /// 送出收藏資料到 Firebase Realtime Database
     /// - Parameter data: 要上傳的 data
-    func postLiktListData(data: Data) {
+    func postLiktListData(nodeID: String ,data: Data) {
         let ref = Database.database().reference(withPath: "likeList")
 
         do {
             // Firebase Realtime Database 只吃 NS 系列，所以轉成 NSDictionary
             let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
 
-            // 將資料上傳到
-            ref.childByAutoId().setValue(json)
+            // 將資料上傳 id 為 SearchBusinessesStruct 的 ID
+            ref.child(nodeID).setValue(json)
 
         } catch {
             Logger.log(message: "catch")
@@ -71,8 +71,8 @@ class RealtimeDatabaseAdapter {
     /// - Parameter nodeID: 節點位置ID
     func removeLikeListValue(nodeID: String) {
         let ref = Database.database().reference(withPath: ("likeList"))
-        // TODO: 確認資料可刪除後，將ID改為吃參數
-        ref.child("-NRVoBcZyXMLn3LEf4HL").removeValue { error,_  in
+        
+        ref.child(nodeID).removeValue { error,_  in
 
             if error != nil {
                 Logger.errorLog(message: "\(String(describing: error))")
@@ -80,6 +80,7 @@ class RealtimeDatabaseAdapter {
         }
     }
 
+    // TODO: 如果可以直接使用 struct 內的ID 就能刪除資料，這段即可刪除
     /// 取得指定節點ID
     func getNodeID() {
         // 取得 資料節點位置ID
