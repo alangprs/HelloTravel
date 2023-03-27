@@ -89,11 +89,6 @@ class NearbyLandmarkVC: UIViewController {
         btn.addTarget(self, action: #selector(clickTravelButton), for: .touchUpInside)
         return btn
     }()
-
-    /// 圖片下載器
-    private lazy var sdWebImageAdapter: SDWebImageAdapter = {
-        return SDWebImageAdapter()
-    }()
     
     // MARK: - 附近景點清單
     
@@ -242,18 +237,6 @@ class NearbyLandmarkVC: UIViewController {
         present(alertControl, animated: true)
     }
     
-    /// cell UI 設定
-    /// - Parameters:
-    ///   - bgImageName: 背景圖名稱
-    ///   - title: 景點名稱
-    ///   - starsCount: 星星數量
-    private func convertCell(cell: TravelCollectionViewCell, bgImageURL: String, title: String, starsCount: Double) {
-        sdWebImageAdapter.setImage(imageView: cell.bgImageView, imageString: bgImageURL)
-        cell.titleLabel.text = title
-        cell.starsCountLabel.text = "\(starsCount)"
-        cell.starsCountImageView.image = viewModel.calculateStarIcon(starsCount: starsCount)
-    }
-    
     /// 跳轉地圖頁面
     /// - Parameter categoryType: 搜尋狀態
     private func presentToSearchVC(categoryType: CategoryType) {
@@ -323,8 +306,12 @@ extension NearbyLandmarkVC: UICollectionViewDelegate, UICollectionViewDataSource
             Logger.errorLog(message: "get CollectionViewCell error")
             return UICollectionViewCell()
         }
-        
-        convertCell(cell: cell, bgImageURL: travelItem.imageURL, title: travelItem.name, starsCount: travelItem.rating)
+
+        let starsImage = viewModel.calculateStarIcon(starsCount: travelItem.rating)
+        cell.convertCell(bgImage: travelItem.imageURL,
+                         title: travelItem.name,
+                         starsCount: travelItem.rating,
+                         starsImage: starsImage)
         
         return cell
     }

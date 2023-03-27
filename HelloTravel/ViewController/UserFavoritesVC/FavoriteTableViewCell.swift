@@ -31,6 +31,11 @@ class FavoriteTableViewCell: UITableViewCell {
         return imageView
     }()
 
+    /// 圖片下載器
+    private lazy var sdWebImageAdapter: SDWebImageAdapter = {
+        return SDWebImageAdapter()
+    }()
+
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
@@ -42,8 +47,9 @@ class FavoriteTableViewCell: UITableViewCell {
     }
 
     /// UI 參數注入
-    func convertCell(title: String) {
+    func convertCell(title: String, image01URL: String) {
         titleLabel.text = title
+        sdWebImageAdapter.setImage(imageView: imageView01, imageString: image01URL)
     }
     
     private func setupUI() {
