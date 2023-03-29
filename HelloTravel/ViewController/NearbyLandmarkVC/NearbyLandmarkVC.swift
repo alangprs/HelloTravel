@@ -311,7 +311,8 @@ extension NearbyLandmarkVC: UICollectionViewDelegate, UICollectionViewDataSource
         cell.convertCell(bgImage: travelItem.imageURL,
                          title: travelItem.name,
                          starsCount: travelItem.rating,
-                         starsImage: starsImage)
+                         starsImage: starsImage,
+                         isFavorite: travelItem.isFavorites)
         
         return cell
     }

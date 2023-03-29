@@ -23,7 +23,17 @@ class NearbyLandmarkVM {
         return locationManager
     }()
 
-    private(set) var travelList: [Business] = []
+    /// 資料庫
+    private lazy var realtimeDatabaseAdapter: RealtimeDatabaseAdapter = {
+        return RealtimeDatabaseAdapter()
+    }()
+
+    /// 顯示用資料
+    private(set) var travelList: [DisplayBusiness] = []
+    /// api 原始資料
+    private var apiDataList: [Business] = []
+    /// 收藏清單資料
+    private var likeList: [LikeListStructValue] = []
 
     /// 取附近資料
     private var searchBusinessesUseCase: SearchBusinessesUseCase?
@@ -33,7 +43,7 @@ class NearbyLandmarkVM {
         locationManager.askPermission()
     }
 
-    func getTravelItem(indexPath: IndexPath) -> Business? {
+    func getTravelItem(indexPath: IndexPath) -> DisplayBusiness? {
         if travelList.indices.contains(indexPath.row) {
             return travelList[indexPath.row]
         } else {
@@ -69,23 +79,106 @@ class NearbyLandmarkVM {
         return image
     }
 
+    /// 取收藏、景點資料
+    func fetchFavoritesAndAttractionsSequentially() {
+        let getDataGroup = DispatchGroup()
+
+        getDataGroup.enter()
+//        getNearbyAttractions {
+//            getDataGroup.leave()
+//        }
+
+        #if DEBUG
+        decodeJson() {
+            getDataGroup.leave()
+        }
+        #endif
+
+        getDataGroup.enter()
+        referenceData {
+            getDataGroup.leave()
+        }
+
+        getDataGroup.notify(queue: DispatchQueue.global()) { [weak self] in
+            guard let self = self else { return }
+
+            self.mappingTravelKist()
+            self.delegate?.getTravelItemSuccess()
+        }
+    }
+
     /// 取得周圍景點
-    private func getNearbyAttractions() {
+    private func getNearbyAttractions(completion: @escaping () -> Void) {
 
         searchBusinessesUseCase?.getBusinessesData { [weak self] result in
             guard let self = self else { return }
 
             switch result {
                 case .success(let item):
-                    Logger.log(message: item.businesses)
-                    self.travelList = item.businesses
-                    self.delegate?.getTravelItemSuccess()
+                    self.apiDataList = item.businesses
+                    completion()
                 case .failure(let error):
                     Logger.errorLog(message: error)
                     self.delegate?.getTravelItemError()
             }
         }
     }
+
+    /// 將api取得原始資料複製一份到顯示用資料
+    private func mappingTravelKist() {
+
+        for indexItem in apiDataList {
+
+            let isFavorite = getIsFavorite(id: indexItem.id)
+
+            let likeData: DisplayBusiness = .init(id: indexItem.id,
+                                                  alias: indexItem.alias,
+                                                  name: indexItem.name,
+                                                  imageURL: indexItem.imageURL,
+                                                  isClosed: indexItem.isClosed,
+                                                  url: indexItem.url,
+                                                  reviewCount: indexItem.reviewCount,
+                                                  categories: indexItem.categories,
+                                                  rating: indexItem.rating,
+                                                  coordinates: indexItem.coordinates,
+                                                  location: indexItem.location,
+                                                  phone: indexItem.phone,
+                                                  displayPhone: indexItem.displayPhone,
+                                                  distance: indexItem.distance,
+                                                  price: indexItem.price,
+                                                  isFavorites: isFavorite)
+            travelList.append(likeData)
+        }
+    }
+
+    /// 判斷是否在收藏清單內
+    private func getIsFavorite(id: String) -> Bool {
+        for like in likeList {
+            if like.id == id {
+                return true
+            }
+        }
+        return false
+    }
+
+    // MARK: - 收藏清單區域
+
+    /// 即時取得 database 資料
+    private func referenceData(completion: @escaping () -> Void) {
+        realtimeDatabaseAdapter.referenceData { [weak self] result in
+
+            guard let self = self else { return }
+
+            switch result {
+                case .success(let success):
+                    self.likeList = success
+                    completion()
+                case .failure(let failure):
+                    Logger.errorLog(message: failure)
+            }
+        }
+    }
+
 }
 
 // MARK: - 定位
@@ -95,11 +188,8 @@ extension NearbyLandmarkVM: LocationManagerDelegate {
 
         // TODO: - 先寫死在新加坡，不然台灣東西太少
         searchBusinessesUseCase = SearchBusinessesUseCase(latitude: 1.284066, longitude: 103.841114)
-//        getNearbyAttractions()
 
-        #if DEBUG
-        decodeJson()
-        #endif
+        fetchFavoritesAndAttractionsSequentially()
     }
 
     func noGPSPermission() {
@@ -113,14 +203,14 @@ extension NearbyLandmarkVM: LocationManagerDelegate {
 extension NearbyLandmarkVM {
 
     /// 模擬打api
-    private func decodeJson() {
+    private func decodeJson(completion: @escaping () -> Void) {
         let jsonStr = testJson()
 
         if let data = jsonStr.data(using: .utf8) {
             do {
                 let jsonitem = try JSONDecoder().decode(SearchBusinessesStruct.self, from: data)
-                travelList = jsonitem.businesses
-                delegate?.getTravelItemSuccess()
+                apiDataList = jsonitem.businesses
+                completion()
             } catch {
                 Logger.errorLog(message: "get decode error")
             }

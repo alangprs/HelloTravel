@@ -92,6 +92,20 @@ class RealtimeDatabaseAdapter {
         }
     }
 
+    /// 判斷是否有此ID資料
+    func checkIfDataExists(withId id: String, completion: @escaping (Bool) -> Void){
+        let ref = Database.database().reference(withPath: "likeList")
+        let childRef = ref.child(id)
+
+        childRef.observeSingleEvent(of: .value, with: { (snapshot) in
+            if snapshot.exists() {
+                completion(true)
+            } else {
+                completion(false)
+            }
+        })
+    }
+
     /// 移除監聽
     func removeAllObservers() {
         database?.removeAllObservers()

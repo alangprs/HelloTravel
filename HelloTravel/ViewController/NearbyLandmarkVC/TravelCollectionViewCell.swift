@@ -36,7 +36,7 @@ class TravelCollectionViewCell: UICollectionViewCell {
 
     private lazy var likeButton: UIButton = {
         var btn = UIButton()
-        btn.setImage(UIImage(systemName: "heart"), for: .normal)
+//        btn.setImage(UIImage(systemName: "bookmark"), for: .normal)
         btn.addTarget(self, action: #selector(didClickLikeButton), for: .touchUpInside)
         return btn
     }()
@@ -62,11 +62,23 @@ class TravelCollectionViewCell: UICollectionViewCell {
     ///   - title: 名稱
     ///   - starsCount: 星星數量
     ///   - starsImage: 星星圖
-    func convertCell(bgImage: String, title: String, starsCount: Double, starsImage: UIImage) {
+    ///   - isFavorite: 是否有被收藏
+    func convertCell(bgImage: String, title: String, starsCount: Double, starsImage: UIImage, isFavorite: Bool) {
         sdWebImageAdapter.setImage(imageView: bgImageView, imageString: bgImage)
         titleLabel.text = title
         starsCountLabel.text = "\(starsCount)"
         starsCountImageView.image = starsImage
+        setLikeButtonImage(isFavorite: isFavorite)
+    }
+
+    /// 判斷收藏按鈕圖片狀態
+    private func setLikeButtonImage(isFavorite: Bool) {
+        if isFavorite {
+            likeButton.setImage(UIImage(systemName: "bookmark.fill"), for: .normal)
+        } else {
+            likeButton.setImage(UIImage(systemName: "bookmark"), for: .normal)
+        }
+
     }
 
     // MARK: - action
