@@ -179,6 +179,22 @@ class NearbyLandmarkVM {
         }
     }
 
+    /// 上傳收藏資料
+    func postLikeListData(tag: Int) {
+
+        guard travelList.indices.contains(tag) else { return }
+
+        let placeItem = travelList[tag]
+        
+        do {
+            let data = try JSONEncoder().encode(placeItem)
+            realtimeDatabaseAdapter.postLiktListData(nodeID: placeItem.id, data: data)
+            delegate?.getTravelItemSuccess()
+        } catch {
+            Logger.log(message: "encoder likeList to date error")
+        }
+    }
+
 }
 
 // MARK: - 定位

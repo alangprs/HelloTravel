@@ -245,6 +245,15 @@ class NearbyLandmarkVC: UIViewController {
         navigationVC.modalPresentationStyle = .fullScreen
         present(navigationVC, animated: true)
     }
+
+    /// cell 點擊事件
+    private func configurationCellEvent(cell: TravelCollectionViewCell) {
+        cell.didClickButton = { [weak self] (tag) in
+
+            guard let self = self else { return }
+            self.viewModel.postLikeListData(tag: tag)
+        }
+    }
     
     // MARK: - action
     
@@ -312,7 +321,9 @@ extension NearbyLandmarkVC: UICollectionViewDelegate, UICollectionViewDataSource
                          title: travelItem.name,
                          starsCount: travelItem.rating,
                          starsImage: starsImage,
-                         isFavorite: travelItem.isFavorites)
+                         isFavorite: travelItem.isFavorites,
+                         buttonTag: indexPath.row)
+        configurationCellEvent(cell: cell)
         
         return cell
     }
