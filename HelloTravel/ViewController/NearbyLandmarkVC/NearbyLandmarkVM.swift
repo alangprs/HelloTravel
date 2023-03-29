@@ -34,11 +34,12 @@ class NearbyLandmarkVM {
     }
 
     func getTravelItem(indexPath: IndexPath) -> Business? {
-        guard !travelList.isEmpty else {
-            Logger.errorLog(message: "\(travelList)")
+        if travelList.indices.contains(indexPath.row) {
+            return travelList[indexPath.row]
+        } else {
+            Logger.errorLog(message: "travelList is out range")
             return nil
         }
-        return travelList[indexPath.item]
     }
 
     /// 計算要顯示的星星圖片
