@@ -46,12 +46,13 @@ class UserFavoritesVM {
 
     /// 取得 index 物件
     func getLikeItem(index: IndexPath) -> LikeListStructValue? {
-        guard !likeList.isEmpty else {
-            Logger.errorLog(message: "likeList isEmpty")
+        if likeList.indices.contains(index.row) {
+            return likeList[index.row]
+        } else {
+            Logger.errorLog(message: "likeItem is out range")
             return nil
         }
-
-        return likeList[index.row]
+        
     }
 
     /// 移除監聽

@@ -110,6 +110,12 @@ class NearbyLandmarkVC: UIViewController {
         
         viewModel.askPermission()
     }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+
+        viewModel.removeAllObservers()
+    }
     
     // MARK: - 其他
     
@@ -245,6 +251,15 @@ class NearbyLandmarkVC: UIViewController {
         navigationVC.modalPresentationStyle = .fullScreen
         present(navigationVC, animated: true)
     }
+
+    /// cell 點擊事件
+    private func configurationCellEvent(cell: TravelCollectionViewCell) {
+        cell.didClickButton = { [weak self] (tag) in
+
+            guard let self = self else { return }
+            self.viewModel.toggleLikeStatus(tag: tag)
+        }
+    }
     
     // MARK: - action
     
@@ -311,7 +326,10 @@ extension NearbyLandmarkVC: UICollectionViewDelegate, UICollectionViewDataSource
         cell.convertCell(bgImage: travelItem.imageURL,
                          title: travelItem.name,
                          starsCount: travelItem.rating,
-                         starsImage: starsImage)
+                         starsImage: starsImage,
+                         isFavorite: travelItem.isFavorites,
+                         buttonTag: indexPath.row)
+        configurationCellEvent(cell: cell)
         
         return cell
     }

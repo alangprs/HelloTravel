@@ -36,7 +36,6 @@ class TravelCollectionViewCell: UICollectionViewCell {
 
     private lazy var likeButton: UIButton = {
         var btn = UIButton()
-        btn.setImage(UIImage(systemName: "heart"), for: .normal)
         btn.addTarget(self, action: #selector(didClickLikeButton), for: .touchUpInside)
         return btn
     }()
@@ -45,6 +44,9 @@ class TravelCollectionViewCell: UICollectionViewCell {
     private lazy var sdWebImageAdapter: SDWebImageAdapter = {
         return SDWebImageAdapter()
     }()
+
+    /// 按鈕點擊事件
+    var didClickButton: ((Int) -> Void)?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -62,18 +64,32 @@ class TravelCollectionViewCell: UICollectionViewCell {
     ///   - title: 名稱
     ///   - starsCount: 星星數量
     ///   - starsImage: 星星圖
-    func convertCell(bgImage: String, title: String, starsCount: Double, starsImage: UIImage) {
+    ///   - isFavorite: 是否有被收藏
+    func convertCell(bgImage: String, title: String, starsCount: Double, starsImage: UIImage, isFavorite: Bool, buttonTag: Int) {
         sdWebImageAdapter.setImage(imageView: bgImageView, imageString: bgImage)
         titleLabel.text = title
         starsCountLabel.text = "\(starsCount)"
         starsCountImageView.image = starsImage
+        setLikeButtonImage(isFavorite: isFavorite)
+        likeButton.tag = buttonTag
+    }
+
+    /// 判斷收藏按鈕圖片狀態
+    private func setLikeButtonImage(isFavorite: Bool) {
+        if isFavorite {
+            likeButton.setImage(UIImage(systemName: "bookmark.fill"), for: .normal)
+        } else {
+            likeButton.setImage(UIImage(systemName: "bookmark"), for: .normal)
+        }
+
     }
 
     // MARK: - action
 
     @objc private func didClickLikeButton() {
-        Logger.log(message: "按鈕被點擊")
+        Logger.log(message: "按鈕\(likeButton.tag)被點擊")
         // TODO: 點擊後事件
+        didClickButton?(likeButton.tag)
     }
 
     // MARK: - UI 設定

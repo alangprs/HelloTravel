@@ -23,8 +23,17 @@ class NearbyLandmarkVM {
         return locationManager
     }()
 
-    private(set) var travelList: [Business] = []
+    /// 資料庫
+    private lazy var realtimeDatabaseAdapter: RealtimeDatabaseAdapter = {
+        return RealtimeDatabaseAdapter()
+    }()
 
+    /// 顯示用資料
+    private(set) var travelList: [DisplayBusiness] = []
+    /// api 原始資料
+    private var apiDataList: [Business] = []
+    /// 收藏清單資料
+    private var likeList: [LikeListStructValue] = []
     /// 取附近資料
     private var searchBusinessesUseCase: SearchBusinessesUseCase?
     
@@ -33,12 +42,13 @@ class NearbyLandmarkVM {
         locationManager.askPermission()
     }
 
-    func getTravelItem(indexPath: IndexPath) -> Business? {
-        guard !travelList.isEmpty else {
-            Logger.errorLog(message: "\(travelList)")
+    func getTravelItem(indexPath: IndexPath) -> DisplayBusiness? {
+        if travelList.indices.contains(indexPath.row) {
+            return travelList[indexPath.row]
+        } else {
+            Logger.errorLog(message: "travelList is out range")
             return nil
         }
-        return travelList[indexPath.item]
     }
 
     /// 計算要顯示的星星圖片
@@ -76,15 +86,116 @@ class NearbyLandmarkVM {
 
             switch result {
                 case .success(let item):
-                    Logger.log(message: item.businesses)
-                    self.travelList = item.businesses
-                    self.delegate?.getTravelItemSuccess()
+                    self.apiDataList = item.businesses
                 case .failure(let error):
                     Logger.errorLog(message: error)
                     self.delegate?.getTravelItemError()
             }
         }
     }
+
+    /// 將api取得原始資料複製一份到顯示用資料
+    private func mappingTravelKist() {
+
+        travelList.removeAll()
+
+        for indexItem in apiDataList {
+
+            let isFavorite = getIsFavorite(id: indexItem.id)
+
+            let likeData: DisplayBusiness = .init(id: indexItem.id,
+                                                  alias: indexItem.alias,
+                                                  name: indexItem.name,
+                                                  imageURL: indexItem.imageURL,
+                                                  isClosed: indexItem.isClosed,
+                                                  url: indexItem.url,
+                                                  reviewCount: indexItem.reviewCount,
+                                                  categories: indexItem.categories,
+                                                  rating: indexItem.rating,
+                                                  coordinates: indexItem.coordinates,
+                                                  location: indexItem.location,
+                                                  phone: indexItem.phone,
+                                                  displayPhone: indexItem.displayPhone,
+                                                  distance: indexItem.distance,
+                                                  price: indexItem.price,
+                                                  isFavorites: isFavorite)
+            travelList.append(likeData)
+        }
+    }
+
+
+    // MARK: - 收藏清單區域
+
+    func removeAllObservers() {
+        realtimeDatabaseAdapter.removeAllObservers()
+    }
+
+    /// 判斷是否在收藏清單內
+    private func getIsFavorite(id: String) -> Bool {
+        guard !likeList.isEmpty else { return false }
+
+        for like in likeList {
+            if like.id == id {
+                return true
+            }
+        }
+        return false
+    }
+
+    /// 即時取得 database 資料
+    private func referenceData() {
+        realtimeDatabaseAdapter.referenceData { [weak self] result in
+
+            guard let self = self else { return }
+
+            switch result {
+                case .success(let success):
+                    self.likeList = success
+                    self.mappingTravelKist()
+                    self.delegate?.getTravelItemSuccess()
+                case .failure(let failure):
+                    Logger.errorLog(message: failure)
+            }
+        }
+    }
+
+    /// 判斷是新增 or 取消 收藏
+    /// - Parameter tag: 點選到的 button tag
+    func toggleLikeStatus(tag: Int) {
+
+        guard travelList.indices.contains(tag) else { return }
+
+        if travelList[tag].isFavorites {
+            removeLikeItem(tag: tag)
+        } else {
+            postLikeListData(tag: tag)
+        }
+    }
+
+    /// 上傳收藏資料
+    private func postLikeListData(tag: Int) {
+
+        guard travelList.indices.contains(tag) else { return }
+
+        let placeItem = travelList[tag]
+        
+        do {
+            let data = try JSONEncoder().encode(placeItem)
+            realtimeDatabaseAdapter.postLiktListData(nodeID: placeItem.id, data: data)
+            delegate?.getTravelItemSuccess()
+        } catch {
+            Logger.log(message: "encoder likeList to date error")
+        }
+    }
+
+    /// 移除指定收藏資料
+    private func removeLikeItem(tag: Int) {
+        guard travelList.indices.contains(tag) else { return }
+
+        let placeItem = travelList[tag]
+        realtimeDatabaseAdapter.removeLikeListValue(nodeID: placeItem.id)
+    }
+
 }
 
 // MARK: - 定位
@@ -94,11 +205,11 @@ extension NearbyLandmarkVM: LocationManagerDelegate {
 
         // TODO: - 先寫死在新加坡，不然台灣東西太少
         searchBusinessesUseCase = SearchBusinessesUseCase(latitude: 1.284066, longitude: 103.841114)
-//        getNearbyAttractions()
 
-        #if DEBUG
+        // 取收藏、景點資料
+        //            getNearbyAttractions()
         decodeJson()
-        #endif
+        referenceData()
     }
 
     func noGPSPermission() {
@@ -118,8 +229,7 @@ extension NearbyLandmarkVM {
         if let data = jsonStr.data(using: .utf8) {
             do {
                 let jsonitem = try JSONDecoder().decode(SearchBusinessesStruct.self, from: data)
-                travelList = jsonitem.businesses
-                delegate?.getTravelItemSuccess()
+                apiDataList = jsonitem.businesses
             } catch {
                 Logger.errorLog(message: "get decode error")
             }

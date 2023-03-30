@@ -1,21 +1,23 @@
 //
-//  SearchBusinessesStruct.swift
+//  DisplayBusinessStruct.swift
 //  HelloTravel
 //
-//  Created by cm0768 on 2023/3/15.
+//  Created by cm0768 on 2023/3/29.
 //
 
 import Foundation
 
 // MARK: - SearchBusinessesStruct
-struct SearchBusinessesStruct: Codable {
-    let businesses: [Business]
+
+/// 顯使用景點資料，提供此景點是否有被收藏
+struct DisplayBusinessStruct: Codable {
+    let businesses: [DisplayBusiness]
     let total: Int?
-    let region: Region
+    let region: DisplayRegion
 }
 
 // MARK: - Business
-struct Business: Codable {
+struct DisplayBusiness: Codable {
     let id, alias, name: String
     let imageURL: String
     /// 是否還有營運
@@ -36,6 +38,7 @@ struct Business: Codable {
     /// 與請求位置之間距離
     let distance: Double
     let price: String?
+    let isFavorites: Bool
 
     enum CodingKeys: String, CodingKey {
         case id, alias, name
@@ -46,21 +49,22 @@ struct Business: Codable {
         case categories, rating, coordinates, location, phone
         case displayPhone = "display_phone"
         case distance, price
+        case isFavorites
     }
 }
 
 // MARK: - Category
-struct Category: Codable {
+struct DisplayCategory: Codable {
     let alias, title: String
 }
 
 // MARK: - Center
-struct Center: Codable {
+struct DisplayCenter: Codable {
     let latitude, longitude: Double
 }
 
 // MARK: - Location
-struct Location: Codable {
+struct DisplayLocation: Codable {
     let address1: String?
     let address2: String?
     let address3: String?
@@ -78,13 +82,13 @@ struct Location: Codable {
     }
 }
 
-enum Address3: String, Codable {
+enum DisplayAddress3: String, Codable {
     case empty = ""
     case maxwellFoodCenter = "Maxwell Food Center"
     case parkviewSquare = "Parkview Square"
 }
 
 // MARK: - Region
-struct Region: Codable {
-    let center: Center
+struct DisplayRegion: Codable {
+    let center: DisplayCenter
 }

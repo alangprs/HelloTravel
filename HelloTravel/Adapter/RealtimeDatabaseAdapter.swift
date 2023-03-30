@@ -10,7 +10,7 @@ import FirebaseDatabase
 
 /// google database
 class RealtimeDatabaseAdapter {
-    
+    // TODO: 是否需要宣告在外面使用？
     private var database: DatabaseReference?
     
     /// 即時取得 database 資料
@@ -19,26 +19,24 @@ class RealtimeDatabaseAdapter {
 
         /// 監聽名稱這欄位
         let ref = Database.database().reference(withPath: "likeList")
-        var likeList: [LikeListStructValue] = []
         
         ref.observe(.value) { (snapshot, error) in
 
-            if error != nil {
-                Logger.errorLog(message: error)
+            guard snapshot.exists() else {
+                completion(.success([]))
                 return
             }
 
-            guard let value = snapshot.value else { return }
+            guard let value = snapshot.value as? [String: Any] else {
+                Logger.errorLog(message: "value change to dictionary error")
+                return
+            }
 
             do {
                 let data = try JSONSerialization.data(withJSONObject: value)
                 let items = try JSONDecoder().decode([String: LikeListStructValue].self, from: data)
 
-                for i in items {
-                    likeList.append(i.value)
-                }
-
-                completion(.success(likeList))
+                completion(.success(Array(items.values)))
 
             } catch(let error) {
                 completion(.failure(error))
@@ -78,18 +76,18 @@ class RealtimeDatabaseAdapter {
         }
     }
 
-    // TODO: 如果可以直接使用 struct 內的ID 就能刪除資料，這段即可刪除
-    /// 取得指定節點ID
-    func getNodeID() {
-        // 取得 資料節點位置ID
-        let ref = Database.database().reference(withPath: ("likeList"))
-        ref.observeSingleEvent(of: .value) { snapshot in
-            for i in snapshot.children {
-                Logger.log(message: "\(i)")
-                // TODO: 取得節點ID之後動作
-            }
+    /// 判斷是否有此ID資料
+    func checkIfDataExists(withId id: String, completion: @escaping (Bool) -> Void){
+        let ref = Database.database().reference(withPath: "likeList")
+        let childRef = ref.child(id)
 
-        }
+        childRef.observeSingleEvent(of: .value, with: { (snapshot) in
+            if snapshot.exists() {
+                completion(true)
+            } else {
+                completion(false)
+            }
+        })
     }
 
     /// 移除監聽
