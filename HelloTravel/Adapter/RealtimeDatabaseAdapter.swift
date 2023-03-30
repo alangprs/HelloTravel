@@ -10,16 +10,15 @@ import FirebaseDatabase
 
 /// google database
 class RealtimeDatabaseAdapter {
-    // TODO: 是否需要宣告在外面使用？
+
     private var database: DatabaseReference?
-    
+
     /// 即時取得 database 資料
     func referenceData(completion: @escaping ((Result<[LikeListStructValue], Error>) -> Void)) {
-        database?.database.reference()
-
         /// 監聽名稱這欄位
-        let ref = Database.database().reference(withPath: "likeList")
-        
+        guard let userID = UserDefaultsManager.shared.getUserID() else { return }
+
+        let ref = Database.database().reference(withPath: "likeList/\(userID)")
         ref.observe(.value) { (snapshot, error) in
 
             guard snapshot.exists() else {
@@ -48,7 +47,9 @@ class RealtimeDatabaseAdapter {
     /// 送出收藏資料到 Firebase Realtime Database
     /// - Parameter data: 要上傳的 data
     func postLiktListData(nodeID: String ,data: Data) {
-        let ref = Database.database().reference(withPath: "likeList")
+
+        guard let userID = UserDefaultsManager.shared.getUserID() else { return }
+        let ref = Database.database().reference(withPath: "likeList/\(userID)")
 
         do {
             // Firebase Realtime Database 只吃 NS 系列，所以轉成 NSDictionary
@@ -66,7 +67,9 @@ class RealtimeDatabaseAdapter {
     /// 移除指定節點ID資料
     /// - Parameter nodeID: 節點位置ID
     func removeLikeListValue(nodeID: String) {
-        let ref = Database.database().reference(withPath: ("likeList"))
+
+        guard let userID = UserDefaultsManager.shared.getUserID() else { return }
+        let ref = Database.database().reference(withPath: "likeList/\(userID)")
         
         ref.child(nodeID).removeValue { error,_  in
 
@@ -74,20 +77,6 @@ class RealtimeDatabaseAdapter {
                 Logger.errorLog(message: "\(String(describing: error))")
             }
         }
-    }
-
-    /// 判斷是否有此ID資料
-    func checkIfDataExists(withId id: String, completion: @escaping (Bool) -> Void){
-        let ref = Database.database().reference(withPath: "likeList")
-        let childRef = ref.child(id)
-
-        childRef.observeSingleEvent(of: .value, with: { (snapshot) in
-            if snapshot.exists() {
-                completion(true)
-            } else {
-                completion(false)
-            }
-        })
     }
 
     /// 移除監聽
