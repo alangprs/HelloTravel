@@ -98,6 +98,8 @@ class NearbyLandmarkVM {
     /// 將api取得原始資料複製一份到顯示用資料
     private func mappingTravelKist() {
 
+        travelList.removeAll()
+
         for indexItem in apiDataList {
 
             let isFavorite = getIsFavorite(id: indexItem.id)
@@ -153,8 +155,21 @@ class NearbyLandmarkVM {
         }
     }
 
+    /// 判斷是新增 or 取消 收藏
+    /// - Parameter tag: 點選到的 button tag
+    func toggleLikeStatus(tag: Int) {
+
+        guard travelList.indices.contains(tag) else { return }
+
+        if travelList[tag].isFavorites {
+            removeLikeItem(tag: tag)
+        } else {
+            postLikeListData(tag: tag)
+        }
+    }
+
     /// 上傳收藏資料
-    func postLikeListData(tag: Int) {
+    private func postLikeListData(tag: Int) {
 
         guard travelList.indices.contains(tag) else { return }
 
@@ -167,6 +182,14 @@ class NearbyLandmarkVM {
         } catch {
             Logger.log(message: "encoder likeList to date error")
         }
+    }
+
+    /// 移除指定收藏資料
+    private func removeLikeItem(tag: Int) {
+        guard travelList.indices.contains(tag) else { return }
+
+        let placeItem = travelList[tag]
+        realtimeDatabaseAdapter.removeLikeListValue(nodeID: placeItem.id)
     }
 
 }

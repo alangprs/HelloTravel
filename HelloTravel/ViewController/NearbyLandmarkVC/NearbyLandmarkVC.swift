@@ -251,7 +251,7 @@ class NearbyLandmarkVC: UIViewController {
         cell.didClickButton = { [weak self] (tag) in
 
             guard let self = self else { return }
-            self.viewModel.postLikeListData(tag: tag)
+            self.viewModel.toggleLikeStatus(tag: tag)
         }
     }
     
