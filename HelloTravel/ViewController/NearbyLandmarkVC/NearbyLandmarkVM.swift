@@ -79,36 +79,8 @@ class NearbyLandmarkVM {
         return image
     }
 
-    /// 取收藏、景點資料
-    func fetchFavoritesAndAttractionsSequentially() {
-        let getDataGroup = DispatchGroup()
-
-        getDataGroup.enter()
-//        getNearbyAttractions {
-//            getDataGroup.leave()
-//        }
-
-        #if DEBUG
-        decodeJson() {
-            getDataGroup.leave()
-        }
-        #endif
-
-        getDataGroup.enter()
-        referenceData {
-            getDataGroup.leave()
-        }
-
-        getDataGroup.notify(queue: DispatchQueue.global()) { [weak self] in
-            guard let self = self else { return }
-
-            self.mappingTravelKist()
-            self.delegate?.getTravelItemSuccess()
-        }
-    }
-
     /// 取得周圍景點
-    private func getNearbyAttractions(completion: @escaping () -> Void) {
+    private func getNearbyAttractions() {
 
         searchBusinessesUseCase?.getBusinessesData { [weak self] result in
             guard let self = self else { return }
@@ -116,7 +88,6 @@ class NearbyLandmarkVM {
             switch result {
                 case .success(let item):
                     self.apiDataList = item.businesses
-                    completion()
                 case .failure(let error):
                     Logger.errorLog(message: error)
                     self.delegate?.getTravelItemError()
@@ -153,6 +124,8 @@ class NearbyLandmarkVM {
 
     /// 判斷是否在收藏清單內
     private func getIsFavorite(id: String) -> Bool {
+        guard !likeList.isEmpty else { return false }
+
         for like in likeList {
             if like.id == id {
                 return true
@@ -164,7 +137,7 @@ class NearbyLandmarkVM {
     // MARK: - 收藏清單區域
 
     /// 即時取得 database 資料
-    private func referenceData(completion: @escaping () -> Void) {
+    private func referenceData() {
         realtimeDatabaseAdapter.referenceData { [weak self] result in
 
             guard let self = self else { return }
@@ -172,7 +145,8 @@ class NearbyLandmarkVM {
             switch result {
                 case .success(let success):
                     self.likeList = success
-                    completion()
+                    self.mappingTravelKist()
+                    self.delegate?.getTravelItemSuccess()
                 case .failure(let failure):
                     Logger.errorLog(message: failure)
             }
@@ -205,7 +179,10 @@ extension NearbyLandmarkVM: LocationManagerDelegate {
         // TODO: - 先寫死在新加坡，不然台灣東西太少
         searchBusinessesUseCase = SearchBusinessesUseCase(latitude: 1.284066, longitude: 103.841114)
 
-        fetchFavoritesAndAttractionsSequentially()
+        // 取收藏、景點資料
+        //            getNearbyAttractions()
+        decodeJson()
+        referenceData()
     }
 
     func noGPSPermission() {
@@ -219,14 +196,13 @@ extension NearbyLandmarkVM: LocationManagerDelegate {
 extension NearbyLandmarkVM {
 
     /// 模擬打api
-    private func decodeJson(completion: @escaping () -> Void) {
+    private func decodeJson() {
         let jsonStr = testJson()
 
         if let data = jsonStr.data(using: .utf8) {
             do {
                 let jsonitem = try JSONDecoder().decode(SearchBusinessesStruct.self, from: data)
                 apiDataList = jsonitem.businesses
-                completion()
             } catch {
                 Logger.errorLog(message: "get decode error")
             }
