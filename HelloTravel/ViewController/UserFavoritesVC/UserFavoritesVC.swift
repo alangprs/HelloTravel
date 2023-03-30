@@ -36,6 +36,12 @@ class UserFavoritesVC: UIViewController {
         viewModel.referenceData()
     }
 
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+
+        viewModel.removeAllObservers()
+    }
+
     private func setupUI() {
         view.addSubview(favoriteTableView)
 

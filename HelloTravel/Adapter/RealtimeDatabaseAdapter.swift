@@ -76,20 +76,6 @@ class RealtimeDatabaseAdapter {
         }
     }
 
-    // TODO: 如果可以直接使用 struct 內的ID 就能刪除資料，這段即可刪除
-    /// 取得指定節點ID
-    func getNodeID() {
-        // 取得 資料節點位置ID
-        let ref = Database.database().reference(withPath: ("likeList"))
-        ref.observeSingleEvent(of: .value) { snapshot in
-            for i in snapshot.children {
-                Logger.log(message: "\(i)")
-                // TODO: 取得節點ID之後動作
-            }
-
-        }
-    }
-
     /// 判斷是否有此ID資料
     func checkIfDataExists(withId id: String, completion: @escaping (Bool) -> Void){
         let ref = Database.database().reference(withPath: "likeList")

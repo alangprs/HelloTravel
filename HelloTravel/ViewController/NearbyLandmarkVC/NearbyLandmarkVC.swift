@@ -110,6 +110,12 @@ class NearbyLandmarkVC: UIViewController {
         
         viewModel.askPermission()
     }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+
+        viewModel.removeAllObservers()
+    }
     
     // MARK: - 其他
     

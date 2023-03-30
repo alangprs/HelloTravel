@@ -34,7 +34,6 @@ class NearbyLandmarkVM {
     private var apiDataList: [Business] = []
     /// 收藏清單資料
     private var likeList: [LikeListStructValue] = []
-
     /// 取附近資料
     private var searchBusinessesUseCase: SearchBusinessesUseCase?
     
@@ -124,6 +123,13 @@ class NearbyLandmarkVM {
         }
     }
 
+
+    // MARK: - 收藏清單區域
+
+    func removeAllObservers() {
+        realtimeDatabaseAdapter.removeAllObservers()
+    }
+
     /// 判斷是否在收藏清單內
     private func getIsFavorite(id: String) -> Bool {
         guard !likeList.isEmpty else { return false }
@@ -135,8 +141,6 @@ class NearbyLandmarkVM {
         }
         return false
     }
-
-    // MARK: - 收藏清單區域
 
     /// 即時取得 database 資料
     private func referenceData() {
