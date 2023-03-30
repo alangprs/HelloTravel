@@ -56,7 +56,8 @@ class SingVM {
 
             switch result {
                 case .success(let success):
-                    Logger.log(message: success)
+                    let userID = success.user.uid
+                    UserDefaultsManager.shared.setUserID(userID: userID)
                 case .failure(let failure):
                     Logger.errorLog(message: failure)
             }
@@ -69,6 +70,7 @@ class SingVM {
 
             switch result {
                 case .success(_):
+                    UserDefaultsManager.shared.removeUserID()
                     Logger.log(message: "登出成功")
                 case .failure(let error):
                     Logger.errorLog(message: error)
