@@ -17,6 +17,18 @@ class SheetTableViewCell: UITableViewCell {
         imageView.image = UIImage(named: "testImage")
         return imageView
     }()
+    
+    private lazy var imageView02: UIImageView = {
+        var imageView = UIImageView()
+        imageView.image = UIImage(named: "testImage")
+        return imageView
+    }()
+    
+    private lazy var imageView03: UIImageView = {
+        var imageView = UIImageView()
+        imageView.image = UIImage(named: "testImage")
+        return imageView
+    }()
 
     private lazy var titleLabel: UILabel = {
         var label = UILabel()
@@ -55,13 +67,32 @@ class SheetTableViewCell: UITableViewCell {
         contentView.backgroundColor = .yellow
 
         contentView.addSubview(imageView01)
+        contentView.addSubview(imageView02)
+        contentView.addSubview(imageView03)
         contentView.addSubview(titleLabel)
         contentView.addSubview(starsCountImageView)
         contentView.addSubview(starsCountLabel)
 
         imageView01.snp.makeConstraints { make in
             make.top.leading.equalToSuperview().inset(12)
-            make.width.height.equalTo(100)
+            make.width.equalToSuperview().multipliedBy(0.3)
+            make.height.equalTo(imageView01.snp.width)
+            make.bottom.equalTo(titleLabel.snp.top).inset(-6)
+        }
+        
+        imageView02.snp.makeConstraints { make in
+            make.top.equalToSuperview().inset(12)
+            make.leading.equalTo(imageView01.snp.trailing).inset(-9)
+            make.width.equalToSuperview().multipliedBy(0.3)
+            make.height.equalTo(imageView02.snp.width)
+            make.bottom.equalTo(titleLabel.snp.top).inset(-6)
+        }
+        
+        imageView03.snp.makeConstraints { make in
+            make.top.equalToSuperview().inset(12)
+            make.trailing.equalToSuperview().inset(12)
+            make.width.equalToSuperview().multipliedBy(0.3)
+            make.height.equalTo(imageView03.snp.width)
             make.bottom.equalTo(titleLabel.snp.top).inset(-6)
         }
 
