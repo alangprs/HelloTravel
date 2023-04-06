@@ -42,6 +42,7 @@
 		6EF6340A29D13A03000ECED0 /* FavoriteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF6340929D13A03000ECED0 /* FavoriteTableViewCell.swift */; };
 		6EF6340C29D146C7000ECED0 /* LikeListStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF6340B29D146C7000ECED0 /* LikeListStruct.swift */; };
 		BE15496429C494B80032C4BE /* CategoryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE15496329C494B80032C4BE /* CategoryButton.swift */; };
+		BEA9F9F529D7E01F0065BDFE /* BusinessSheetVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA9F9F429D7E01F0065BDFE /* BusinessSheetVM.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -95,6 +96,7 @@
 		6EF6340B29D146C7000ECED0 /* LikeListStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeListStruct.swift; sourceTree = "<group>"; };
 		9BCF00734D1A76B4375EB4EF /* Pods-HelloTravel.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HelloTravel.release.xcconfig"; path = "Target Support Files/Pods-HelloTravel/Pods-HelloTravel.release.xcconfig"; sourceTree = "<group>"; };
 		BE15496329C494B80032C4BE /* CategoryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryButton.swift; sourceTree = "<group>"; };
+		BEA9F9F429D7E01F0065BDFE /* BusinessSheetVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessSheetVM.swift; sourceTree = "<group>"; };
 		D8C334B444D78BA5B13A0755 /* Pods_HelloTravelTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HelloTravelTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA6DE97EDBC1D4160FA79B3D /* Pods-HelloTravel.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HelloTravel.debug.xcconfig"; path = "Target Support Files/Pods-HelloTravel/Pods-HelloTravel.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -279,6 +281,7 @@
 			isa = PBXGroup;
 			children = (
 				6E4DFA7229CC474A004C9177 /* BusinessSheetVC.swift */,
+				BEA9F9F429D7E01F0065BDFE /* BusinessSheetVM.swift */,
 				6E4DFA7429CC4EC5004C9177 /* SheetTableViewCell.swift */,
 			);
 			path = BusinessSheetVC;
@@ -524,6 +527,7 @@
 				6E216F2D29C1692A00BE1BB1 /* FirebaseAuthenticationAdapter.swift in Sources */,
 				6E216EFB29C017FD00BE1BB1 /* SingVC.swift in Sources */,
 				6EF6340C29D146C7000ECED0 /* LikeListStruct.swift in Sources */,
+				BEA9F9F529D7E01F0065BDFE /* BusinessSheetVM.swift in Sources */,
 				6E216EF729C017FD00BE1BB1 /* AppDelegate.swift in Sources */,
 				6E216F3E29C1BB1200BE1BB1 /* AlamofireAdapter.swift in Sources */,
 				6E4DFA5A29C40215004C9177 /* NearbyLandmarkVC.swift in Sources */,

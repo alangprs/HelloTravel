@@ -62,6 +62,24 @@ class SheetTableViewCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    /// cell UI 設定
+    /// - Parameters:
+    ///   - image01: 照片1
+    ///   - image02: 照片2
+    ///   - image03: 照片3
+    ///   - title: 抬頭文字
+    ///   - starsCount: 星星數量文字
+    ///   - starsImage: 星星圖片
+    func convertCell(image01: String, image02: String, image03: String, title: String, starsCount: String, starsImage: UIImage) {
+        
+        sdWebImageAdapter.setImage(imageView: imageView01, imageString: image01)
+        sdWebImageAdapter.setImage(imageView: imageView02, imageString: image02)
+        sdWebImageAdapter.setImage(imageView: imageView03, imageString: image03)
+        titleLabel.text = title
+        starsCountLabel.text = starsCount
+        starsCountImageView.image = starsImage
+    }
 
     private func setupUI() {
         contentView.backgroundColor = .yellow
