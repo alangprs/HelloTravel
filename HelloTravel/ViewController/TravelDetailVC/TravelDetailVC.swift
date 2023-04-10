@@ -29,6 +29,45 @@ class TravelDetailVC: UIViewController {
         return headerView
     }()
 
+    /// 返回按鈕
+    private lazy var backButton: UIButton = {
+        var btn = UIButton()
+        btn.setTitle("返回", for: .normal)
+        btn.titleLabel?.font = .systemFont(ofSize: 16, weight: .bold)
+        let image = UIImage(systemName: "chevron.backward")?.withRenderingMode(.alwaysTemplate)
+        btn.tintColor = .white
+        btn.setImage(image, for: .normal)
+        btn.addTarget(self, action: #selector(didClickBackButton), for: .touchUpInside)
+        return btn
+    }()
+
+    /// 喜歡按鈕
+    private lazy var likeButton: UIButton = {
+        var btn = UIButton()
+        btn.setImage(UIImage(systemName: "bookmark"), for: .normal)
+        btn.tintColor = .white
+        btn.addTarget(self, action: #selector(didClickLikeButton), for: .touchUpInside)
+        return btn
+    }()
+
+    /// 分享按鈕
+    private lazy var shareButton: UIButton = {
+        var btn = UIButton()
+        btn.setImage(UIImage(systemName: "square.and.arrow.up"), for: .normal)
+        btn.tintColor = .white
+        btn.addTarget(self, action: #selector(didClickShareButton), for: .touchUpInside)
+        return btn
+    }()
+
+    /// 更多按鈕
+    private lazy var moreButton: UIButton = {
+        var btn = UIButton()
+        btn.setImage(UIImage(systemName: "ellipsis"), for: .normal)
+        btn.tintColor = .white
+        btn.addTarget(self, action: #selector(didClickMoreButton), for: .touchUpInside)
+        return btn
+    }()
+
     /// 預設 header 高度
     private lazy var headerHeight: CGFloat = {
         var height = 230.0
@@ -55,13 +94,60 @@ class TravelDetailVC: UIViewController {
 
     private func setupUI() {
         view.addSubview(detailTableView)
+        headerImageView.addSubview(backButton)
+        headerImageView.addSubview(moreButton)
+        headerImageView.addSubview(shareButton)
+        headerImageView.addSubview(likeButton)
+
         detailTableView.snp.makeConstraints { make in
             make.top.bottom.leading.trailing.equalToSuperview()
         }
+
+        backButton.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(30)
+            make.leading.equalToSuperview().offset(25)
+        }
+
+        moreButton.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(30)
+            make.trailing.equalToSuperview().offset(-25)
+        }
+
+        shareButton.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(30)
+            make.trailing.equalTo(moreButton.snp.leading).offset(-20)
+        }
+
+        likeButton.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(30)
+            make.trailing.equalTo(shareButton.snp.leading).offset(-20)
+        }
+    }
+
+    // MARK: - action
+
+    /// 返回按鈕
+    @objc private func didClickBackButton() {
+        // TODO: 返回按鈕動作
+    }
+
+    /// 更多按鈕
+    @objc private func didClickMoreButton() {
+        // TODO: 更多按鈕動作
+    }
+
+    /// 分享按鈕
+    @objc private func didClickShareButton() {
+        // TODO: 分享按鈕動作
+    }
+
+    /// 喜歡按鈕
+    @objc private func didClickLikeButton() {
+        // TODO: 喜歡按鈕動作
     }
 }
 
-// MARK: -
+// MARK: - tableView
 
 extension TravelDetailVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
