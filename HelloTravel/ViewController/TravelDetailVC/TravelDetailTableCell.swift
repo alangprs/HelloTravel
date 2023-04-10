@@ -51,6 +51,54 @@ class TravelDetailTableCell: UITableViewCell {
         return btn
     }()
 
+    /// 新增評論
+    private lazy var addCommentButton: CategoryButton = {
+        var btn = CategoryButton()
+        btn.setTitle("新增評論", for: .normal)
+        btn.titleLabel?.font = .systemFont(ofSize: 14)
+        let image = btn.resizeImage(image: .init(systemName: "square.and.pencil")!,targetSize: CGSize(width: 20, height: 20))
+        btn.setImage(image, for: .normal)
+        btn.setTitleColor(.black, for: .normal)
+        btn.addTarget(self, action: #selector(didClickAddCommentButton), for: .touchUpInside)
+        return btn
+    }()
+
+    /// 新增照片
+    private lazy var addPhotoButton: CategoryButton = {
+        var btn = CategoryButton()
+        btn.setTitle("新增照片", for: .normal)
+        btn.titleLabel?.font = .systemFont(ofSize: 14)
+        let image = btn.resizeImage(image: .init(systemName: "camera")!,targetSize: CGSize(width: 20, height: 20))
+        btn.setImage(image, for: .normal)
+        btn.setTitleColor(.black, for: .normal)
+        btn.addTarget(self, action: #selector(didClickAddPhotoButton), for: .touchUpInside)
+        return btn
+    }()
+
+    /// 電話
+    private lazy var callPhoneButton: CategoryButton = {
+        var btn = CategoryButton()
+        btn.setTitle("撥打電話", for: .normal)
+        btn.titleLabel?.font = .systemFont(ofSize: 14)
+        let image = btn.resizeImage(image: .init(systemName: "phone")!,targetSize: CGSize(width: 20, height: 20))
+        btn.setImage(image, for: .normal)
+        btn.setTitleColor(.black, for: .normal)
+        btn.addTarget(self, action: #selector(didClickCallPhoneButton), for: .touchUpInside)
+        return btn
+    }()
+
+    /// 看地圖
+    private lazy var lookMapButton: CategoryButton = {
+        var btn = CategoryButton()
+        btn.setTitle("開啟地圖", for: .normal)
+        btn.titleLabel?.font = .systemFont(ofSize: 14)
+        let image = btn.resizeImage(image: .init(systemName: "map")!,targetSize: CGSize(width: 20, height: 20))
+        btn.setImage(image, for: .normal)
+        btn.setTitleColor(.black, for: .normal)
+        btn.addTarget(self, action: #selector(didClickLookMapButton), for: .touchUpInside)
+        return btn
+    }()
+
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
@@ -87,7 +135,45 @@ class TravelDetailTableCell: UITableViewCell {
             make.top.equalTo(allBusinessHoursButton.snp.bottom).offset(6)
             make.leading.equalToSuperview().offset(25)
             make.trailing.equalToSuperview().offset(-25)
-            make.bottom.equalToSuperview().offset(-6)
+        }
+
+        // MARK: 中間按鈕
+
+        contentView.addSubview(addCommentButton)
+        contentView.addSubview(addPhotoButton)
+        contentView.addSubview(callPhoneButton)
+        contentView.addSubview(lookMapButton)
+
+        let leading = 20
+        let bottom = 10
+
+        addCommentButton.snp.makeConstraints { make in
+            make.top.equalTo(registerStoreButton.snp.bottom).offset(10)
+            make.leading.equalToSuperview().offset(24)
+            make.leading.equalToSuperview().multipliedBy(4.1)
+            make.height.equalTo(57)
+            make.bottom.equalToSuperview().inset(bottom)
+        }
+
+        addPhotoButton.snp.makeConstraints { make in
+            make.top.equalTo(addCommentButton)
+            make.leading.equalTo(addCommentButton.snp.trailing).offset(leading)
+            make.width.height.equalTo(addCommentButton)
+            make.bottom.equalToSuperview().inset(bottom)
+        }
+
+        callPhoneButton.snp.makeConstraints { make in
+            make.top.equalTo(addCommentButton)
+            make.leading.equalTo(addPhotoButton.snp.trailing).offset(leading)
+            make.width.height.equalTo(addCommentButton)
+            make.bottom.equalToSuperview().inset(bottom)
+        }
+
+        lookMapButton.snp.makeConstraints { make in
+            make.top.equalTo(addCommentButton)
+            make.leading.equalTo(callPhoneButton.snp.trailing).offset(leading)
+            make.width.height.equalTo(addCommentButton)
+            make.bottom.equalToSuperview().inset(bottom)
         }
 
     }
@@ -102,4 +188,24 @@ class TravelDetailTableCell: UITableViewCell {
     @objc private func didClickRegisterStoreButton() {
         // TODO: 註冊商店動作
     }
+
+    /// 新增評論
+    @objc private func didClickAddCommentButton() {
+
+    }
+    /// 新增照片
+    @objc private func didClickAddPhotoButton() {
+
+    }
+
+    /// 電話
+    @objc private func didClickCallPhoneButton() {
+
+    }
+
+    /// 看地圖
+    @objc private func didClickLookMapButton() {
+
+    }
+
 }
