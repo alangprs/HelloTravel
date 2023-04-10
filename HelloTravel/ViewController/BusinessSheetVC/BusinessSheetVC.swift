@@ -9,6 +9,11 @@ import UIKit
 import SnapKit
 
 class BusinessSheetVC: UIViewController {
+    
+    private lazy var viewModel: BusinessSheetVM = {
+        var vm = BusinessSheetVM()
+        return vm
+    }()
 
     private lazy var sheetTableView: UITableView = {
         var tableView = UITableView()
@@ -33,17 +38,24 @@ class BusinessSheetVC: UIViewController {
             make.top.leading.trailing.bottom.equalToSuperview()
         }
     }
+    
+    func fetchSearchResults(travelList: [DisplayBusiness]) {
+        viewModel.fetchSearchResults(travelList: travelList)
+    }
 }
+
+// MARK: - tableView
 
 extension BusinessSheetVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
-        return 5
+        return viewModel.travelList.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "\(SheetTableViewCell.self)", for: indexPath) as? SheetTableViewCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "\(SheetTableViewCell.self)", for: indexPath) as? SheetTableViewCell,
+              let travelItem = viewModel.getTravelItem(indexPath: indexPath) else {
             Logger.log(message: "get cell error")
             return UITableViewCell()
         }

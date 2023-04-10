@@ -134,6 +134,7 @@ extension SearchVC: SearchVMDelegate {
     func getTravelItemSuccess() {
         // TODO: 取得 api 資料後處理
         showMapPonit()
+        businessSheetVC.fetchSearchResults(travelList: viewModel.displayTravelList)
     }
     
     func getTravelItemError() {

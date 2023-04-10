@@ -35,6 +35,9 @@ class SearchVM {
     }()
     
     private(set) var travelList: [Business] = []
+    private(set) var displayTravelList: [DisplayBusiness] = []
+    /// 收藏清單資料
+    private var likeList: [LikeListStructValue] = []
     /// 地圖標記
     private(set) var pintList: [MKPointAnnotation] = []
     
@@ -49,7 +52,7 @@ class SearchVM {
     func askPermission() {
         locationManager.askPermission()
     }
-
+    
     /// 依當前坐標位置，使用狀態搜尋
     private func searchLocation() {
         
@@ -57,14 +60,15 @@ class SearchVM {
             guard let self = self else { return }
             
             switch result {
-                case .success(let item):
-                    Logger.log(message: item.businesses)
-                    self.travelList = item.businesses
-                    self.createMapPoint()
-                    self.delegate?.getTravelItemSuccess()
-                case .failure(let error):
-                    Logger.errorLog(message: error)
-                    self.delegate?.getTravelItemError()
+            case .success(let item):
+                Logger.log(message: item.businesses)
+                self.travelList = item.businesses
+                self.mappingTravelKist()
+                self.createMapPoint()
+                self.delegate?.getTravelItemSuccess()
+            case .failure(let error):
+                Logger.errorLog(message: error)
+                self.delegate?.getTravelItemError()
             }
         })
         
@@ -73,19 +77,60 @@ class SearchVM {
     /// 產出地點標記
     private func createMapPoint() {
         
-        guard !travelList.isEmpty else { return }
-        for index in 1 ..< travelList.count {
+        guard !displayTravelList.isEmpty else { return }
+        for index in 1 ..< displayTravelList.count {
             
             let point = MKPointAnnotation()
             
-            let latitude = travelList[index].coordinates.latitude
-            let longitude = travelList[index].coordinates.longitude
+            let latitude = displayTravelList[index].coordinates.latitude
+            let longitude = displayTravelList[index].coordinates.longitude
             
             point.coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
             point.title = "\(index)"
             
             pintList.append(point)
         }
+    }
+    
+    /// 將api取得原始資料複製一份到顯示用資料
+    private func mappingTravelKist() {
+        
+        displayTravelList.removeAll()
+        
+        for indexItem in travelList {
+            
+            let isFavorite = getIsFavorite(id: indexItem.id)
+            
+            let likeData: DisplayBusiness = .init(id: indexItem.id,
+                                                  alias: indexItem.alias,
+                                                  name: indexItem.name,
+                                                  imageURL: indexItem.imageURL,
+                                                  isClosed: indexItem.isClosed,
+                                                  url: indexItem.url,
+                                                  reviewCount: indexItem.reviewCount,
+                                                  categories: indexItem.categories,
+                                                  rating: indexItem.rating,
+                                                  coordinates: indexItem.coordinates,
+                                                  location: indexItem.location,
+                                                  phone: indexItem.phone,
+                                                  displayPhone: indexItem.displayPhone,
+                                                  distance: indexItem.distance,
+                                                  price: indexItem.price,
+                                                  isFavorites: isFavorite)
+            displayTravelList.append(likeData)
+        }
+    }
+    
+    /// 判斷是否在收藏清單內
+    private func getIsFavorite(id: String) -> Bool {
+        guard !likeList.isEmpty else { return false }
+        
+        for like in likeList {
+            if like.id == id {
+                return true
+            }
+        }
+        return false
     }
     
 }
@@ -123,6 +168,7 @@ extension SearchVM {
             do {
                 let jsonitem = try JSONDecoder().decode(SearchBusinessesStruct.self, from: data)
                 travelList = jsonitem.businesses
+                mappingTravelKist()
                 createMapPoint()
                 delegate?.getTravelItemSuccess()
             } catch {
