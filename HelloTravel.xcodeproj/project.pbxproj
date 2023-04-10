@@ -35,6 +35,7 @@
 		6E4DFA6A29C9B585004C9177 /* CategoryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4DFA6929C9B585004C9177 /* CategoryType.swift */; };
 		6E4DFA7329CC474A004C9177 /* BusinessSheetVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4DFA7229CC474A004C9177 /* BusinessSheetVC.swift */; };
 		6E4DFA7529CC4EC5004C9177 /* SheetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4DFA7429CC4EC5004C9177 /* SheetTableViewCell.swift */; };
+		6E91DB4F29E39F1C008C6395 /* TravelDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E91DB4E29E39F1C008C6395 /* TravelDetailVC.swift */; };
 		6EA14F5F29D3DAA0006B845F /* DisplayBusinessStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA14F5E29D3DAA0006B845F /* DisplayBusinessStruct.swift */; };
 		6EDBA84329D5810D0065C0F7 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EDBA84229D5810D0065C0F7 /* UserDefaultsManager.swift */; };
 		6EF6340329D13573000ECED0 /* UserFavoritesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF6340229D13573000ECED0 /* UserFavoritesVC.swift */; };
@@ -88,6 +89,7 @@
 		6E4DFA6929C9B585004C9177 /* CategoryType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryType.swift; sourceTree = "<group>"; };
 		6E4DFA7229CC474A004C9177 /* BusinessSheetVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessSheetVC.swift; sourceTree = "<group>"; };
 		6E4DFA7429CC4EC5004C9177 /* SheetTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetTableViewCell.swift; sourceTree = "<group>"; };
+		6E91DB4E29E39F1C008C6395 /* TravelDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelDetailVC.swift; sourceTree = "<group>"; };
 		6EA14F5E29D3DAA0006B845F /* DisplayBusinessStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayBusinessStruct.swift; sourceTree = "<group>"; };
 		6EDBA84229D5810D0065C0F7 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		6EF6340229D13573000ECED0 /* UserFavoritesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserFavoritesVC.swift; sourceTree = "<group>"; };
@@ -204,6 +206,7 @@
 		6E216F3629C1700E00BE1BB1 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				6E91DB4D29E39F0E008C6395 /* TravelDetailVC */,
 				6EF6340129D134E7000ECED0 /* UserFavoritesVC */,
 				6E4DFA7129CC473A004C9177 /* BusinessSheetVC */,
 				6E4DFA6129C95BDD004C9177 /* SearchVC */,
@@ -285,6 +288,14 @@
 				6E4DFA7429CC4EC5004C9177 /* SheetTableViewCell.swift */,
 			);
 			path = BusinessSheetVC;
+			sourceTree = "<group>";
+		};
+		6E91DB4D29E39F0E008C6395 /* TravelDetailVC */ = {
+			isa = PBXGroup;
+			children = (
+				6E91DB4E29E39F1C008C6395 /* TravelDetailVC.swift */,
+			);
+			path = TravelDetailVC;
 			sourceTree = "<group>";
 		};
 		6EF6340129D134E7000ECED0 /* UserFavoritesVC */ = {
@@ -542,6 +553,7 @@
 				6EA14F5F29D3DAA0006B845F /* DisplayBusinessStruct.swift in Sources */,
 				6EF6340829D135EA000ECED0 /* UserFavoritesVM.swift in Sources */,
 				6E4DFA6029C950AB004C9177 /* SDWebImageAdapter.swift in Sources */,
+				6E91DB4F29E39F1C008C6395 /* TravelDetailVC.swift in Sources */,
 				6E4DFA6529C95EF2004C9177 /* SearchVM.swift in Sources */,
 				6E216F4429C1BF0700BE1BB1 /* SearchBusinessesStruct.swift in Sources */,
 				6E4DFA5C29C40258004C9177 /* NearbyLandmarkVM.swift in Sources */,
@@ -716,7 +728,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = KWKVL4YQWY;
+				DEVELOPMENT_TEAM = X23B858772;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = HelloTravel/Info.plist;
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "允許永久定位";
@@ -749,7 +761,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = KWKVL4YQWY;
+				DEVELOPMENT_TEAM = X23B858772;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = HelloTravel/Info.plist;
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "允許永久定位";
