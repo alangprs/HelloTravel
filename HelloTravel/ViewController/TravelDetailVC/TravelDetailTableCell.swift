@@ -33,7 +33,21 @@ class TravelDetailTableCell: UITableViewCell {
         btn.setTitle("查看全部時間 →", for: .normal)
         btn.setTitleColor(.blue, for: .normal)
         btn.titleLabel?.font = .systemFont(ofSize: 14, weight: .regular)
-        btn.addTarget(self, action: #selector(didAllBusinessHoursButton), for: .touchUpInside)
+        btn.addTarget(self, action: #selector(didClickAllBusinessHoursButton), for: .touchUpInside)
+        return btn
+    }()
+
+    /// 註冊商店按鈕
+    private lazy var registerStoreButton: UIButton = {
+        var btn = UIButton()
+        btn.setTitle("註冊這商店", for: .normal)
+        btn.setTitleColor(.black, for: .normal)
+        btn.titleLabel?.font = .systemFont(ofSize: 16, weight: .regular)
+        btn.layer.borderWidth = 1
+        btn.layer.borderColor = UIColor.gray.cgColor
+        btn.layer.cornerRadius = 5
+        btn.contentEdgeInsets = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
+        btn.addTarget(self, action: #selector(didClickRegisterStoreButton), for: .touchUpInside)
         return btn
     }()
 
@@ -52,6 +66,7 @@ class TravelDetailTableCell: UITableViewCell {
         contentView.addSubview(typeNameLabel)
         contentView.addSubview(businessHoursLabel)
         contentView.addSubview(allBusinessHoursButton)
+        contentView.addSubview(registerStoreButton)
 
         typeNameLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(20)
@@ -66,6 +81,12 @@ class TravelDetailTableCell: UITableViewCell {
         allBusinessHoursButton.snp.makeConstraints { make in
             make.top.equalTo(businessHoursLabel.snp.bottom).offset(6)
             make.leading.equalToSuperview().offset(25)
+        }
+
+        registerStoreButton.snp.makeConstraints { make in
+            make.top.equalTo(allBusinessHoursButton.snp.bottom).offset(6)
+            make.leading.equalToSuperview().offset(25)
+            make.trailing.equalToSuperview().offset(-25)
             make.bottom.equalToSuperview().offset(-6)
         }
 
@@ -74,7 +95,11 @@ class TravelDetailTableCell: UITableViewCell {
     // MARK: - action
 
     /// 點擊觀看更多按鈕
-    @objc private func didAllBusinessHoursButton() {
+    @objc private func didClickAllBusinessHoursButton() {
         // TODO: 看更多時間按鈕動作
+    }
+
+    @objc private func didClickRegisterStoreButton() {
+        // TODO: 註冊商店動作
     }
 }
