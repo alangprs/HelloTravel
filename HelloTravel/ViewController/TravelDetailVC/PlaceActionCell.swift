@@ -8,7 +8,8 @@
 import UIKit
 import SnapKit
 
-class TravelDetailTableCell: UITableViewCell {
+/// 名稱、資訊、主要功能按鈕
+class PlaceActionCell: UITableViewCell {
 
     private lazy var typeNameLabel: UILabel = {
         var label = UILabel()

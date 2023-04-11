@@ -16,7 +16,7 @@ class TravelDetailVC: UIViewController {
         tableView.dataSource = self
         tableView.addSubview(headerImageView)
         tableView.contentInset = UIEdgeInsets(top: headerHeight, left: 0, bottom: 0, right: 0)
-        tableView.register(TravelDetailTableCell.self, forCellReuseIdentifier: "\(TravelDetailTableCell.self)")
+        tableView.register(PlaceActionCell.self, forCellReuseIdentifier: "\(PlaceActionCell.self)")
         return tableView
     }()
 
@@ -225,7 +225,7 @@ extension TravelDetailVC: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "\(TravelDetailTableCell.self)", for: indexPath) as? TravelDetailTableCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "\(PlaceActionCell.self)", for: indexPath) as? PlaceActionCell else {
             return UITableViewCell()
         }
 
