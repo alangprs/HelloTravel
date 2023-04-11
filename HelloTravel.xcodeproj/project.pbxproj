@@ -299,12 +299,20 @@
 		6E91DB4D29E39F0E008C6395 /* TravelDetailVC */ = {
 			isa = PBXGroup;
 			children = (
+				6E91DB5B29E52A29008C6395 /* Cells */,
 				6E91DB4E29E39F1C008C6395 /* TravelDetailVC.swift */,
 				6E91DB5929E50732008C6395 /* TravelDetailVC+SectionType.swift */,
+			);
+			path = TravelDetailVC;
+			sourceTree = "<group>";
+		};
+		6E91DB5B29E52A29008C6395 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
 				6E91DB5429E4EBF9008C6395 /* BusinessHoursCell.swift */,
 				6E91DB5229E3ECA3008C6395 /* PlaceActionCell.swift */,
 			);
-			path = TravelDetailVC;
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		6EF6340129D134E7000ECED0 /* UserFavoritesVC */ = {
