@@ -17,10 +17,11 @@ class TravelDetailVC: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.addSubview(headerImageView)
-        tableView.contentInset = UIEdgeInsets(top: headerHeight, left: 0, bottom: 0, right: 0)
-        tableView.register(PlaceActionCell.self, forCellReuseIdentifier: "\(PlaceActionCell.self)")
-        tableView.register(BusinessHoursCell.self, forCellReuseIdentifier: "\(BusinessHoursCell.self)")
-        tableView.register(PhoneCell.self, forCellReuseIdentifier: "\(PhoneCell.self)")
+        // 添加 20 作為額外的間距，避免最下方被擋住
+        let tabBarHeight = tabBarController?.tabBar.frame.height ?? 0
+        let bottomInset = tabBarHeight + 20
+        tableView.contentInset = UIEdgeInsets(top: headerHeight, left: 0, bottom: bottomInset, right: 0)
+        registerCell(tableView: tableView)
         return tableView
     }()
 
@@ -224,6 +225,13 @@ class TravelDetailVC: UIViewController {
 // MARK: - tableView
 
 extension TravelDetailVC: UITableViewDelegate, UITableViewDataSource {
+
+    private func registerCell(tableView: UITableView) {
+        tableView.register(PlaceActionCell.self, forCellReuseIdentifier: "\(PlaceActionCell.self)")
+        tableView.register(BusinessHoursCell.self, forCellReuseIdentifier: "\(BusinessHoursCell.self)")
+        tableView.register(PhoneCell.self, forCellReuseIdentifier: "\(PhoneCell.self)")
+        tableView.register(MapCell.self, forCellReuseIdentifier: "\(MapCell.self)")
+    }
     
     private func configureCell(for sectionType: TravelDetailSectionType, indexPath: IndexPath, tableView: UITableView) -> UITableViewCell {
         switch sectionType {
@@ -242,6 +250,8 @@ extension TravelDetailVC: UITableViewDelegate, UITableViewDataSource {
         }
     }
 
+    /// cell 增加方式：增加 InformationCellType case 
+    /// 加入新 cell 時，numberOfRowsInSection 要增加數量
     private func configureInformationCell(at indexPath: IndexPath, tableView: UITableView) -> UITableViewCell {
         guard let cellType = InformationCellType(rawValue: indexPath.row) else {
             return UITableViewCell()
@@ -256,6 +266,12 @@ extension TravelDetailVC: UITableViewDelegate, UITableViewDataSource {
                 return cell
             case .phone:
                 guard let cell = tableView.dequeueReusableCell(withIdentifier: "\(PhoneCell.self)", for: indexPath) as? PhoneCell else {
+                    return UITableViewCell()
+                }
+
+                return cell
+            case .map:
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: "\(MapCell.self)", for: indexPath) as? MapCell else {
                     return UITableViewCell()
                 }
 
@@ -280,7 +296,7 @@ extension TravelDetailVC: UITableViewDelegate, UITableViewDataSource {
             case .placeAction:
                 return 1
             case .information:
-                return 2
+                return 3
         }
 
     }

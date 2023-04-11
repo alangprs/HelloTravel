@@ -36,4 +36,7 @@ enum InformationCellType: Int {
 
     /// 顯示地點的聯繫電話。
     case phone = 1
+
+    /// 顯示地圖導航資訊
+    case map = 2
 }
