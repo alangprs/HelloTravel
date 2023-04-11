@@ -10,6 +10,8 @@ import SnapKit
 
 class TravelDetailVC: UIViewController {
 
+    // MARK: - UI 元件
+
     private lazy var detailTableView: UITableView = {
         var tableView = UITableView()
         tableView.delegate = self
@@ -17,6 +19,7 @@ class TravelDetailVC: UIViewController {
         tableView.addSubview(headerImageView)
         tableView.contentInset = UIEdgeInsets(top: headerHeight, left: 0, bottom: 0, right: 0)
         tableView.register(PlaceActionCell.self, forCellReuseIdentifier: "\(PlaceActionCell.self)")
+        tableView.register(BusinessHoursCell.self, forCellReuseIdentifier: "\(BusinessHoursCell.self)")
         return tableView
     }()
 
@@ -218,24 +221,75 @@ class TravelDetailVC: UIViewController {
 // MARK: - tableView
 
 extension TravelDetailVC: UITableViewDelegate, UITableViewDataSource {
+
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return TravelDetailSectionType.allCases.count
+    }
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
-        return 1
+        guard let sectionType = TravelDetailSectionType(rawValue: section) else {
+            return 0
+        }
+
+        switch sectionType {
+            case .topArea:
+                return 0
+            case .placeAction:
+                return 1
+            case .information:
+                return 1
+        }
+
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "\(PlaceActionCell.self)", for: indexPath) as? PlaceActionCell else {
+        guard let sectionType = TravelDetailSectionType(rawValue: indexPath.section) else {
             return UITableViewCell()
         }
 
+        switch sectionType {
+            case .topArea:
+                return UITableViewCell()
 
-        return cell
+            case .placeAction:
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: "\(PlaceActionCell.self)", for: indexPath) as? PlaceActionCell else {
+                    return UITableViewCell()
+                }
+
+                return cell
+
+            case .information:
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: "\(BusinessHoursCell.self)", for: indexPath) as? BusinessHoursCell else {
+                    return UITableViewCell()
+                }
+
+                return cell
+
+        }
     }
 
+    /// 依照 section 返回指定 headerView 高度
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
 
-        return headerHeight
+        guard let sectionType = TravelDetailSectionType(rawValue: section) else {
+            return 0
+        }
+
+        switch sectionType {
+            case .topArea:
+                return headerHeight
+            case .placeAction:
+                return 0
+            case .information:
+                return 30
+        }
+    }
+
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+
+        return TravelDetailSectionType(rawValue: section)?.stringValue
     }
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
