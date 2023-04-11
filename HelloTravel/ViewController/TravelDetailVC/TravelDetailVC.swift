@@ -20,6 +20,7 @@ class TravelDetailVC: UIViewController {
         tableView.contentInset = UIEdgeInsets(top: headerHeight, left: 0, bottom: 0, right: 0)
         tableView.register(PlaceActionCell.self, forCellReuseIdentifier: "\(PlaceActionCell.self)")
         tableView.register(BusinessHoursCell.self, forCellReuseIdentifier: "\(BusinessHoursCell.self)")
+        tableView.register(PhoneCell.self, forCellReuseIdentifier: "\(PhoneCell.self)")
         return tableView
     }()
 
@@ -112,6 +113,8 @@ class TravelDetailVC: UIViewController {
         btn.addTarget(self, action: #selector(didClickMoreImageButton), for: .touchUpInside)
         return btn
     }()
+
+    // MARK: - 生命週期
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -221,34 +224,8 @@ class TravelDetailVC: UIViewController {
 // MARK: - tableView
 
 extension TravelDetailVC: UITableViewDelegate, UITableViewDataSource {
-
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return TravelDetailSectionType.allCases.count
-    }
-
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-
-        guard let sectionType = TravelDetailSectionType(rawValue: section) else {
-            return 0
-        }
-
-        switch sectionType {
-            case .topArea:
-                return 0
-            case .placeAction:
-                return 1
-            case .information:
-                return 1
-        }
-
-    }
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
-        guard let sectionType = TravelDetailSectionType(rawValue: indexPath.section) else {
-            return UITableViewCell()
-        }
-
+    
+    private func configureCell(for sectionType: TravelDetailSectionType, indexPath: IndexPath, tableView: UITableView) -> UITableViewCell {
         switch sectionType {
             case .topArea:
                 return UITableViewCell()
@@ -261,13 +238,61 @@ extension TravelDetailVC: UITableViewDelegate, UITableViewDataSource {
                 return cell
 
             case .information:
+                return configureInformationCell(at: indexPath, tableView: tableView)
+        }
+    }
+
+    private func configureInformationCell(at indexPath: IndexPath, tableView: UITableView) -> UITableViewCell {
+        guard let cellType = InformationCellType(rawValue: indexPath.row) else {
+            return UITableViewCell()
+        }
+
+        switch cellType {
+            case .businessHours:
                 guard let cell = tableView.dequeueReusableCell(withIdentifier: "\(BusinessHoursCell.self)", for: indexPath) as? BusinessHoursCell else {
                     return UITableViewCell()
                 }
 
                 return cell
+            case .phone:
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: "\(PhoneCell.self)", for: indexPath) as? PhoneCell else {
+                    return UITableViewCell()
+                }
 
+                return cell
         }
+    }
+
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return TravelDetailSectionType.allCases.count
+    }
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+
+        guard let sectionType = TravelDetailSectionType(rawValue: section) else {
+            return 0
+        }
+
+        // 返回每個 section 需要的 cell 數量
+        switch sectionType {
+            case .topArea:
+                return 0
+            case .placeAction:
+                return 1
+            case .information:
+                return 2
+        }
+
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+
+        guard let sectionType = TravelDetailSectionType(rawValue: indexPath.section) else {
+            return UITableViewCell()
+        }
+
+        return configureCell(for: sectionType, indexPath: indexPath, tableView: tableView)
+
     }
 
     /// 依照 section 返回指定 headerView 高度
