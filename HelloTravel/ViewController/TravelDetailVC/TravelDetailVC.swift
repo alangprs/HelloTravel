@@ -10,6 +10,8 @@ import SnapKit
 
 class TravelDetailVC: UIViewController {
 
+    private var viewModel: TravelDetailVM?
+
     // MARK: - UI 元件
 
     private lazy var detailTableView: UITableView = {
@@ -115,6 +117,15 @@ class TravelDetailVC: UIViewController {
         return btn
     }()
 
+    init(travelItem: DisplayBusiness) {
+        self.viewModel = TravelDetailVM(travelItem: travelItem)
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     // MARK: - 生命週期
 
     override func viewDidLoad() {
@@ -125,7 +136,7 @@ class TravelDetailVC: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
+        setupHeaderDetail()
         navigationController?.setNavigationBarHidden(false, animated: false)
     }
 
@@ -192,6 +203,24 @@ class TravelDetailVC: UIViewController {
             make.bottom.equalToSuperview().offset(-20)
             make.trailing.equalToSuperview().offset(-40)
         }
+    }
+
+    /// 設定 header 區域資料
+    private func setupHeaderDetail() {
+        guard let travelItem = viewModel?.travelItem else { return }
+        titleLabel.text = travelItem.name
+        starsCountLabel.text = "\(travelItem.rating)"
+        setLikeButtonImage(isFavorite: travelItem.isFavorites)
+    }
+
+    /// 判斷收藏按鈕圖片狀態
+    private func setLikeButtonImage(isFavorite: Bool) {
+        if isFavorite {
+            likeButton.setImage(UIImage(systemName: "bookmark.fill"), for: .normal)
+        } else {
+            likeButton.setImage(UIImage(systemName: "bookmark"), for: .normal)
+        }
+
     }
 
     // MARK: - action
