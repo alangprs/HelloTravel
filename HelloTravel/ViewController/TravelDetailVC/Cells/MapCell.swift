@@ -11,10 +11,10 @@ import MapKit
 
 class MapCell: UITableViewCell {
 
-    private lazy var mapView: UIView = {
-        var view = UIView()
-        view.backgroundColor = .systemRed
-        return view
+    private lazy var mapView: MKMapView = {
+        var mapView = MKMapView()
+        mapView.delegate = self
+        return mapView
     }()
 
     private lazy var titleLabel: UILabel = {
@@ -46,10 +46,60 @@ class MapCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
         setupUI()
+        setupMapView()
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func setupMapView() {
+        // 設置地圖縮放級別和區域
+        let initialLocation = CLLocationCoordinate2D(latitude: 25.0192, longitude: 121.4662)
+        let regionRadius: CLLocationDistance = 1000
+        let coordinateRegion = MKCoordinateRegion(center: initialLocation, latitudinalMeters: regionRadius, longitudinalMeters: regionRadius)
+        mapView.setRegion(coordinateRegion, animated: true)
+        
+        
+        // 根據需要標記起點和終點
+        let startAnnotation = MKPointAnnotation()
+        startAnnotation.coordinate = CLLocationCoordinate2D(latitude: 25.0192, longitude: 121.4662)
+        startAnnotation.title = "起點"
+        mapView.addAnnotation(startAnnotation)
+
+        let endAnnotation = MKPointAnnotation()
+        endAnnotation.coordinate = CLLocationCoordinate2D(latitude: 25.0418, longitude: 121.5654)
+        endAnnotation.title = "終點"
+        mapView.addAnnotation(endAnnotation)
+        
+        // 使用 MKDirections 計算從起點到終點的路線
+        let startPlacemark = MKPlacemark(coordinate: startAnnotation.coordinate)
+        let endPlacemark = MKPlacemark(coordinate: endAnnotation.coordinate)
+
+        let directionRequest = MKDirections.Request()
+        directionRequest.source = MKMapItem(placemark: startPlacemark)
+        directionRequest.destination = MKMapItem(placemark: endPlacemark)
+        directionRequest.transportType = .automobile
+
+        let directions = MKDirections(request: directionRequest)
+
+        // 在地圖上繪製路線
+        directions.calculate { response, error in
+            guard let response = response, error == nil else {
+                print("Error calculating directions: \(error?.localizedDescription ?? "Unknown error")")
+                return
+            }
+            
+            // 路線可能包含多個路線段，這裡我們選擇第一個路線。
+            if let route = response.routes.first {
+                // 在地圖上添加路線的線條圖層。
+                self.mapView.addOverlay(route.polyline, level: .aboveRoads)
+                
+                // 調整地圖區域以顯示整條路線。
+                let routeRect = route.polyline.boundingMapRect
+                self.mapView.setVisibleMapRect(routeRect, edgePadding: UIEdgeInsets(top: 50, left: 50, bottom: 50, right: 50), animated: true)
+            }
+        }
     }
 
     private func setupUI() {
@@ -80,4 +130,20 @@ class MapCell: UITableViewCell {
         }
 
     }
+}
+
+// MARK: - MKMapViewDelegate
+
+extension MapCell: MKMapViewDelegate {
+    
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        if let polyline = overlay as? MKPolyline {
+            let renderer = MKPolylineRenderer(polyline: polyline)
+            renderer.strokeColor = UIColor.blue
+            renderer.lineWidth = 3.0
+            return renderer
+        }
+        return MKOverlayRenderer(overlay: overlay)
+    }
+
 }
