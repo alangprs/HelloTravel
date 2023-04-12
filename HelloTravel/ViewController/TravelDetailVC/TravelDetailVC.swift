@@ -300,11 +300,14 @@ extension TravelDetailVC: UITableViewDelegate, UITableViewDataSource {
 
                 return cell
             case .map:
-                guard let cell = tableView.dequeueReusableCell(withIdentifier: "\(MapCell.self)", for: indexPath) as? MapCell else {
+                guard let mapCell = tableView.dequeueReusableCell(withIdentifier: "\(MapCell.self)", for: indexPath) as? MapCell else {
                     return UITableViewCell()
                 }
-
-                return cell
+            
+            // TODO: 座標等確定後接上實際座標
+            mapCell.convertCell(userLat: 25.0192, userLon: 121.4662,
+                                destinationLat: 25.0418, destinationLon: 121.5654)
+                return mapCell
         }
     }
 
