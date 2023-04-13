@@ -137,13 +137,11 @@ class TravelDetailVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupHeaderDetail()
-        navigationController?.setNavigationBarHidden(false, animated: false)
+        navigationController?.setNavigationBarHidden(true, animated: false)
     }
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-
-        navigationController?.setNavigationBarHidden(true, animated: true)
+    override func viewWillDisappear(_ animated: Bool) {
+        navigationController?.setNavigationBarHidden(false, animated: false)
     }
 
     private func setupUI() {
@@ -357,23 +355,6 @@ extension TravelDetailVC: UITableViewDelegate, UITableViewDataSource {
                 return 0
             case .information:
                 return 30
-        }
-    }
-
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-
-        return TravelDetailSectionType(rawValue: section)?.stringValue
-    }
-
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let offsetY = scrollView.contentOffset.y
-        let radius = -offsetY/headerHeight
-
-        if (-offsetY > headerHeight) {
-            headerImageView.transform = CGAffineTransform.init(scaleX: radius, y: radius)
-            var frame = headerImageView.frame
-            frame.origin.y = offsetY
-            headerImageView.frame = frame
         }
     }
 }
