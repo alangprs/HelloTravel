@@ -309,6 +309,42 @@ extension TravelDetailVC: UITableViewDelegate, UITableViewDataSource {
         }
     }
 
+    /// 控制點選到的 cell
+    private func configureSelectInformationCell(indexPath: IndexPath) {
+        guard let section = TravelDetailSectionType(rawValue: indexPath.section),
+              section == .information,
+              let cellType = InformationCellType(rawValue: indexPath.row) else {
+            return
+        }
+
+        switch cellType {
+            case .businessHours:
+                return
+            case .phone:
+                callPhoneNumber()
+            case .map:
+                return
+        }
+
+    }
+
+    /// 撥打電話
+    private func callPhoneNumber() {
+        guard let phoneNumber = viewModel?.travelItem?.phone,
+              let phoneURL = URL(string: "tel://\(phoneNumber)") else { return }
+
+        if UIApplication.shared.canOpenURL(phoneURL) {
+            UIApplication.shared.open(phoneURL)
+        } else {
+            Logger.errorLog(message: "無法撥打電話")
+        }
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
+        configureSelectInformationCell(indexPath: indexPath)
+    }
+
     func numberOfSections(in tableView: UITableView) -> Int {
         return TravelDetailSectionType.allCases.count
     }
