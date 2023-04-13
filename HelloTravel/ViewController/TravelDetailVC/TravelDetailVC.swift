@@ -33,6 +33,7 @@ class TravelDetailVC: UIViewController {
         headerView.contentMode = .scaleAspectFill
         headerView.clipsToBounds = true
         headerView.image = UIImage(named: "testImage")
+        headerView.isUserInteractionEnabled = true
         return headerView
     }()
 
@@ -83,7 +84,6 @@ class TravelDetailVC: UIViewController {
 
     private lazy var titleLabel: UILabel = {
         var label = UILabel()
-        label.text = "測試抬頭"
         label.textColor = .white
         label.font = .systemFont(ofSize: 22, weight: .bold)
         return label
@@ -227,7 +227,7 @@ class TravelDetailVC: UIViewController {
 
     /// 返回按鈕
     @objc private func didClickBackButton() {
-        // TODO: 返回按鈕動作
+        navigationController?.popViewController(animated: true)
     }
 
     /// 更多按鈕
