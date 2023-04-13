@@ -301,10 +301,26 @@ extension TravelDetailVC: UITableViewDelegate, UITableViewDataSource {
                 guard let mapCell = tableView.dequeueReusableCell(withIdentifier: "\(MapCell.self)", for: indexPath) as? MapCell else {
                     return UITableViewCell()
                 }
-            
-            // TODO: 座標等確定後接上實際座標
-            mapCell.convertCell(userLat: 25.0192, userLon: 121.4662,
-                                destinationLat: 25.0418, destinationLon: 121.5654)
+
+                let userLat = 1.2938
+                let userLon = 103.841114
+
+                let destinationLat = 1.284066
+                let destinationLon = 103.841114
+
+                // TODO: 座標等確定後接上實際座標
+                viewModel?.calculateDistanceAndETA(userLat: userLat, userLon: userLon,
+                                                   destinationLat: destinationLat, destinationLon: destinationLon, completion: { distance, travelTime, error in
+                    guard let distance = distance,
+                          let travelTime = travelTime,
+                          let address = self.viewModel?.assembleAddress() else { return }
+
+                    mapCell.convertCell(userLat: userLat, userLon: userLon,
+                                        destinationLat: destinationLat, destinationLon: destinationLon,
+                                        navigateTime: "\(travelTime)分鐘開車",
+                                        distance: "\(distance)公尺",
+                                        address: address)
+                })
                 return mapCell
         }
     }

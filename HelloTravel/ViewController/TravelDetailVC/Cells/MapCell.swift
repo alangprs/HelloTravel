@@ -27,7 +27,7 @@ class MapCell: UITableViewCell {
 
     private lazy var addressLabel: UILabel = {
         var label = UILabel()
-        label.text = "文化路一段270巷6號"
+        label.text = "未取得地址"
         label.textColor = .black
         label.font = .systemFont(ofSize: 14, weight: .regular)
         return label
@@ -36,7 +36,7 @@ class MapCell: UITableViewCell {
     /// 距離
     private lazy var distanceLabel: UILabel = {
         var label = UILabel()
-        label.text = "300公尺"
+        label.text = "未取得距離"
         label.textColor = .black
         label.font = .systemFont(ofSize: 14, weight: .regular)
         return label
@@ -51,12 +51,24 @@ class MapCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    func convertCell(userLat: Double, userLon: Double, destinationLat: Double, destinationLon: Double) {
+
+    /// cell資料注入
+    /// - Parameters:
+    ///   - userLat: 使用者目前緯度
+    ///   - userLon: 使用者目前經度
+    ///   - destinationLat: 目的地緯度
+    ///   - destinationLon: 目的地經度
+    ///   - navigateTime: 導航時間
+    ///   - distance: 距離(單位公尺)
+    ///   - address: 地址
+    func convertCell(userLat: Double, userLon: Double, destinationLat: Double, destinationLon: Double, navigateTime: String, distance: String, address: String) {
         setupInitialRegion(lat: userLat, lon: userLon)
         addAnnotations(userLat: userLat, userLon: userLon,
                        destinationLat: destinationLat, destinationLon: destinationLon)
         calculateAndDrawRoute()
+        titleLabel.text = "🚗 \(navigateTime)"
+        addressLabel.text = address
+        distanceLabel.text = distance
     }
 
     /// 設置初始地圖區域（使用者目前座標）
