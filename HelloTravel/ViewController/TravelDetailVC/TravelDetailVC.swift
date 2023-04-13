@@ -317,8 +317,8 @@ extension TravelDetailVC: UITableViewDelegate, UITableViewDataSource {
 
                     mapCell.convertCell(userLat: userLat, userLon: userLon,
                                         destinationLat: destinationLat, destinationLon: destinationLon,
-                                        navigateTime: "\(travelTime)分鐘開車",
-                                        distance: "\(distance)公尺",
+                                        navigateTime: "\(travelTime)",
+                                        distance: "\(distance)",
                                         address: address)
                 })
                 return mapCell

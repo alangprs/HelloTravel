@@ -68,7 +68,7 @@ class MapCell: UITableViewCell {
         calculateAndDrawRoute()
         titleLabel.text = "🚗 \(navigateTime)"
         addressLabel.text = address
-        distanceLabel.text = distance
+        distanceLabel.text = "\(distance)公里"
     }
 
     /// 設置初始地圖區域（使用者目前座標）
