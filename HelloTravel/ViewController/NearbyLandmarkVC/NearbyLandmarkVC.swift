@@ -170,7 +170,7 @@ class NearbyLandmarkVC: UIViewController {
         middleButtonContainerView.addSubview(massageButton)
         middleButtonContainerView.addSubview(travelButton)
         
-        middleButtonContainerView.backgroundColor = .systemRed
+        middleButtonContainerView.backgroundColor = .systemPink
         
         middleButtonContainerView.snp.makeConstraints { make in
             
@@ -179,21 +179,20 @@ class NearbyLandmarkVC: UIViewController {
             make.height.equalTo(150)
         }
         
-        restaurantButton.snp.makeConstraints { make in
-            make.top.equalTo(50)
-            make.leading.equalToSuperview().offset(16)
-        }
-        
         massageButton.snp.makeConstraints { make in
-            make.leading.equalTo(restaurantButton.snp.trailing).offset(30)
-            make.bottom.equalToSuperview().offset(-12)
+            make.top.equalTo(60)
+            make.centerX.equalToSuperview()
         }
-        
+
+        restaurantButton.snp.makeConstraints { make in
+            make.centerY.equalTo(massageButton)
+            make.leading.equalToSuperview().offset(40)
+        }
+
         travelButton.snp.makeConstraints { make in
-            make.leading.equalTo(massageButton.snp.trailing).offset(30)
-            make.bottom.equalToSuperview().offset(-12)
+            make.centerY.equalTo(restaurantButton)
+            make.trailing.equalToSuperview().offset(-40)
         }
-        
     }
     
     /// CollectionView 相關設定
