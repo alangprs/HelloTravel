@@ -35,18 +35,24 @@ class NearbyLandmarkVC: UIViewController {
         label.text = "你周圍的餐廳、景點"
         return label
     }()
-    
-    // MARK: - 搜尋匡
-    
-    private lazy var textView: UITextField = {
-        var textView = UITextField()
-        textView.placeholder = "請輸入文字"
-        textView.borderStyle = .roundedRect
-        textView.delegate = self
-        return textView
-    }()
-    
+
     // MARK: - 按鈕區
+
+    /// 搜尋按鈕
+    private lazy var searchButton: UIButton = {
+        var btn = UIButton()
+        btn.setImage(UIImage(systemName: "magnifyingglass"), for: .normal)
+        btn.setTitle("搜尋你感興趣的地點", for: .normal)
+        btn.titleLabel?.font = .systemFont(ofSize: 16)
+        btn.backgroundColor = .white
+        btn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 0)
+        btn.setTitleColor(.black, for: .normal)
+        btn.layer.borderWidth = 2
+        btn.layer.borderColor = UIColor.gray.cgColor
+        btn.layer.cornerRadius = 5
+        btn.addTarget(self, action: #selector(didClickSearchButton), for: .touchUpInside)
+        return btn
+    }()
     
     /// 按鈕容器
     private lazy var middleButtonContainerView: UIView = {
@@ -128,8 +134,8 @@ class NearbyLandmarkVC: UIViewController {
     
     /// 搜尋匡
     private func setupSearchBar() {
-        view.addSubview(textView)
-        textView.snp.makeConstraints { make in
+        view.addSubview(searchButton)
+        searchButton.snp.makeConstraints { make in
             make.leading.equalToSuperview().inset(12)
             make.trailing.equalToSuperview().offset(-12)
             let height = 50
@@ -262,18 +268,19 @@ class NearbyLandmarkVC: UIViewController {
     
     // MARK: - action
     
+    @objc private func didClickSearchButton() {
+        presentToSearchVC(categoryType: .none)
+    }
+    
     @objc private func clickRestaurantButton() {
-        Logger.log(message: "clickRestaurantButton")
         presentToSearchVC(categoryType: .restaurant)
     }
     
     @objc private func clickMassageButton() {
-        Logger.log(message: "clickMassageButton")
         presentToSearchVC(categoryType: .massage)
     }
     
     @objc private func clickTravelButton() {
-        Logger.log(message: "clickTravelButton")
         presentToSearchVC(categoryType: .travel)
     }
     
