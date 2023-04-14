@@ -95,7 +95,7 @@ class TravelCollectionViewCell: UICollectionViewCell {
     // MARK: - UI 設定
 
     private func setupUI() {
-        contentView.backgroundColor = .green
+        contentView.backgroundColor = .white
 
         contentView.addSubview(bgImageView)
         bgImageView.snp.makeConstraints { make in
@@ -116,7 +116,7 @@ class TravelCollectionViewCell: UICollectionViewCell {
 
         contentView.addSubview(starsCountImageView)
         starsCountImageView.snp.makeConstraints { make in
-            make.top.equalTo(bgImageView.snp.bottom).offset(16)
+            make.top.equalTo(bgImageView.snp.bottom).offset(12)
             make.height.equalTo(30)
             make.width.equalTo(60)
             make.leading.equalTo(likeButton.snp.trailing).offset(10)
