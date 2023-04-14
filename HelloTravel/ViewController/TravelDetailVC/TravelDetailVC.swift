@@ -270,6 +270,13 @@ extension TravelDetailVC: UITableViewDelegate, UITableViewDataSource {
                 return UITableViewCell()
             }
             
+            // TODO: 確定座標之後傳入
+            let destinationLat = 1.284066
+            let destinationLon = 103.841114
+            let plazceName = viewModel?.travelItem?.name ?? ""
+            
+            placeActionCell.configureCell(lat: destinationLat, lon: destinationLon, placeName: plazceName)
+            
             return placeActionCell
             
         case .information:

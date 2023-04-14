@@ -101,6 +101,13 @@ class PlaceActionCell: UITableViewCell {
         return btn
     }()
     
+    // TODO: 暫時放這，思考一下資料結構如何處理
+    
+    // 目的地座標
+    private lazy var lat: Double = 0
+    private lazy var lon: Double = 0
+    private lazy var placeName: String = ""
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -109,6 +116,32 @@ class PlaceActionCell: UITableViewCell {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func configureCell(lat: Double, lon: Double, placeName: String) {
+        self.lat = lat
+        self.lon = lon
+        self.placeName = placeName
+    }
+    
+    private func openMap() {
+        // 將目標經緯度設為目標地點的經緯度
+        let destinationCoordinate = CLLocationCoordinate2D(latitude: lat, longitude: lon)
+        
+        // 創建一個 MKPlacemark，用於表示目標地點
+        let destinationPlacemark = MKPlacemark(coordinate: destinationCoordinate)
+        
+        // 創建一個 MKMapItem，用於打開地圖應用
+        let destinationMapItem = MKMapItem(placemark: destinationPlacemark)
+        
+        // 設置目標地點的名稱
+        destinationMapItem.name = placeName
+        
+        // 通過 launchOptions 選擇導航模式（例如：開車）
+        let launchOptions = [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving]
+        
+        // 打開地圖應用並開始導航
+        destinationMapItem.openInMaps(launchOptions: launchOptions)
     }
     
     private func setupUI() {
@@ -207,7 +240,7 @@ class PlaceActionCell: UITableViewCell {
     
     /// 看地圖
     @objc private func didClickLookMapButton() {
-        
+        openMap()
     }
     
 }
