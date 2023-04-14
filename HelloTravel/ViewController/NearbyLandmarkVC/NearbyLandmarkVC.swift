@@ -25,14 +25,17 @@ class NearbyLandmarkVC: UIViewController {
     
     private lazy var bgImage: UIImageView = {
         var imageView = UIImageView()
-        imageView.image = UIImage(named: "KabdnarkTop")
+        imageView.contentMode = .scaleAspectFill
+        imageView.image = UIImage(named: "testImage")
         return imageView
     }()
     
     private lazy var topTitleLabel: UILabel = {
         var label = UILabel()
-        label.textColor = .black
-        label.text = "你周圍的餐廳、景點"
+        label.textColor = .white
+        label.text = "New and popular\nin Nearby"
+        label.numberOfLines = 0
+        label.font = .systemFont(ofSize: 32, weight: .bold)
         return label
     }()
 
@@ -115,6 +118,7 @@ class NearbyLandmarkVC: UIViewController {
         super.viewWillAppear(animated)
         
         viewModel.askPermission()
+        navigationController?.isNavigationBarHidden = true
     }
 
     override func viewDidDisappear(_ animated: Bool) {
