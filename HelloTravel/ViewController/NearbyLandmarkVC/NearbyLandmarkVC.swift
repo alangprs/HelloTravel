@@ -333,6 +333,13 @@ extension NearbyLandmarkVC: UICollectionViewDelegate, UICollectionViewDataSource
         
         return cell
     }
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let selectItem = viewModel.travelList[indexPath.row]
+        let travelDetailVC = TravelDetailVC(travelItem: selectItem)
+
+        navigationController?.pushViewController(travelDetailVC, animated: true)
+    }
     
     
 }
