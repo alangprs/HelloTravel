@@ -333,11 +333,9 @@ extension NearbyLandmarkVC: UICollectionViewDelegate, UICollectionViewDataSource
             return UICollectionViewCell()
         }
 
-        let starsImage = viewModel.calculateStarIcon(starsCount: travelItem.rating)
         cell.convertCell(bgImage: travelItem.imageURL,
                          title: travelItem.name,
                          starsCount: travelItem.rating,
-                         starsImage: starsImage,
                          isFavorite: travelItem.isFavorites,
                          buttonTag: indexPath.row)
         configurationCellEvent(cell: cell)

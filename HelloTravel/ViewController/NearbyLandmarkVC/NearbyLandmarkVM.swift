@@ -51,31 +51,6 @@ class NearbyLandmarkVM {
         }
     }
 
-    /// 計算要顯示的星星圖片
-    /// - Parameter starsCount: 星星數量
-    /// - Returns: 星星圖片
-    func calculateStarIcon(starsCount: Double) -> UIImage {
-        var image = UIImage()
-        switch starsCount {
-            
-        case 1...1.9:
-            image = UIImage(named: "star1") ?? UIImage()
-        case 2...2.9:
-            image = UIImage(named: "star2") ?? UIImage()
-        case 3...3.9:
-            image = UIImage(named: "star3") ?? UIImage()
-        case 4...4.9:
-            image = UIImage(named: "star4") ?? UIImage()
-        case 5:
-            image = UIImage(named: "star5") ?? UIImage()
-        default:
-            image = UIImage(named: "star0") ?? UIImage()
-            return image
-        }
-        
-        return image
-    }
-
     /// 取得周圍景點
     private func getNearbyAttractions() {
 
