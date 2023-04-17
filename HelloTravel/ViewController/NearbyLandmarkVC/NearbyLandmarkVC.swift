@@ -25,28 +25,37 @@ class NearbyLandmarkVC: UIViewController {
     
     private lazy var bgImage: UIImageView = {
         var imageView = UIImageView()
-        imageView.image = UIImage(named: "KabdnarkTop")
+        imageView.contentMode = .scaleAspectFill
+        imageView.image = UIImage(named: "testImage")
         return imageView
     }()
     
     private lazy var topTitleLabel: UILabel = {
         var label = UILabel()
-        label.textColor = .black
-        label.text = "你周圍的餐廳、景點"
+        label.textColor = .white
+        label.text = "New and popular\nin Nearby"
+        label.numberOfLines = 0
+        label.font = .systemFont(ofSize: 32, weight: .bold)
         return label
     }()
-    
-    // MARK: - 搜尋匡
-    
-    private lazy var textView: UITextField = {
-        var textView = UITextField()
-        textView.placeholder = "請輸入文字"
-        textView.borderStyle = .roundedRect
-        textView.delegate = self
-        return textView
-    }()
-    
+
     // MARK: - 按鈕區
+
+    /// 搜尋按鈕
+    private lazy var searchButton: UIButton = {
+        var btn = UIButton()
+        btn.setImage(UIImage(systemName: "magnifyingglass"), for: .normal)
+        btn.setTitle("搜尋你感興趣的地點", for: .normal)
+        btn.titleLabel?.font = .systemFont(ofSize: 16)
+        btn.backgroundColor = .white
+        btn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 0)
+        btn.setTitleColor(.myLightBlue, for: .normal)
+        btn.layer.borderWidth = 2
+        btn.layer.borderColor = UIColor.gray.cgColor
+        btn.layer.cornerRadius = 5
+        btn.addTarget(self, action: #selector(didClickSearchButton), for: .touchUpInside)
+        return btn
+    }()
     
     /// 按鈕容器
     private lazy var middleButtonContainerView: UIView = {
@@ -60,8 +69,9 @@ class NearbyLandmarkVC: UIViewController {
         btn.setTitle(CategoryType.restaurant.typeTitle, for: .normal)
         btn.titleLabel?.font = .systemFont(ofSize: 14)
         let image = btn.resizeImage(image: UIImage(named: "icon_restaurant")!,targetSize: CGSize(width: 20, height: 20))
-        btn.setImage(image, for: .normal)
-        btn.setTitleColor(.black, for: .normal)
+        let tintedImage = image.withTintColor(.myLightBlue, renderingMode: .alwaysTemplate)
+        btn.setImage(tintedImage, for: .normal)
+        btn.setTitleColor(.myLightBlue, for: .normal)
         btn.addTarget(self, action: #selector(clickRestaurantButton), for: .touchUpInside)
         return btn
     }()
@@ -72,8 +82,9 @@ class NearbyLandmarkVC: UIViewController {
         btn.setTitle(CategoryType.massage.typeTitle, for: .normal)
         btn.titleLabel?.font = .systemFont(ofSize: 14)
         let image = btn.resizeImage(image: UIImage(named: "icon_massage")!,targetSize: CGSize(width: 20, height: 20))
-        btn.setImage(image, for: .normal)
-        btn.setTitleColor(.black, for: .normal)
+        let tintedImage = image.withTintColor(.myLightBlue, renderingMode: .alwaysTemplate)
+        btn.setImage(tintedImage, for: .normal)
+        btn.setTitleColor(.myLightBlue, for: .normal)
         btn.addTarget(self, action: #selector(clickMassageButton), for: .touchUpInside)
         return btn
     }()
@@ -84,8 +95,9 @@ class NearbyLandmarkVC: UIViewController {
         btn.setTitle(CategoryType.travel.typeTitle, for: .normal)
         btn.titleLabel?.font = .systemFont(ofSize: 14)
         let image = btn.resizeImage(image: UIImage(named: "icon_travel")!,targetSize: CGSize(width: 20, height: 20))
-        btn.setImage(image, for: .normal)
-        btn.setTitleColor(.black, for: .normal)
+        let tintedImage = image.withTintColor(.myLightBlue, renderingMode: .alwaysTemplate)
+        btn.setImage(tintedImage, for: .normal)
+        btn.setTitleColor(.myLightBlue, for: .normal)
         btn.addTarget(self, action: #selector(clickTravelButton), for: .touchUpInside)
         return btn
     }()
@@ -109,6 +121,7 @@ class NearbyLandmarkVC: UIViewController {
         super.viewWillAppear(animated)
         
         viewModel.askPermission()
+        navigationController?.isNavigationBarHidden = true
     }
 
     override func viewDidDisappear(_ animated: Bool) {
@@ -120,6 +133,7 @@ class NearbyLandmarkVC: UIViewController {
     // MARK: - 其他
     
     private func setupUI() {
+        view.backgroundColor = .bgLightBlue
         setupTopView()
         setupMiddleButtonContainerView()
         setupSearchBar()
@@ -128,8 +142,8 @@ class NearbyLandmarkVC: UIViewController {
     
     /// 搜尋匡
     private func setupSearchBar() {
-        view.addSubview(textView)
-        textView.snp.makeConstraints { make in
+        view.addSubview(searchButton)
+        searchButton.snp.makeConstraints { make in
             make.leading.equalToSuperview().inset(12)
             make.trailing.equalToSuperview().offset(-12)
             let height = 50
@@ -141,16 +155,14 @@ class NearbyLandmarkVC: UIViewController {
     
     private func setupTopView() {
         view.addSubview(topView)
-        topView.backgroundColor = .systemRed
+        topView.addSubview(bgImage)
+        topView.addSubview(topTitleLabel)
+
         topView.snp.makeConstraints { make in
             make.top.leading.trailing.equalToSuperview()
             make.height.equalTo(280)
         }
-        
-        topView.addSubview(bgImage)
-        bgImage.backgroundColor = .systemGray
-        topView.addSubview(topTitleLabel)
-        
+
         bgImage.snp.makeConstraints { make in
             make.top.bottom.leading.trailing.equalToSuperview()
         }
@@ -164,13 +176,11 @@ class NearbyLandmarkVC: UIViewController {
     /// 按鈕群
     private func setupMiddleButtonContainerView() {
         // TODO: - UI 再調整
-        
+
         view.addSubview(middleButtonContainerView)
         middleButtonContainerView.addSubview(restaurantButton)
         middleButtonContainerView.addSubview(massageButton)
         middleButtonContainerView.addSubview(travelButton)
-        
-        middleButtonContainerView.backgroundColor = .systemRed
         
         middleButtonContainerView.snp.makeConstraints { make in
             
@@ -179,21 +189,20 @@ class NearbyLandmarkVC: UIViewController {
             make.height.equalTo(150)
         }
         
-        restaurantButton.snp.makeConstraints { make in
-            make.top.equalTo(50)
-            make.leading.equalToSuperview().offset(16)
-        }
-        
         massageButton.snp.makeConstraints { make in
-            make.leading.equalTo(restaurantButton.snp.trailing).offset(30)
-            make.bottom.equalToSuperview().offset(-12)
+            make.top.equalTo(60)
+            make.centerX.equalToSuperview()
         }
-        
+
+        restaurantButton.snp.makeConstraints { make in
+            make.centerY.equalTo(massageButton)
+            make.leading.equalToSuperview().offset(40)
+        }
+
         travelButton.snp.makeConstraints { make in
-            make.leading.equalTo(massageButton.snp.trailing).offset(30)
-            make.bottom.equalToSuperview().offset(-12)
+            make.centerY.equalTo(restaurantButton)
+            make.trailing.equalToSuperview().offset(-40)
         }
-        
     }
     
     /// CollectionView 相關設定
@@ -220,6 +229,7 @@ class NearbyLandmarkVC: UIViewController {
         travelCollectionView.showsHorizontalScrollIndicator = false
         
         view.addSubview(travelCollectionView)
+        travelCollectionView.backgroundColor = .clear
         
         travelCollectionView.delegate = self
         travelCollectionView.dataSource = self
@@ -227,7 +237,7 @@ class NearbyLandmarkVC: UIViewController {
         travelCollectionView.register(TravelCollectionViewCell.self, forCellWithReuseIdentifier: "\(TravelCollectionViewCell.self)")
         travelCollectionView.snp.makeConstraints { make in
             make.top.equalTo(middleButtonContainerView.snp.bottom).inset(0.5)
-            make.bottom.equalTo(self.view.safeAreaLayoutGuide)
+            make.bottom.equalTo(self.view.safeAreaLayoutGuide).offset(-6)
             make.leading.trailing.equalToSuperview()
         }
     }
@@ -263,18 +273,19 @@ class NearbyLandmarkVC: UIViewController {
     
     // MARK: - action
     
+    @objc private func didClickSearchButton() {
+        presentToSearchVC(categoryType: .none)
+    }
+    
     @objc private func clickRestaurantButton() {
-        Logger.log(message: "clickRestaurantButton")
         presentToSearchVC(categoryType: .restaurant)
     }
     
     @objc private func clickMassageButton() {
-        Logger.log(message: "clickMassageButton")
         presentToSearchVC(categoryType: .massage)
     }
     
     @objc private func clickTravelButton() {
-        Logger.log(message: "clickTravelButton")
         presentToSearchVC(categoryType: .travel)
     }
     
