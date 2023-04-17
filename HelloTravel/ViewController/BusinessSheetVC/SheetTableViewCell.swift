@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import SwiftyStarRatingView
 
 class SheetTableViewCell: UITableViewCell {
 
@@ -14,37 +15,41 @@ class SheetTableViewCell: UITableViewCell {
 
     private lazy var imageView01: UIImageView = {
         var imageView = UIImageView()
-        imageView.image = UIImage(named: "testImage")
         return imageView
     }()
     
     private lazy var imageView02: UIImageView = {
         var imageView = UIImageView()
-        imageView.image = UIImage(named: "testImage")
         return imageView
     }()
     
     private lazy var imageView03: UIImageView = {
         var imageView = UIImageView()
-        imageView.image = UIImage(named: "testImage")
         return imageView
     }()
 
     private lazy var titleLabel: UILabel = {
         var label = UILabel()
+        label.textColor = .white
+        label.font = .systemFont(ofSize: 16, weight: .bold)
         return label
     }()
 
     /// 依照星星數量決定圖片
-    private lazy var starsCountImageView: UIImageView = {
-        var imageView = UIImageView()
-        imageView.backgroundColor = .green
+    private lazy var starsCountImageView: SwiftyStarRatingView = {
+        var imageView = SwiftyStarRatingView()
+        imageView.backgroundColor = .clear
+        // 關閉使用者手勢
+        imageView.isUserInteractionEnabled = false
+        imageView.tintColor = .yellow
         return imageView
     }()
 
     /// 顯示星星數量文字
     private lazy var starsCountLabel: UILabel = {
         var label = UILabel()
+        label.textColor = .white
+        label.font = .systemFont(ofSize: 16)
         return label
     }()
 
@@ -69,20 +74,20 @@ class SheetTableViewCell: UITableViewCell {
     ///   - image02: 照片2
     ///   - image03: 照片3
     ///   - title: 抬頭文字
-    ///   - starsCount: 星星數量文字
-    ///   - starsImage: 星星圖片
-    func convertCell(image01: String, image02: String, image03: String, title: String, starsCount: String, starsImage: UIImage) {
+    ///   - reviewCount: 留言數量文字
+    ///   - starsImage: 星星數量
+    func convertCell(image01: String, image02: String, image03: String, title: String, reviewCount: String, starsstars: CGFloat) {
         
         sdWebImageAdapter.setImage(imageView: imageView01, imageString: image01)
         sdWebImageAdapter.setImage(imageView: imageView02, imageString: image02)
         sdWebImageAdapter.setImage(imageView: imageView03, imageString: image03)
         titleLabel.text = title
-        starsCountLabel.text = starsCount
-        starsCountImageView.image = starsImage
+        starsCountLabel.text = "\(reviewCount)個評價"
+        starsCountImageView.value = starsstars
     }
 
     private func setupUI() {
-        contentView.backgroundColor = .yellow
+        contentView.backgroundColor = .bgLightBlue
 
         contentView.addSubview(imageView01)
         contentView.addSubview(imageView02)
@@ -114,12 +119,10 @@ class SheetTableViewCell: UITableViewCell {
             make.bottom.equalTo(titleLabel.snp.top).inset(-6)
         }
 
-        titleLabel.text = "咖啡吧"
         titleLabel.snp.makeConstraints { make in
             make.leading.equalToSuperview().inset(12)
         }
 
-        starsCountLabel.text = "5656"
         starsCountLabel.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(12)
             make.leading.equalToSuperview().inset(12)
