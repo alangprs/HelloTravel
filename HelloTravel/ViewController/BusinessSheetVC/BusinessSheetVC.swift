@@ -19,6 +19,7 @@ class BusinessSheetVC: UIViewController {
         var tableView = UITableView()
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.backgroundColor = .clear
         tableView.register(SheetTableViewCell.self, forCellReuseIdentifier: "\(SheetTableViewCell.self)")
         return tableView
     }()
@@ -31,7 +32,7 @@ class BusinessSheetVC: UIViewController {
 
     private func setupUI() {
 
-        view.backgroundColor = .systemRed
+        view.backgroundColor = .bgLightBlue
 
         view.addSubview(sheetTableView)
         sheetTableView.snp.makeConstraints { make in
@@ -59,6 +60,8 @@ extension BusinessSheetVC: UITableViewDelegate, UITableViewDataSource {
             Logger.log(message: "get cell error")
             return UITableViewCell()
         }
+
+        cell.convertCell(image01: "testImage", image02: "testImage", image03: "testImage", title: travelItem.name, reviewCount: "\(travelItem.reviewCount)", starsstars: travelItem.rating)
 
         return cell
     }

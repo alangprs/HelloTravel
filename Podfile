@@ -18,6 +18,7 @@ source 'https://github.com/CocoaPods/Specs.git'
  pod 'Alamofire', '5.6.4'
  pod 'SnapKit', '5.6.0'
  pod 'SDWebImage', '5.15.5'
+ pod 'SwiftyStarRatingView'
  
 # Firebase 相關套件
  pod 'FirebaseAuth'

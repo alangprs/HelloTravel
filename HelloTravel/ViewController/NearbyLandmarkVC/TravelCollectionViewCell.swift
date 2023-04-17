@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import SwiftyStarRatingView
 
 class TravelCollectionViewCell: UICollectionViewCell {
 
@@ -24,8 +25,12 @@ class TravelCollectionViewCell: UICollectionViewCell {
     }()
 
     /// 依照星星數量決定圖片
-    private lazy var starsCountImageView: UIImageView = {
-        var imageView = UIImageView()
+    private lazy var starsCountImageView: SwiftyStarRatingView = {
+        var imageView = SwiftyStarRatingView()
+        imageView.backgroundColor = .clear
+        // 關閉使用者手勢
+        imageView.isUserInteractionEnabled = false
+        imageView.tintColor = .yellow
         return imageView
     }()
 
@@ -67,13 +72,12 @@ class TravelCollectionViewCell: UICollectionViewCell {
     ///   - bgImage: 背景圖
     ///   - title: 名稱
     ///   - starsCount: 星星數量
-    ///   - starsImage: 星星圖
     ///   - isFavorite: 是否有被收藏
-    func convertCell(bgImage: String, title: String, starsCount: Double, starsImage: UIImage, isFavorite: Bool, buttonTag: Int) {
+    func convertCell(bgImage: String, title: String, starsCount: Double, isFavorite: Bool, buttonTag: Int) {
         sdWebImageAdapter.setImage(imageView: bgImageView, imageString: bgImage)
         titleLabel.text = title
         starsCountLabel.text = "\(starsCount)"
-        starsCountImageView.image = starsImage
+        starsCountImageView.value = CGFloat(starsCount)
         setLikeButtonImage(isFavorite: isFavorite)
         likeButton.tag = buttonTag
     }
@@ -123,7 +127,7 @@ class TravelCollectionViewCell: UICollectionViewCell {
         starsCountImageView.snp.makeConstraints { make in
             make.top.equalTo(bgImageView.snp.bottom).offset(12)
             make.height.equalTo(30)
-            make.width.equalTo(60)
+            make.width.equalTo(85)
             make.leading.equalTo(likeButton.snp.trailing).offset(10)
         }
 

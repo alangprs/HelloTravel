@@ -133,7 +133,6 @@ class NearbyLandmarkVC: UIViewController {
     // MARK: - 其他
     
     private func setupUI() {
-        view.backgroundColor = .bgLightBlue
         setupTopView()
         setupMiddleButtonContainerView()
         setupSearchBar()
@@ -333,11 +332,9 @@ extension NearbyLandmarkVC: UICollectionViewDelegate, UICollectionViewDataSource
             return UICollectionViewCell()
         }
 
-        let starsImage = viewModel.calculateStarIcon(starsCount: travelItem.rating)
         cell.convertCell(bgImage: travelItem.imageURL,
                          title: travelItem.name,
                          starsCount: travelItem.rating,
-                         starsImage: starsImage,
                          isFavorite: travelItem.isFavorites,
                          buttonTag: indexPath.row)
         configurationCellEvent(cell: cell)

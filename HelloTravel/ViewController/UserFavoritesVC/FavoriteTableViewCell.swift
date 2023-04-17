@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import SwiftyStarRatingView
 
 class FavoriteTableViewCell: UITableViewCell {
 
@@ -21,13 +22,18 @@ class FavoriteTableViewCell: UITableViewCell {
 
     private lazy var titleLabel: UILabel = {
         var label = UILabel()
+        label.textColor = .white
+        label.font = .systemFont(ofSize: 16, weight: .bold)
         return label
     }()
 
     /// 依照星星數量決定圖片
-    private lazy var starsCountImageView: UIImageView = {
-        var imageView = UIImageView()
-        imageView.backgroundColor = .green
+    private lazy var starsCountImageView: SwiftyStarRatingView = {
+        var imageView = SwiftyStarRatingView()
+        imageView.backgroundColor = .clear
+        // 關閉使用者手勢
+        imageView.isUserInteractionEnabled = false
+        imageView.tintColor = .yellow
         return imageView
     }()
 
@@ -47,13 +53,14 @@ class FavoriteTableViewCell: UITableViewCell {
     }
 
     /// UI 參數注入
-    func convertCell(title: String, image01URL: String) {
+    func convertCell(title: String, image01URL: String, starsCount: Double) {
         titleLabel.text = title
         sdWebImageAdapter.setImage(imageView: imageView01, imageString: image01URL)
+        starsCountImageView.value = CGFloat(starsCount)
     }
     
     private func setupUI() {
-        contentView.backgroundColor = .brown
+        contentView.backgroundColor = .bgLightBlue
 
         contentView.addSubview(imageView01)
         contentView.addSubview(titleLabel)

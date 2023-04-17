@@ -14,6 +14,7 @@ class CategoryButton: UIButton {
         super.layoutSubviews()
         
         setupCategory()
+        setupBorder()
     }
     
     /// 修改圖片大小
@@ -63,6 +64,13 @@ class CategoryButton: UIButton {
         self.layer.cornerRadius = self.frame.height / 3
         self.backgroundColor = .white
         
+    }
+
+    /// 設定邊匡
+    private func setupBorder() {
+        self.layer.borderWidth = 1
+        self.layer.borderColor = UIColor.gray.cgColor
+        self.layer.cornerRadius = 5
     }
 }
 
