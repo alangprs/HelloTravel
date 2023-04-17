@@ -68,7 +68,7 @@ extension UserFavoritesVC: UITableViewDelegate, UITableViewDataSource {
             return UITableViewCell()
         }
 
-        cell.convertCell(title: likeItem.name, image01URL: likeItem.imageURL)
+        cell.convertCell(title: likeItem.name, image01URL: likeItem.imageURL, starsCount: likeItem.rating)
 
         return cell
     }
