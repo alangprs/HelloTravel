@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import SwiftyStarRatingView
 
 class TravelDetailVC: UIViewController {
     
@@ -90,17 +91,20 @@ class TravelDetailVC: UIViewController {
     }()
     
     /// 依照星星數量決定圖片
-    private lazy var starsCountImageView: UIImageView = {
-        var imageView = UIImageView()
-        imageView.backgroundColor = .green
+    private lazy var starsCountImageView: SwiftyStarRatingView = {
+        var imageView = SwiftyStarRatingView()
+        imageView.backgroundColor = .clear
+        // 關閉使用者手勢
+        imageView.isUserInteractionEnabled = false
+        imageView.tintColor = .yellow
         return imageView
     }()
     
     /// 顯示星星數量文字
     private lazy var starsCountLabel: UILabel = {
         var label = UILabel()
-        label.text = "56"
         label.textColor = .white
+        label.font = .systemFont(ofSize: 16)
         return label
     }()
     
@@ -208,6 +212,7 @@ class TravelDetailVC: UIViewController {
         guard let travelItem = viewModel?.travelItem else { return }
         titleLabel.text = travelItem.name
         starsCountLabel.text = "\(travelItem.rating)"
+        starsCountImageView.value = CGFloat(travelItem.rating)
         setLikeButtonImage(isFavorite: travelItem.isFavorites)
     }
     
