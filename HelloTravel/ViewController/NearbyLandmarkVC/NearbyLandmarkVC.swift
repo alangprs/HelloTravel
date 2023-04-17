@@ -49,7 +49,7 @@ class NearbyLandmarkVC: UIViewController {
         btn.titleLabel?.font = .systemFont(ofSize: 16)
         btn.backgroundColor = .white
         btn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 0)
-        btn.setTitleColor(.black, for: .normal)
+        btn.setTitleColor(.myLightBlue, for: .normal)
         btn.layer.borderWidth = 2
         btn.layer.borderColor = UIColor.gray.cgColor
         btn.layer.cornerRadius = 5
@@ -69,8 +69,9 @@ class NearbyLandmarkVC: UIViewController {
         btn.setTitle(CategoryType.restaurant.typeTitle, for: .normal)
         btn.titleLabel?.font = .systemFont(ofSize: 14)
         let image = btn.resizeImage(image: UIImage(named: "icon_restaurant")!,targetSize: CGSize(width: 20, height: 20))
-        btn.setImage(image, for: .normal)
-        btn.setTitleColor(.black, for: .normal)
+        let tintedImage = image.withTintColor(.myLightBlue, renderingMode: .alwaysTemplate)
+        btn.setImage(tintedImage, for: .normal)
+        btn.setTitleColor(.myLightBlue, for: .normal)
         btn.addTarget(self, action: #selector(clickRestaurantButton), for: .touchUpInside)
         return btn
     }()
@@ -81,8 +82,9 @@ class NearbyLandmarkVC: UIViewController {
         btn.setTitle(CategoryType.massage.typeTitle, for: .normal)
         btn.titleLabel?.font = .systemFont(ofSize: 14)
         let image = btn.resizeImage(image: UIImage(named: "icon_massage")!,targetSize: CGSize(width: 20, height: 20))
-        btn.setImage(image, for: .normal)
-        btn.setTitleColor(.black, for: .normal)
+        let tintedImage = image.withTintColor(.myLightBlue, renderingMode: .alwaysTemplate)
+        btn.setImage(tintedImage, for: .normal)
+        btn.setTitleColor(.myLightBlue, for: .normal)
         btn.addTarget(self, action: #selector(clickMassageButton), for: .touchUpInside)
         return btn
     }()
@@ -93,8 +95,9 @@ class NearbyLandmarkVC: UIViewController {
         btn.setTitle(CategoryType.travel.typeTitle, for: .normal)
         btn.titleLabel?.font = .systemFont(ofSize: 14)
         let image = btn.resizeImage(image: UIImage(named: "icon_travel")!,targetSize: CGSize(width: 20, height: 20))
-        btn.setImage(image, for: .normal)
-        btn.setTitleColor(.black, for: .normal)
+        let tintedImage = image.withTintColor(.myLightBlue, renderingMode: .alwaysTemplate)
+        btn.setImage(tintedImage, for: .normal)
+        btn.setTitleColor(.myLightBlue, for: .normal)
         btn.addTarget(self, action: #selector(clickTravelButton), for: .touchUpInside)
         return btn
     }()
@@ -130,6 +133,7 @@ class NearbyLandmarkVC: UIViewController {
     // MARK: - 其他
     
     private func setupUI() {
+        view.backgroundColor = .bgLightBlue
         setupTopView()
         setupMiddleButtonContainerView()
         setupSearchBar()
@@ -151,16 +155,14 @@ class NearbyLandmarkVC: UIViewController {
     
     private func setupTopView() {
         view.addSubview(topView)
-        topView.backgroundColor = .systemRed
+        topView.addSubview(bgImage)
+        topView.addSubview(topTitleLabel)
+
         topView.snp.makeConstraints { make in
             make.top.leading.trailing.equalToSuperview()
             make.height.equalTo(280)
         }
-        
-        topView.addSubview(bgImage)
-        bgImage.backgroundColor = .systemGray
-        topView.addSubview(topTitleLabel)
-        
+
         bgImage.snp.makeConstraints { make in
             make.top.bottom.leading.trailing.equalToSuperview()
         }
@@ -174,13 +176,11 @@ class NearbyLandmarkVC: UIViewController {
     /// 按鈕群
     private func setupMiddleButtonContainerView() {
         // TODO: - UI 再調整
-        
+
         view.addSubview(middleButtonContainerView)
         middleButtonContainerView.addSubview(restaurantButton)
         middleButtonContainerView.addSubview(massageButton)
         middleButtonContainerView.addSubview(travelButton)
-        
-        middleButtonContainerView.backgroundColor = .systemPink
         
         middleButtonContainerView.snp.makeConstraints { make in
             
@@ -229,6 +229,7 @@ class NearbyLandmarkVC: UIViewController {
         travelCollectionView.showsHorizontalScrollIndicator = false
         
         view.addSubview(travelCollectionView)
+        travelCollectionView.backgroundColor = .clear
         
         travelCollectionView.delegate = self
         travelCollectionView.dataSource = self
@@ -236,7 +237,7 @@ class NearbyLandmarkVC: UIViewController {
         travelCollectionView.register(TravelCollectionViewCell.self, forCellWithReuseIdentifier: "\(TravelCollectionViewCell.self)")
         travelCollectionView.snp.makeConstraints { make in
             make.top.equalTo(middleButtonContainerView.snp.bottom).inset(0.5)
-            make.bottom.equalTo(self.view.safeAreaLayoutGuide)
+            make.bottom.equalTo(self.view.safeAreaLayoutGuide).offset(-6)
             make.leading.trailing.equalToSuperview()
         }
     }

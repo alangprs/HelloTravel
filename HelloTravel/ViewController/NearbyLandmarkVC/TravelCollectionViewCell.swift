@@ -19,6 +19,7 @@ class TravelCollectionViewCell: UICollectionViewCell {
     private lazy var titleLabel: UILabel = {
         var label = UILabel()
         label.textColor = .white
+        label.font = .systemFont(ofSize: 16, weight: .bold)
         return label
     }()
 
@@ -31,11 +32,14 @@ class TravelCollectionViewCell: UICollectionViewCell {
     /// 顯示星星數量文字
     private lazy var starsCountLabel: UILabel = {
         var label = UILabel()
+        label.textColor = .white
+        label.font = .systemFont(ofSize: 16)
         return label
     }()
 
     private lazy var likeButton: UIButton = {
         var btn = UIButton()
+        btn.tintColor = .red
         btn.addTarget(self, action: #selector(didClickLikeButton), for: .touchUpInside)
         return btn
     }()
@@ -95,26 +99,27 @@ class TravelCollectionViewCell: UICollectionViewCell {
     // MARK: - UI 設定
 
     private func setupUI() {
-        contentView.backgroundColor = .white
 
         contentView.addSubview(bgImageView)
+        bgImageView.addSubview(titleLabel)
+        contentView.addSubview(likeButton)
+        contentView.addSubview(starsCountImageView)
+        contentView.addSubview(starsCountLabel)
+
         bgImageView.snp.makeConstraints { make in
             make.top.leading.trailing.equalToSuperview()
             make.height.equalToSuperview().multipliedBy(0.6)
         }
 
-        bgImageView.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { make in
             make.leading.bottom.equalToSuperview().inset(14)
         }
 
-        contentView.addSubview(likeButton)
         likeButton.snp.makeConstraints { make in
             make.top.equalTo(bgImageView.snp.bottom).offset(16)
             make.leading.equalTo(14)
         }
 
-        contentView.addSubview(starsCountImageView)
         starsCountImageView.snp.makeConstraints { make in
             make.top.equalTo(bgImageView.snp.bottom).offset(12)
             make.height.equalTo(30)
@@ -122,7 +127,6 @@ class TravelCollectionViewCell: UICollectionViewCell {
             make.leading.equalTo(likeButton.snp.trailing).offset(10)
         }
 
-        contentView.addSubview(starsCountLabel)
         starsCountLabel.snp.makeConstraints { make in
             make.top.equalTo(bgImageView.snp.bottom).offset(16)
             make.leading.equalTo(starsCountImageView.snp.trailing).offset(10)

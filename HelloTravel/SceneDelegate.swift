@@ -43,10 +43,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         vc4.tabBarItem = UITabBarItem(title: "空", image: UIImage(systemName: "ferry"), tag: 3)
 
         let tabBarController = UITabBarController()
-        tabBarController.tabBar.backgroundColor = .white
+        tabBarController.tabBar.backgroundColor = .myLightBlue
         tabBarController.viewControllers = [nearbyLandmarkVC, vc2, vc3, vc4]
         tabBarController.modalPresentationStyle = .fullScreen
-        tabBarController.tabBar.tintColor = .black
+        tabBarController.tabBar.tintColor = .white
         tabBarController.selectedIndex = 0
 
         return tabBarController

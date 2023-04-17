@@ -61,7 +61,7 @@ class CategoryButton: UIButton {
         self.contentEdgeInsets = UIEdgeInsets(top: imageViewHeight, left: 0, bottom: labelHeight, right: 0)
         
         self.layer.cornerRadius = self.frame.height / 3
-        self.backgroundColor = .brown
+        self.backgroundColor = .white
         
     }
 }
