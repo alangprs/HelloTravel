@@ -133,7 +133,6 @@ class NearbyLandmarkVC: UIViewController {
     // MARK: - 其他
     
     private func setupUI() {
-        view.backgroundColor = .bgLightBlue
         setupTopView()
         setupMiddleButtonContainerView()
         setupSearchBar()

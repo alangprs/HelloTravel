@@ -26,20 +26,22 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     private func creatTapBarController() -> UITabBarController {
-        let nearbyLandmarkVC = UINavigationController(rootViewController: NearbyLandmarkVC())
+        let vc1 = NearbyLandmarkVC()
+        vc1.view.backgroundColor = .bgLightBlue
+        let nearbyLandmarkVC = UINavigationController(rootViewController: vc1)
         nearbyLandmarkVC.tabBarItem = UITabBarItem(title: "附近景點", image: UIImage(systemName: "airplane"), tag: 0)
 
         let vc2 = UINavigationController(rootViewController: SingVC())
-        vc2.view.backgroundColor = .systemRed
+        vc2.view.backgroundColor = .bgLightBlue
         vc2.tabBarItem = UITabBarItem(title: "登入頁面", image: UIImage(systemName: "car"), tag: 1)
 
         let vc3 = UserFavoritesVC()
-        vc3.view.backgroundColor = .green
+        vc3.view.backgroundColor = .bgLightBlue
         vc3.tabBarItem = UITabBarItem(title: "收藏頁面", image: UIImage(systemName: "tram"), tag: 2)
 
 //        let vc4 = TravelDetailVC(travelItem: nil)
         let vc4 = UIViewController()
-        vc4.view.backgroundColor = .yellow
+        vc4.view.backgroundColor = .bgLightBlue
         vc4.tabBarItem = UITabBarItem(title: "空", image: UIImage(systemName: "ferry"), tag: 3)
 
         let tabBarController = UITabBarController()

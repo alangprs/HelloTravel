@@ -18,6 +18,7 @@ class UserFavoritesVC: UIViewController {
 
     private lazy var favoriteTableView: UITableView = {
         var tableView = UITableView()
+        tableView.backgroundColor = .clear
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(FavoriteTableViewCell.self, forCellReuseIdentifier: "\(FavoriteTableViewCell.self)")
@@ -43,6 +44,7 @@ class UserFavoritesVC: UIViewController {
     }
 
     private func setupUI() {
+        view.backgroundColor = .bgLightBlue
         view.addSubview(favoriteTableView)
 
         favoriteTableView.snp.makeConstraints { make in
