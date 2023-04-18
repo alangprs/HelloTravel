@@ -32,6 +32,10 @@ class UserInfoCell: UITableViewCell {
     }
 
     private func setupUI() {
+
+        self.accessoryType = .disclosureIndicator
+        self.selectionStyle = .none
+
         contentView.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
