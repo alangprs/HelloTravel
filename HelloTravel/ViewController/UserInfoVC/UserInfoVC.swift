@@ -70,26 +70,6 @@ class UserInfoVC: UIViewController {
         }
     }
 
-    /// 依照點選到cell 執行相關動作
-    private func configureSelectCell(indexPath: IndexPath) {
-        let cells = UserInfoType.allCases[indexPath.row]
-
-        switch cells {
-
-            case .dynamic:
-                // TODO: 動態點擊後動作
-                Logger.log(message: cells.typeTitle)
-                break
-            case .favorites:
-                Logger.log(message: cells.typeTitle)
-            case .deleteAccount:
-                deleteAccount()
-                break
-            case .signOut:
-                singOut()
-        }
-    }
-
     private func deleteAccount() {
         // TODO: 刪除帳號相關動作
         notifyAlert(title: "是否確認刪除帳號？", message: "帳號刪除之後，將無法恢復，點擊確認之後，帳號將會永久刪除")
@@ -131,6 +111,27 @@ class UserInfoVC: UIViewController {
 // MARK: - TableView
 
 extension UserInfoVC: UITableViewDelegate, UITableViewDataSource {
+
+    /// 依照點選到cell 執行相關動作
+    private func configureSelectCell(indexPath: IndexPath) {
+        let cells = UserInfoType.allCases[indexPath.row]
+
+        switch cells {
+
+            case .dynamic:
+                // TODO: 動態點擊後動作
+                Logger.log(message: cells.typeTitle)
+                break
+            case .favorites:
+                Logger.log(message: cells.typeTitle)
+            case .deleteAccount:
+                deleteAccount()
+                break
+            case .signOut:
+                singOut()
+        }
+    }
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return UserInfoType.allCases.count
     }
