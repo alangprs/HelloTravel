@@ -123,7 +123,8 @@ extension UserInfoVC: UITableViewDelegate, UITableViewDataSource {
                 Logger.log(message: cells.typeTitle)
                 break
             case .favorites:
-                Logger.log(message: cells.typeTitle)
+                let vc = UserFavoritesVC()
+                navigationController?.pushViewController(vc, animated: true)
             case .deleteAccount:
                 deleteAccount()
                 break
