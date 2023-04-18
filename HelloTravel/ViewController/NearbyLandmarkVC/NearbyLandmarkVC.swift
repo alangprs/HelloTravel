@@ -121,13 +121,14 @@ class NearbyLandmarkVC: UIViewController {
         super.viewWillAppear(animated)
         
         viewModel.askPermission()
-        navigationController?.isNavigationBarHidden = true
+        navigationController?.setNavigationBarHidden(true, animated: false)
     }
 
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
         viewModel.removeAllObservers()
+        navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
     // MARK: - 其他

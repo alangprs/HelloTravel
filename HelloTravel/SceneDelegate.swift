@@ -28,10 +28,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     private func creatTapBarController() -> UITabBarController {
         let vc1 = NearbyLandmarkVC()
         vc1.view.backgroundColor = .bgLightBlue
-        let nearbyLandmarkVC = UINavigationController(rootViewController: vc1)
-        nearbyLandmarkVC.tabBarItem = UITabBarItem(title: "附近景點", image: UIImage(systemName: "airplane"), tag: 0)
+        vc1.tabBarItem = UITabBarItem(title: "附近景點", image: UIImage(systemName: "airplane"), tag: 0)
 
-        let vc2 = UINavigationController(rootViewController: SingVC())
+        let vc2 = SingVC()
         vc2.view.backgroundColor = .bgLightBlue
         vc2.tabBarItem = UITabBarItem(title: "登入頁面", image: UIImage(systemName: "car"), tag: 1)
 
@@ -45,7 +44,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         let tabBarController = UITabBarController()
         tabBarController.tabBar.backgroundColor = .myLightBlue
-        tabBarController.viewControllers = [nearbyLandmarkVC, vc2, vc3, vc4]
+        tabBarController.viewControllers = [vc1, vc2, vc3, vc4]
         tabBarController.modalPresentationStyle = .fullScreen
         tabBarController.tabBar.tintColor = .white
         tabBarController.selectedIndex = 3
