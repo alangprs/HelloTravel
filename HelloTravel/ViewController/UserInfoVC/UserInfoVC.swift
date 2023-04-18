@@ -64,6 +64,29 @@ class UserInfoVC: UIViewController {
             make.leading.trailing.bottom.equalToSuperview()
         }
     }
+
+    /// 依照點選到cell 執行相關動作
+    private func configureSelectCell(indexPath: IndexPath) {
+        let cells = UserInfoType.allCases[indexPath.row]
+
+        switch cells {
+
+            case .dynamic:
+                // TODO: 動態點擊後動作
+                Logger.log(message: cells.typeTitle)
+                break
+            case .favorites:
+                Logger.log(message: cells.typeTitle)
+            case .deleteAccount:
+                // TODO: 刪除帳號動作
+                Logger.log(message: cells.typeTitle)
+                break
+            case .SignOut:
+                // TODO: 登出動作
+                
+                break
+        }
+    }
 }
 
 // MARK: - TableView
@@ -85,5 +108,8 @@ extension UserInfoVC: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
 
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
+        configureSelectCell(indexPath: indexPath)
+    }
 }
