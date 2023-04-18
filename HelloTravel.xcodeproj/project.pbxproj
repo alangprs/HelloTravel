@@ -43,6 +43,10 @@
 		6E91DB6129E53B1D008C6395 /* MapCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E91DB6029E53B1D008C6395 /* MapCell.swift */; };
 		6E91DB6329E54587008C6395 /* TravelDetailVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E91DB6229E54587008C6395 /* TravelDetailVM.swift */; };
 		6E91DB6B29ECDDBD008C6395 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E91DB6A29ECDDBD008C6395 /* UIColor.swift */; };
+		6E91DB7029ED43DC008C6395 /* UserInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E91DB6F29ED43DC008C6395 /* UserInfoVC.swift */; };
+		6E91DB7529ED4C8D008C6395 /* UserInfoType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E91DB7429ED4C8D008C6395 /* UserInfoType.swift */; };
+		6E91DB7729ED4E0F008C6395 /* UserInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E91DB7629ED4E0F008C6395 /* UserInfoCell.swift */; };
+		6E91DB7929EE27D3008C6395 /* UserInfoVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E91DB7829EE27D3008C6395 /* UserInfoVM.swift */; };
 		6EA14F5F29D3DAA0006B845F /* DisplayBusinessStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA14F5E29D3DAA0006B845F /* DisplayBusinessStruct.swift */; };
 		6EDBA84329D5810D0065C0F7 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EDBA84229D5810D0065C0F7 /* UserDefaultsManager.swift */; };
 		6EF6340329D13573000ECED0 /* UserFavoritesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF6340229D13573000ECED0 /* UserFavoritesVC.swift */; };
@@ -104,6 +108,10 @@
 		6E91DB6029E53B1D008C6395 /* MapCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapCell.swift; sourceTree = "<group>"; };
 		6E91DB6229E54587008C6395 /* TravelDetailVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelDetailVM.swift; sourceTree = "<group>"; };
 		6E91DB6A29ECDDBD008C6395 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
+		6E91DB6F29ED43DC008C6395 /* UserInfoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoVC.swift; sourceTree = "<group>"; };
+		6E91DB7429ED4C8D008C6395 /* UserInfoType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoType.swift; sourceTree = "<group>"; };
+		6E91DB7629ED4E0F008C6395 /* UserInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoCell.swift; sourceTree = "<group>"; };
+		6E91DB7829EE27D3008C6395 /* UserInfoVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoVM.swift; sourceTree = "<group>"; };
 		6EA14F5E29D3DAA0006B845F /* DisplayBusinessStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayBusinessStruct.swift; sourceTree = "<group>"; };
 		6EDBA84229D5810D0065C0F7 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		6EF6340229D13573000ECED0 /* UserFavoritesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserFavoritesVC.swift; sourceTree = "<group>"; };
@@ -221,6 +229,7 @@
 		6E216F3629C1700E00BE1BB1 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				6E91DB6C29ED43C3008C6395 /* UserInfoVC */,
 				6E91DB4D29E39F0E008C6395 /* TravelDetailVC */,
 				6EF6340129D134E7000ECED0 /* UserFavoritesVC */,
 				6E4DFA7129CC473A004C9177 /* BusinessSheetVC */,
@@ -291,6 +300,7 @@
 			isa = PBXGroup;
 			children = (
 				6E4DFA6929C9B585004C9177 /* CategoryType.swift */,
+				6E91DB7429ED4C8D008C6395 /* UserInfoType.swift */,
 			);
 			path = Enum;
 			sourceTree = "<group>";
@@ -333,6 +343,16 @@
 				6E91DB6A29ECDDBD008C6395 /* UIColor.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		6E91DB6C29ED43C3008C6395 /* UserInfoVC */ = {
+			isa = PBXGroup;
+			children = (
+				6E91DB6F29ED43DC008C6395 /* UserInfoVC.swift */,
+				6E91DB7629ED4E0F008C6395 /* UserInfoCell.swift */,
+				6E91DB7829EE27D3008C6395 /* UserInfoVM.swift */,
+			);
+			path = UserInfoVC;
 			sourceTree = "<group>";
 		};
 		6EF6340129D134E7000ECED0 /* UserFavoritesVC */ = {
@@ -573,17 +593,20 @@
 			files = (
 				6E216F3529C16F7100BE1BB1 /* Logger.swift in Sources */,
 				6E216F2D29C1692A00BE1BB1 /* FirebaseAuthenticationAdapter.swift in Sources */,
+				6E91DB7529ED4C8D008C6395 /* UserInfoType.swift in Sources */,
 				6E216EFB29C017FD00BE1BB1 /* SingVC.swift in Sources */,
 				6EF6340C29D146C7000ECED0 /* LikeListStruct.swift in Sources */,
 				BEA9F9F529D7E01F0065BDFE /* BusinessSheetVM.swift in Sources */,
 				6E216EF729C017FD00BE1BB1 /* AppDelegate.swift in Sources */,
 				6E216F3E29C1BB1200BE1BB1 /* AlamofireAdapter.swift in Sources */,
+				6E91DB7729ED4E0F008C6395 /* UserInfoCell.swift in Sources */,
 				6E91DB6329E54587008C6395 /* TravelDetailVM.swift in Sources */,
 				6E4DFA5A29C40215004C9177 /* NearbyLandmarkVC.swift in Sources */,
 				BE15496429C494B80032C4BE /* CategoryButton.swift in Sources */,
 				6E4DFA7329CC474A004C9177 /* BusinessSheetVC.swift in Sources */,
 				6E216F3C29C1A56200BE1BB1 /* RealtimeDatabaseAdapter.swift in Sources */,
 				6EDBA84329D5810D0065C0F7 /* UserDefaultsManager.swift in Sources */,
+				6E91DB7029ED43DC008C6395 /* UserInfoVC.swift in Sources */,
 				6E91DB5329E3ECA3008C6395 /* PlaceActionCell.swift in Sources */,
 				6E216F3929C1704600BE1BB1 /* SingVM.swift in Sources */,
 				6E4DFA6A29C9B585004C9177 /* CategoryType.swift in Sources */,
@@ -593,6 +616,7 @@
 				6EF6340829D135EA000ECED0 /* UserFavoritesVM.swift in Sources */,
 				6E91DB6129E53B1D008C6395 /* MapCell.swift in Sources */,
 				6E4DFA6029C950AB004C9177 /* SDWebImageAdapter.swift in Sources */,
+				6E91DB7929EE27D3008C6395 /* UserInfoVM.swift in Sources */,
 				6E91DB6B29ECDDBD008C6395 /* UIColor.swift in Sources */,
 				6E91DB4F29E39F1C008C6395 /* TravelDetailVC.swift in Sources */,
 				6E4DFA6529C95EF2004C9177 /* SearchVM.swift in Sources */,

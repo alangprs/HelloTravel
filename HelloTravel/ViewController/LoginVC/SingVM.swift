@@ -64,18 +64,4 @@ class SingVM {
         }
     }
 
-    /// 登出
-    func singOut() {
-        authenticationAdapter.singOut { result in
-
-            switch result {
-                case .success(_):
-                    UserDefaultsManager.shared.removeUserID()
-                    Logger.log(message: "登出成功")
-                case .failure(let error):
-                    Logger.errorLog(message: error)
-            }
-        }
-    }
-
 }
