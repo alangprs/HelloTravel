@@ -57,6 +57,13 @@ class UserFavoritesVC: UIViewController {
 // MARK: - TableView
 
 extension UserFavoritesVC: UITableViewDelegate, UITableViewDataSource {
+
+    private func configureSelectCell(indexPath: IndexPath) {
+        guard let item = viewModel.mapTravelListToDisplayBusiness(indexPath: indexPath) else { return }
+        let vc = TravelDetailVC(travelItem: item)
+        navigationController?.pushViewController(vc, animated: true)
+    }
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
         return viewModel.likeList.count
@@ -73,6 +80,10 @@ extension UserFavoritesVC: UITableViewDelegate, UITableViewDataSource {
         cell.convertCell(title: likeItem.name, image01URL: likeItem.imageURL, starsCount: likeItem.rating)
 
         return cell
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        configureSelectCell(indexPath: indexPath)
     }
 
 }
