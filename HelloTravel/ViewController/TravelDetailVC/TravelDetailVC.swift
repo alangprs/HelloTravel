@@ -124,6 +124,7 @@ class TravelDetailVC: UIViewController {
     init(travelItem: DisplayBusiness) {
         self.viewModel = TravelDetailVM(travelItem: travelItem)
         super.init(nibName: nil, bundle: nil)
+        self.viewModel?.delegate = self
     }
     
     required init?(coder: NSCoder) {
@@ -134,7 +135,7 @@ class TravelDetailVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         setupUI()
     }
     
@@ -245,7 +246,7 @@ class TravelDetailVC: UIViewController {
     
     /// 喜歡按鈕
     @objc private func didClickLikeButton() {
-        // TODO: 喜歡按鈕動作
+        viewModel?.toggleLikeStatus()
     }
     
     /// 更多圖片按鈕
@@ -420,5 +421,13 @@ extension TravelDetailVC: UITableViewDelegate, UITableViewDataSource {
         case .information:
             return 30
         }
+    }
+}
+
+// MARK: - TravelDetailVMDelegate
+
+extension TravelDetailVC: TravelDetailVMDelegate {
+    func getTravelItemSuccess(isLike: Bool) {
+        setLikeButtonImage(isFavorite: isLike)
     }
 }

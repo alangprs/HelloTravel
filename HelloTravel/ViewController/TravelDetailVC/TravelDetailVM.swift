@@ -8,10 +8,22 @@
 import Foundation
 import MapKit
 
+protocol TravelDetailVMDelegate: AnyObject {
+    // TODO: DisplayBusiness 資料收攏重構
+    func getTravelItemSuccess(isLike: Bool)
+}
+
 class TravelDetailVM {
+
+    weak var delegate: TravelDetailVMDelegate?
     
     /// 顯示用資料
     private(set) var travelItem: DisplayBusiness?
+
+    /// 資料庫
+    private lazy var realtimeDatabaseAdapter: RealtimeDatabaseAdapter = {
+        return RealtimeDatabaseAdapter()
+    }()
     
     init(travelItem: DisplayBusiness) {
         self.travelItem = travelItem
@@ -75,6 +87,35 @@ class TravelDetailVM {
         }
         
         return address
+    }
+
+    /// 判斷是新增 or 取消 收藏
+    func toggleLikeStatus() {
+
+        guard let travelItem = travelItem else { return }
+
+        if travelItem.isFavorites {
+            Logger.log(message: "取消")
+            realtimeDatabaseAdapter.removeLikeListValue(nodeID: travelItem.id)
+            delegate?.getTravelItemSuccess(isLike: false)
+        } else {
+            Logger.log(message: "新增")
+            postLikeListData()
+        }
+    }
+
+    /// 上傳收藏資料
+    private func postLikeListData() {
+
+        guard let travelItem = travelItem else { return }
+
+        do {
+            let data = try JSONEncoder().encode(travelItem)
+            realtimeDatabaseAdapter.postLiktListData(nodeID: travelItem.id, data: data)
+            delegate?.getTravelItemSuccess(isLike: true)
+        } catch {
+            Logger.log(message: "encoder likeList to date error")
+        }
     }
     
 }
