@@ -15,7 +15,7 @@ enum UserInfoType: CaseIterable {
     /// 刪除帳號
     case deleteAccount
     /// 登出
-    case SignOut
+    case signOut
 
     var typeTitle: String {
         switch self {
@@ -25,7 +25,7 @@ enum UserInfoType: CaseIterable {
                 return "收藏"
             case .deleteAccount:
                 return "刪除帳號"
-            case .SignOut:
+            case .signOut:
                 return "登出"
         }
     }

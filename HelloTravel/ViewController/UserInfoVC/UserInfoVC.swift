@@ -10,6 +10,11 @@ import SnapKit
 
 class UserInfoVC: UIViewController {
 
+    private lazy var viewModel: UserInfoVM = {
+        var vm = UserInfoVM()
+        return vm
+    }()
+
     private lazy var userAvatarImageView: UIImageView = {
         var imageView = UIImageView()
         imageView.image = UIImage(systemName: "person.crop.circle")
@@ -78,14 +83,48 @@ class UserInfoVC: UIViewController {
             case .favorites:
                 Logger.log(message: cells.typeTitle)
             case .deleteAccount:
-                // TODO: 刪除帳號動作
-                Logger.log(message: cells.typeTitle)
+                deleteAccount()
                 break
-            case .SignOut:
-                // TODO: 登出動作
-                
-                break
+            case .signOut:
+                singOut()
         }
+    }
+
+    private func deleteAccount() {
+        // TODO: 刪除帳號相關動作
+        notifyAlert(title: "是否確認刪除帳號？", message: "帳號刪除之後，將無法恢復，點擊確認之後，帳號將會永久刪除")
+    }
+
+    private func singOut() {
+        notifyAlert(title: "是否確認登出？", message: "點擊登出之後，將無法取得收藏頁面相關資訊") { [weak self] in
+            self?.viewModel.singOut(completion: { result in
+                switch result {
+                    case .success(_):
+                        // TODO: 回登入頁面
+                        Logger.log(message: "返回登入頁面")
+                    case .failure(let failure):
+                        self?.notifyAlert(title: "登出失敗", message: failure.localizedDescription)
+                }
+            })
+        }
+    }
+
+    /// 此頁各項通知 alert
+    private func notifyAlert(title: String, message: String, okAction: (() -> Void)? = nil) {
+        let alertControl = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default) { [weak self] _ in
+            guard let action = okAction else {
+                return
+            }
+
+            action()
+        }
+
+        let noAction = UIAlertAction(title: "取消", style: .cancel)
+
+        alertControl.addAction(okAction)
+        alertControl.addAction(noAction)
+        present(alertControl, animated: true)
     }
 }
 
