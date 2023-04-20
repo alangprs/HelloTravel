@@ -16,19 +16,19 @@ protocol TravelDetailVMDelegate: AnyObject {
 }
 
 class TravelDetailVM {
-
+    
     weak var delegate: TravelDetailVMDelegate?
     
     /// 顯示用資料
     private(set) var travelItem: DisplayBusiness?
-
+    
     /// 資料庫
     private lazy var realtimeDatabaseAdapter: RealtimeDatabaseAdapter = {
         return RealtimeDatabaseAdapter()
     }()
-
+    
     private var getBusinessByIdUseCase: GetBusinessByIdUseCase?
-
+    
     private var businessTime: BusinessByIDStruct?
     
     init(travelItem: DisplayBusiness) {
@@ -38,18 +38,18 @@ class TravelDetailVM {
     func getBusinessItem() -> DisplayBusiness? {
         return travelItem
     }
-
+    
     /// 取得商家詳細資料
     func getBusinessById() {
-
+        
         guard let id = travelItem?.id else { return }
-
+        
         getBusinessByIdUseCase = GetBusinessByIdUseCase(id: id)
-
+        
         getBusinessByIdUseCase?.getBusinessesByID { [weak self] result in
-
+            
             switch result {
-
+                    
                 case .success(let item):
                     self?.businessTime = item
                     self?.delegate?.getBusinessByIdSuccess()
@@ -58,55 +58,55 @@ class TravelDetailVM {
             }
         }
     }
-
+    
     // MARK: - 計算營業時間
-
+    
     /// 取得今天的營業時間跟狀態
     func getTodayBusinessStatusAndHours() -> String {
         let businessHours = getTodayBusinessHours()
         let openStatus = isOpenNow()
-
+        
         let timeStatus = "\(openStatus), \(businessHours)"
         return timeStatus
     }
-
+    
     /// 取得今天的營業時間
     private func getTodayBusinessHours() -> String {
-
+        
         guard let businessTime = businessTime,
               let openTimes = businessTime.hours.first?.hourOpen else { return "無營業時間資料"}
-
+        
         let today = Calendar.current.component(.weekday, from: Date()) % 7
-
+        
         var timeTitles: [String] = []
-
+        
         for time in openTimes {
             if time.day == today {
                 let timeTitle = "\(time.start) - \(time.end)"
                 timeTitles.append(timeTitle)
             }
         }
-
+        
         let sumTimeTitle = timeTitles.joined(separator: ", ")
-
+        
         return sumTimeTitle
     }
-
+    
     /// 目前是否營業中
     private func isOpenNow() -> String {
         guard let businessTime = businessTime,
               let isOpen = businessTime.hours.first?.isOpenNow else { return "無法計算" }
-
+        
         if isOpen {
             return "營業中"
         } else {
             return "休息中"
         }
-
+        
     }
-
+    
     // MARK: - 地圖相關
-
+    
     /// 計算路線
     func calculateDistanceAndETA(userLat: Double, userLon: Double, destinationLat: Double, destinationLon: Double, completion: @escaping (_ distance: CLLocationDistance?, _ travelTime: String?, _ error: Error?) -> Void) {
         
@@ -162,12 +162,12 @@ class TravelDetailVM {
         
         return address
     }
-
+    
     /// 判斷是新增 or 取消 收藏
     func toggleLikeStatus() {
-
+        
         guard let travelItem = travelItem else { return }
-
+        
         if travelItem.isFavorites {
             Logger.log(message: "取消")
             realtimeDatabaseAdapter.removeLikeListValue(nodeID: travelItem.id)
@@ -177,12 +177,12 @@ class TravelDetailVM {
             postLikeListData()
         }
     }
-
+    
     /// 上傳收藏資料
     private func postLikeListData() {
-
+        
         guard let travelItem = travelItem else { return }
-
+        
         do {
             let data = try JSONEncoder().encode(travelItem)
             realtimeDatabaseAdapter.postLiktListData(nodeID: travelItem.id, data: data)
@@ -196,11 +196,11 @@ class TravelDetailVM {
 
 // MARK: - 測試用資料
 extension TravelDetailVM {
-
+    
     /// 模擬打api
     func decodeJson() {
         let jsonStr = jsonString()
-
+        
         if let data = jsonStr.data(using: .utf8) {
             do {
                 let jsonitem = try JSONDecoder().decode(BusinessByIDStruct.self, from: data)
@@ -210,10 +210,10 @@ extension TravelDetailVM {
                 Logger.errorLog(message: "get decode error")
             }
         }
-
+        
     }
-
-
+    
+    
     private func jsonString() -> String {
         let json =
         """
