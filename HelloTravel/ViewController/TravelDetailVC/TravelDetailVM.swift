@@ -151,3 +151,176 @@ class TravelDetailVM {
     }
     
 }
+
+// MARK: - 測試用資料
+extension TravelDetailVM {
+
+    /// 模擬打api
+    func decodeJson() {
+        let jsonStr = jsonString()
+
+        if let data = jsonStr.data(using: .utf8) {
+            do {
+                let jsonitem = try JSONDecoder().decode(BusinessByIDStruct.self, from: data)
+                businessTime = jsonitem
+            } catch {
+                Logger.errorLog(message: "get decode error")
+            }
+        }
+
+    }
+
+
+    private func jsonString() -> String {
+        let json =
+        """
+{
+  "id": "wcYmWVGB0kVdjfp3kmovkA",
+  "alias": "zhong-guo-la-mian-xiao-long-bao-singapore",
+  "name": "Zhong Guo La Mian Xiao Long Bao",
+  "image_url": "https://s3-media3.fl.yelpcdn.com/bphoto/a5bAZQp1FCY6qseBi0d1tA/o.jpg",
+  "is_claimed": false,
+  "is_closed": false,
+  "url": "https://www.yelp.com/biz/zhong-guo-la-mian-xiao-long-bao-singapore?adjust_creative=L2DNe2W3HxwxlaFN2D-DJg&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_lookup&utm_source=L2DNe2W3HxwxlaFN2D-DJg",
+  "phone": "",
+  "display_phone": "",
+  "review_count": 34,
+  "categories": [
+    {
+      "alias": "shanghainese",
+      "title": "Shanghainese"
+    },
+    {
+      "alias": "dimsum",
+      "title": "Dim Sum"
+    },
+    {
+      "alias": "noodles",
+      "title": "Noodles"
+    }
+  ],
+  "rating": 4.5,
+  "location": {
+    "address1": "Blk 335 Smith St",
+    "address2": "#02-135",
+    "address3": "",
+    "city": "Singapore",
+    "zip_code": "051335",
+    "country": "SG",
+    "state": "SG",
+    "display_address": [
+      "Blk 335 Smith St",
+      "#02-135",
+      "Singapore 051335",
+      "Singapore"
+    ],
+    "cross_streets": ""
+  },
+  "coordinates": {
+    "latitude": 1.28218,
+    "longitude": 103.84317
+  },
+  "photos": [
+    "https://s3-media3.fl.yelpcdn.com/bphoto/a5bAZQp1FCY6qseBi0d1tA/o.jpg",
+    "https://s3-media2.fl.yelpcdn.com/bphoto/IKA3CZbKD2ZWwfjfxLiK8Q/o.jpg",
+    "https://s3-media3.fl.yelpcdn.com/bphoto/932DTKl6-jH_XVvUU_zWZA/o.jpg"
+  ],
+  "price": "$",
+  "hours": [
+    {
+      "open": [
+        {
+          "is_overnight": false,
+          "start": "1130",
+          "end": "1500",
+          "day": 0
+        },
+        {
+          "is_overnight": false,
+          "start": "1700",
+          "end": "2030",
+          "day": 0
+        },
+        {
+          "is_overnight": false,
+          "start": "1130",
+          "end": "1500",
+          "day": 1
+        },
+        {
+          "is_overnight": false,
+          "start": "1700",
+          "end": "2030",
+          "day": 1
+        },
+        {
+          "is_overnight": false,
+          "start": "1130",
+          "end": "1500",
+          "day": 2
+        },
+        {
+          "is_overnight": false,
+          "start": "1700",
+          "end": "2030",
+          "day": 2
+        },
+        {
+          "is_overnight": false,
+          "start": "1130",
+          "end": "1500",
+          "day": 3
+        },
+        {
+          "is_overnight": false,
+          "start": "1700",
+          "end": "2030",
+          "day": 3
+        },
+        {
+          "is_overnight": false,
+          "start": "1130",
+          "end": "1500",
+          "day": 4
+        },
+        {
+          "is_overnight": false,
+          "start": "1700",
+          "end": "2030",
+          "day": 4
+        },
+        {
+          "is_overnight": false,
+          "start": "1130",
+          "end": "1500",
+          "day": 5
+        },
+        {
+          "is_overnight": false,
+          "start": "1700",
+          "end": "2030",
+          "day": 5
+        },
+        {
+          "is_overnight": false,
+          "start": "1130",
+          "end": "1500",
+          "day": 6
+        },
+        {
+          "is_overnight": false,
+          "start": "1700",
+          "end": "2030",
+          "day": 6
+        }
+      ],
+      "hours_type": "REGULAR",
+      "is_open_now": false
+    }
+  ],
+  "transactions": []
+}
+"""
+        return json
+    }
+}
