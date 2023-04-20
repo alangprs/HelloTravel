@@ -184,7 +184,7 @@
 				BE15496229C494160032C4BE /* CustomizedUI */,
 				6E216F4829C2C64400BE1BB1 /* Mannger */,
 				6E216F4229C1BED700BE1BB1 /* DataStruct */,
-				6E216F3F29C1BCBA00BE1BB1 /* SearchBusinessesUseCase */,
+				6E216F3F29C1BCBA00BE1BB1 /* UseCase */,
 				6E216F3329C16F6300BE1BB1 /* Logger */,
 				6E216F2B29C168EA00BE1BB1 /* Adapter */,
 				6E216F3629C1700E00BE1BB1 /* ViewController */,
@@ -249,12 +249,12 @@
 			path = LoginVC;
 			sourceTree = "<group>";
 		};
-		6E216F3F29C1BCBA00BE1BB1 /* SearchBusinessesUseCase */ = {
+		6E216F3F29C1BCBA00BE1BB1 /* UseCase */ = {
 			isa = PBXGroup;
 			children = (
 				6E216F4029C1BCE900BE1BB1 /* SearchBusinessesUseCase.swift */,
 			);
-			path = SearchBusinessesUseCase;
+			path = UseCase;
 			sourceTree = "<group>";
 		};
 		6E216F4229C1BED700BE1BB1 /* DataStruct */ = {
