@@ -56,12 +56,51 @@ class TravelDetailVM {
         }
     }
 
+    // MARK: - 計算營業時間
+
+    /// 取得今天的營業時間跟狀態
+    func getTodayBusinessStatusAndHours() -> String {
+        let businessHours = getTodayBusinessHours()
+        let openStatus = isOpenNow()
+
+        return "\(openStatus), \(businessHours)"
+
+    }
+
+    /// 取得今天的營業時間
+    private func getTodayBusinessHours() -> String {
+
+        guard let businessTime = businessTime,
+              let openTimes = businessTime.hours.first?.hourOpen else { return "無營業時間資料"}
+
+        let today = Calendar.current.component(.weekday, from: Date()) % 7
+
+        var timeTitles: [String] = []
+
+        for time in openTimes {
+            if time.day == today {
+                let timeTitle = "\(time.start) - \(time.end)"
+                timeTitles.append(timeTitle)
+            }
+        }
+
+        let sumTimeTitle = timeTitles.joined(separator: ", ")
+
+        return sumTimeTitle
+    }
+
     /// 目前是否營業中
-//    func isOpenNow() -> Bool {
-//        guard let businessTime else { return false }
-//
-//        return businessTime
-//    }
+    private func isOpenNow() -> String {
+        guard let businessTime = businessTime,
+              let isOpen = businessTime.hours.first?.isOpenNow else { return "無法計算" }
+
+        if isOpen {
+            return "營業中"
+        } else {
+            return "休息中"
+        }
+
+    }
 
     // MARK: - 地圖相關
 
