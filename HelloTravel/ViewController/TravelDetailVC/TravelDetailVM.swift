@@ -11,6 +11,8 @@ import MapKit
 protocol TravelDetailVMDelegate: AnyObject {
     // TODO: DisplayBusiness 資料收攏重構
     func getTravelItemSuccess(isLike: Bool)
+    /// 依照地點ID取得詳細資料成功
+    func getBusinessByIdSuccess()
 }
 
 class TravelDetailVM {
@@ -50,6 +52,7 @@ class TravelDetailVM {
 
                 case .success(let item):
                     self?.businessTime = item
+                    self?.delegate?.getBusinessByIdSuccess()
                 case .failure(let error):
                     Logger.errorLog(message: error)
             }
@@ -63,8 +66,8 @@ class TravelDetailVM {
         let businessHours = getTodayBusinessHours()
         let openStatus = isOpenNow()
 
-        return "\(openStatus), \(businessHours)"
-
+        let timeStatus = "\(openStatus), \(businessHours)"
+        return timeStatus
     }
 
     /// 取得今天的營業時間
@@ -202,6 +205,7 @@ extension TravelDetailVM {
             do {
                 let jsonitem = try JSONDecoder().decode(BusinessByIDStruct.self, from: data)
                 businessTime = jsonitem
+                delegate?.getBusinessByIdSuccess()
             } catch {
                 Logger.errorLog(message: "get decode error")
             }

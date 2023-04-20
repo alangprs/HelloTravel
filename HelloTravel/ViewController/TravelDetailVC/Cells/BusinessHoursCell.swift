@@ -21,7 +21,6 @@ class BusinessHoursCell: UITableViewCell {
 
     private lazy var businessHoursLabel: UILabel = {
         var label = UILabel()
-        label.text = "關門中 12:00-14:30, 17:30-21:00"
         label.textColor = .black
         label.font = .systemFont(ofSize: 14, weight: .regular)
         return label
@@ -42,6 +41,10 @@ class BusinessHoursCell: UITableViewCell {
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    func convertCell(timeText: String) {
+        businessHoursLabel.text = timeText
     }
 
     private func setupUI() {

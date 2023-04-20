@@ -23,7 +23,6 @@ class PlaceActionCell: UITableViewCell {
     /// 營業時間
     private lazy var businessHoursLabel: UILabel = {
         var label = UILabel()
-        label.text = "關門中 12:00-14:30, 17:30-21:00"
         label.textColor = .black
         label.font = .systemFont(ofSize: 14, weight: .regular)
         return label
@@ -118,10 +117,11 @@ class PlaceActionCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configureCell(lat: Double, lon: Double, placeName: String) {
+    func configureCell(lat: Double, lon: Double, placeName: String, businessHours: String) {
         self.lat = lat
         self.lon = lon
         self.placeName = placeName
+        self.businessHoursLabel.text = businessHours
     }
     
     private func openMap() {

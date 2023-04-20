@@ -143,7 +143,11 @@ class TravelDetailVC: UIViewController {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: false)
         setupHeaderDetail()
-        viewModel?.getBusinessById()
+
+//        viewModel?.getBusinessById()
+        #if DEBUG
+        viewModel?.decodeJson()
+        #endif
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -280,9 +284,10 @@ extension TravelDetailVC: UITableViewDelegate, UITableViewDataSource {
             // TODO: 確定座標之後傳入
             let destinationLat = 1.284066
             let destinationLon = 103.841114
-            let plazceName = viewModel?.travelItem?.name ?? ""
-            
-            placeActionCell.configureCell(lat: destinationLat, lon: destinationLon, placeName: plazceName)
+            let placeName = viewModel?.travelItem?.name ?? ""
+                let businessHours = viewModel?.getTodayBusinessStatusAndHours() ?? ""
+
+                placeActionCell.configureCell(lat: destinationLat, lon: destinationLon, placeName: placeName, businessHours: businessHours)
             
             return placeActionCell
             
@@ -303,6 +308,8 @@ extension TravelDetailVC: UITableViewDelegate, UITableViewDataSource {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "\(BusinessHoursCell.self)", for: indexPath) as? BusinessHoursCell else {
                 return UITableViewCell()
             }
+                let timeStatus = viewModel?.getTodayBusinessStatusAndHours() ?? ""
+                cell.convertCell(timeText: timeStatus)
             
             return cell
         case .phone:
@@ -428,6 +435,10 @@ extension TravelDetailVC: UITableViewDelegate, UITableViewDataSource {
 // MARK: - TravelDetailVMDelegate
 
 extension TravelDetailVC: TravelDetailVMDelegate {
+    func getBusinessByIdSuccess() {
+        detailTableView.reloadData()
+    }
+
     func getTravelItemSuccess(isLike: Bool) {
         setLikeButtonImage(isFavorite: isLike)
     }
