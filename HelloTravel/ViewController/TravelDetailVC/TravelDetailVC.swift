@@ -141,8 +141,9 @@ class TravelDetailVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setupHeaderDetail()
         navigationController?.setNavigationBarHidden(true, animated: false)
+        setupHeaderDetail()
+        viewModel?.getBusinessById()
     }
     
     override func viewWillDisappear(_ animated: Bool) {

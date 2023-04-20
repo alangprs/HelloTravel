@@ -24,6 +24,10 @@ class TravelDetailVM {
     private lazy var realtimeDatabaseAdapter: RealtimeDatabaseAdapter = {
         return RealtimeDatabaseAdapter()
     }()
+
+    private var getBusinessByIdUseCase: GetBusinessByIdUseCase?
+
+    private var businessTime: BusinessByIDStruct?
     
     init(travelItem: DisplayBusiness) {
         self.travelItem = travelItem
@@ -32,7 +36,35 @@ class TravelDetailVM {
     func getBusinessItem() -> DisplayBusiness? {
         return travelItem
     }
-    
+
+    /// 取得商家詳細資料
+    func getBusinessById() {
+
+        guard let id = travelItem?.id else { return }
+
+        getBusinessByIdUseCase = GetBusinessByIdUseCase(id: id)
+
+        getBusinessByIdUseCase?.getBusinessesByID { [weak self] result in
+
+            switch result {
+
+                case .success(let item):
+                    self?.businessTime = item
+                case .failure(let error):
+                    Logger.errorLog(message: error)
+            }
+        }
+    }
+
+    /// 目前是否營業中
+//    func isOpenNow() -> Bool {
+//        guard let businessTime else { return false }
+//
+//        return businessTime
+//    }
+
+    // MARK: - 地圖相關
+
     /// 計算路線
     func calculateDistanceAndETA(userLat: Double, userLon: Double, destinationLat: Double, destinationLon: Double, completion: @escaping (_ distance: CLLocationDistance?, _ travelTime: String?, _ error: Error?) -> Void) {
         

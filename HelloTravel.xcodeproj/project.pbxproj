@@ -35,6 +35,8 @@
 		6E4DFA6A29C9B585004C9177 /* CategoryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4DFA6929C9B585004C9177 /* CategoryType.swift */; };
 		6E4DFA7329CC474A004C9177 /* BusinessSheetVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4DFA7229CC474A004C9177 /* BusinessSheetVC.swift */; };
 		6E4DFA7529CC4EC5004C9177 /* SheetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4DFA7429CC4EC5004C9177 /* SheetTableViewCell.swift */; };
+		6E78F42829F0E79C00DAE110 /* GetBusinessByIdUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E78F42729F0E79C00DAE110 /* GetBusinessByIdUseCase.swift */; };
+		6E78F42A29F0EBD000DAE110 /* BusinessByIdStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E78F42929F0EBD000DAE110 /* BusinessByIdStruct.swift */; };
 		6E91DB4F29E39F1C008C6395 /* TravelDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E91DB4E29E39F1C008C6395 /* TravelDetailVC.swift */; };
 		6E91DB5329E3ECA3008C6395 /* PlaceActionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E91DB5229E3ECA3008C6395 /* PlaceActionCell.swift */; };
 		6E91DB5529E4EBF9008C6395 /* BusinessHoursCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E91DB5429E4EBF9008C6395 /* BusinessHoursCell.swift */; };
@@ -100,6 +102,8 @@
 		6E4DFA6929C9B585004C9177 /* CategoryType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryType.swift; sourceTree = "<group>"; };
 		6E4DFA7229CC474A004C9177 /* BusinessSheetVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessSheetVC.swift; sourceTree = "<group>"; };
 		6E4DFA7429CC4EC5004C9177 /* SheetTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetTableViewCell.swift; sourceTree = "<group>"; };
+		6E78F42729F0E79C00DAE110 /* GetBusinessByIdUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetBusinessByIdUseCase.swift; sourceTree = "<group>"; };
+		6E78F42929F0EBD000DAE110 /* BusinessByIdStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessByIdStruct.swift; sourceTree = "<group>"; };
 		6E91DB4E29E39F1C008C6395 /* TravelDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelDetailVC.swift; sourceTree = "<group>"; };
 		6E91DB5229E3ECA3008C6395 /* PlaceActionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceActionCell.swift; sourceTree = "<group>"; };
 		6E91DB5429E4EBF9008C6395 /* BusinessHoursCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessHoursCell.swift; sourceTree = "<group>"; };
@@ -253,6 +257,7 @@
 			isa = PBXGroup;
 			children = (
 				6E216F4029C1BCE900BE1BB1 /* SearchBusinessesUseCase.swift */,
+				6E78F42729F0E79C00DAE110 /* GetBusinessByIdUseCase.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -263,6 +268,7 @@
 				6E216F4329C1BF0700BE1BB1 /* SearchBusinessesStruct.swift */,
 				6EA14F5E29D3DAA0006B845F /* DisplayBusinessStruct.swift */,
 				6EF6340B29D146C7000ECED0 /* LikeListStruct.swift */,
+				6E78F42929F0EBD000DAE110 /* BusinessByIdStruct.swift */,
 			);
 			path = DataStruct;
 			sourceTree = "<group>";
@@ -595,6 +601,7 @@
 				6E216F2D29C1692A00BE1BB1 /* FirebaseAuthenticationAdapter.swift in Sources */,
 				6E91DB7529ED4C8D008C6395 /* UserInfoType.swift in Sources */,
 				6E216EFB29C017FD00BE1BB1 /* SingVC.swift in Sources */,
+				6E78F42A29F0EBD000DAE110 /* BusinessByIdStruct.swift in Sources */,
 				6EF6340C29D146C7000ECED0 /* LikeListStruct.swift in Sources */,
 				BEA9F9F529D7E01F0065BDFE /* BusinessSheetVM.swift in Sources */,
 				6E216EF729C017FD00BE1BB1 /* AppDelegate.swift in Sources */,
@@ -607,6 +614,7 @@
 				6E216F3C29C1A56200BE1BB1 /* RealtimeDatabaseAdapter.swift in Sources */,
 				6EDBA84329D5810D0065C0F7 /* UserDefaultsManager.swift in Sources */,
 				6E91DB7029ED43DC008C6395 /* UserInfoVC.swift in Sources */,
+				6E78F42829F0E79C00DAE110 /* GetBusinessByIdUseCase.swift in Sources */,
 				6E91DB5329E3ECA3008C6395 /* PlaceActionCell.swift in Sources */,
 				6E216F3929C1704600BE1BB1 /* SingVM.swift in Sources */,
 				6E4DFA6A29C9B585004C9177 /* CategoryType.swift in Sources */,
