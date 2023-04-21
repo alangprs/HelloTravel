@@ -56,6 +56,9 @@
 		6EF6340A29D13A03000ECED0 /* FavoriteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF6340929D13A03000ECED0 /* FavoriteTableViewCell.swift */; };
 		6EF6340C29D146C7000ECED0 /* LikeListStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF6340B29D146C7000ECED0 /* LikeListStruct.swift */; };
 		BE15496429C494B80032C4BE /* CategoryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE15496329C494B80032C4BE /* CategoryButton.swift */; };
+		BE8010F629F252A000149FC7 /* BusinessHoursListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8010F529F252A000149FC7 /* BusinessHoursListVC.swift */; };
+		BE8010F829F254CF00149FC7 /* RoundedTopCornersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8010F729F254CF00149FC7 /* RoundedTopCornersView.swift */; };
+		BE8010FA29F2566900149FC7 /* BusinessHoursListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8010F929F2566900149FC7 /* BusinessHoursListCell.swift */; };
 		BEA9F9F529D7E01F0065BDFE /* BusinessSheetVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA9F9F429D7E01F0065BDFE /* BusinessSheetVM.swift */; };
 /* End PBXBuildFile section */
 
@@ -124,6 +127,9 @@
 		6EF6340B29D146C7000ECED0 /* LikeListStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeListStruct.swift; sourceTree = "<group>"; };
 		9BCF00734D1A76B4375EB4EF /* Pods-HelloTravel.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HelloTravel.release.xcconfig"; path = "Target Support Files/Pods-HelloTravel/Pods-HelloTravel.release.xcconfig"; sourceTree = "<group>"; };
 		BE15496329C494B80032C4BE /* CategoryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryButton.swift; sourceTree = "<group>"; };
+		BE8010F529F252A000149FC7 /* BusinessHoursListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessHoursListVC.swift; sourceTree = "<group>"; };
+		BE8010F729F254CF00149FC7 /* RoundedTopCornersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedTopCornersView.swift; sourceTree = "<group>"; };
+		BE8010F929F2566900149FC7 /* BusinessHoursListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessHoursListCell.swift; sourceTree = "<group>"; };
 		BEA9F9F429D7E01F0065BDFE /* BusinessSheetVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessSheetVM.swift; sourceTree = "<group>"; };
 		D8C334B444D78BA5B13A0755 /* Pods_HelloTravelTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HelloTravelTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA6DE97EDBC1D4160FA79B3D /* Pods-HelloTravel.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HelloTravel.debug.xcconfig"; path = "Target Support Files/Pods-HelloTravel/Pods-HelloTravel.debug.xcconfig"; sourceTree = "<group>"; };
@@ -233,6 +239,7 @@
 		6E216F3629C1700E00BE1BB1 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				BE8010F429F2529500149FC7 /* BusinessHoursListVC */,
 				6E91DB6C29ED43C3008C6395 /* UserInfoVC */,
 				6E91DB4D29E39F0E008C6395 /* TravelDetailVC */,
 				6EF6340129D134E7000ECED0 /* UserFavoritesVC */,
@@ -386,6 +393,16 @@
 				BE15496329C494B80032C4BE /* CategoryButton.swift */,
 			);
 			path = CustomizedUI;
+			sourceTree = "<group>";
+		};
+		BE8010F429F2529500149FC7 /* BusinessHoursListVC */ = {
+			isa = PBXGroup;
+			children = (
+				BE8010F529F252A000149FC7 /* BusinessHoursListVC.swift */,
+				BE8010F729F254CF00149FC7 /* RoundedTopCornersView.swift */,
+				BE8010F929F2566900149FC7 /* BusinessHoursListCell.swift */,
+			);
+			path = BusinessHoursListVC;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -626,15 +643,18 @@
 				6E4DFA6029C950AB004C9177 /* SDWebImageAdapter.swift in Sources */,
 				6E91DB7929EE27D3008C6395 /* UserInfoVM.swift in Sources */,
 				6E91DB6B29ECDDBD008C6395 /* UIColor.swift in Sources */,
+				BE8010F829F254CF00149FC7 /* RoundedTopCornersView.swift in Sources */,
 				6E91DB4F29E39F1C008C6395 /* TravelDetailVC.swift in Sources */,
 				6E4DFA6529C95EF2004C9177 /* SearchVM.swift in Sources */,
 				6E91DB5529E4EBF9008C6395 /* BusinessHoursCell.swift in Sources */,
 				6E216F4429C1BF0700BE1BB1 /* SearchBusinessesStruct.swift in Sources */,
 				6E4DFA5C29C40258004C9177 /* NearbyLandmarkVM.swift in Sources */,
+				BE8010FA29F2566900149FC7 /* BusinessHoursListCell.swift in Sources */,
 				6E216EF929C017FD00BE1BB1 /* SceneDelegate.swift in Sources */,
 				6E91DB5D29E52A71008C6395 /* PhoneCell.swift in Sources */,
 				6EF6340A29D13A03000ECED0 /* FavoriteTableViewCell.swift in Sources */,
 				6EF6340329D13573000ECED0 /* UserFavoritesVC.swift in Sources */,
+				BE8010F629F252A000149FC7 /* BusinessHoursListVC.swift in Sources */,
 				6E91DB5A29E50732008C6395 /* TravelDetailVC+SectionType.swift in Sources */,
 				6E4DFA6729C979F8004C9177 /* SearchTopBar.swift in Sources */,
 				6E4DFA7529CC4EC5004C9177 /* SheetTableViewCell.swift in Sources */,
