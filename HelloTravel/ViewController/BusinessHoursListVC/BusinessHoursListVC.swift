@@ -23,6 +23,7 @@ class BusinessHoursListVC: UIViewController {
     }
     
     private func setupUI() {
+        view.backgroundColor = .black.withAlphaComponent(0.4)
         view.addSubview(contenerView)
         
         contenerView.snp.makeConstraints { make in

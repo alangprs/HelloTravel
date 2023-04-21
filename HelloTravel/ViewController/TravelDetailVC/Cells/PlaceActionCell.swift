@@ -107,6 +107,9 @@ class PlaceActionCell: UITableViewCell {
     private lazy var lon: Double = 0
     private lazy var placeName: String = ""
     
+    /// 點擊顯示全部營業時間
+    var didClickAllBusinessHours: (() -> Void)?
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -218,6 +221,7 @@ class PlaceActionCell: UITableViewCell {
     /// 點擊觀看更多按鈕
     @objc private func didClickAllBusinessHoursButton() {
         // TODO: 看更多時間按鈕動作
+        didClickAllBusinessHours?()
     }
     
     @objc private func didClickRegisterStoreButton() {

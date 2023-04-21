@@ -229,7 +229,12 @@ class TravelDetailVC: UIViewController {
         } else {
             likeButton.setImage(UIImage(systemName: "bookmark"), for: .normal)
         }
-        
+    }
+    
+    private func presentBusinessHoursListVC() {
+        let vc = BusinessHoursListVC()
+        vc.modalPresentationStyle = .overCurrentContext
+        present(vc, animated: true)
     }
     
     // MARK: - action
@@ -289,7 +294,9 @@ extension TravelDetailVC: UITableViewDelegate, UITableViewDataSource {
             
             placeActionCell.configureCell(lat: destinationLat, lon: destinationLon, placeName: placeName, businessHours: businessHours)
             
-            
+            placeActionCell.didClickAllBusinessHours = { [weak self] in
+                self?.presentBusinessHoursListVC()
+            }
             
             
             return placeActionCell
@@ -359,7 +366,7 @@ extension TravelDetailVC: UITableViewDelegate, UITableViewDataSource {
         
         switch cellType {
         case .businessHours:
-            return
+            presentBusinessHoursListVC()
         case .phone:
             callPhoneNumber()
         case .map:
