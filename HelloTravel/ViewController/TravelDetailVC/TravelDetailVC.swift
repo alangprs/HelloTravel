@@ -273,30 +273,33 @@ extension TravelDetailVC: UITableViewDelegate, UITableViewDataSource {
     
     private func configureCell(for sectionType: TravelDetailSectionType, indexPath: IndexPath, tableView: UITableView) -> UITableViewCell {
         switch sectionType {
-            case .topArea:
+        case .topArea:
+            return UITableViewCell()
+            
+        case .placeAction:
+            guard let placeActionCell = tableView.dequeueReusableCell(withIdentifier: "\(PlaceActionCell.self)", for: indexPath) as? PlaceActionCell else {
                 return UITableViewCell()
-                
-            case .placeAction:
-                guard let placeActionCell = tableView.dequeueReusableCell(withIdentifier: "\(PlaceActionCell.self)", for: indexPath) as? PlaceActionCell else {
-                    return UITableViewCell()
-                }
-                
-                // TODO: 確定座標之後傳入
-                let destinationLat = 1.284066
-                let destinationLon = 103.841114
-                let placeName = viewModel?.travelItem?.name ?? ""
-                let businessHours = viewModel?.getTodayBusinessStatusAndHours() ?? ""
-                
-                placeActionCell.configureCell(lat: destinationLat, lon: destinationLon, placeName: placeName, businessHours: businessHours)
-                
-                return placeActionCell
-                
-            case .information:
-                return configureInformationCell(at: indexPath, tableView: tableView)
+            }
+            
+            // TODO: 確定座標之後傳入
+            let destinationLat = 1.284066
+            let destinationLon = 103.841114
+            let placeName = viewModel?.travelItem?.name ?? ""
+            let businessHours = viewModel?.getTodayBusinessStatusAndHours() ?? ""
+            
+            placeActionCell.configureCell(lat: destinationLat, lon: destinationLon, placeName: placeName, businessHours: businessHours)
+            
+            
+            
+            
+            return placeActionCell
+            
+        case .information:
+            return configureInformationCell(at: indexPath, tableView: tableView)
         }
     }
     
-    /// cell 增加方式：增加 InformationCellType case 
+    /// cell 增加方式：增加 InformationCellType case
     /// 加入新 cell 時，numberOfRowsInSection 要增加數量
     private func configureInformationCell(at indexPath: IndexPath, tableView: UITableView) -> UITableViewCell {
         guard let cellType = InformationCellType(rawValue: indexPath.row) else {
@@ -304,45 +307,45 @@ extension TravelDetailVC: UITableViewDelegate, UITableViewDataSource {
         }
         
         switch cellType {
-            case .businessHours:
-                guard let cell = tableView.dequeueReusableCell(withIdentifier: "\(BusinessHoursCell.self)", for: indexPath) as? BusinessHoursCell else {
-                    return UITableViewCell()
-                }
-                let timeStatus = viewModel?.getTodayBusinessStatusAndHours() ?? ""
-                cell.convertCell(timeText: timeStatus)
+        case .businessHours:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "\(BusinessHoursCell.self)", for: indexPath) as? BusinessHoursCell else {
+                return UITableViewCell()
+            }
+            let timeStatus = viewModel?.getTodayBusinessStatusAndHours() ?? ""
+            cell.convertCell(timeText: timeStatus)
+            
+            return cell
+        case .phone:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "\(PhoneCell.self)", for: indexPath) as? PhoneCell else {
+                return UITableViewCell()
+            }
+            
+            return cell
+        case .map:
+            guard let mapCell = tableView.dequeueReusableCell(withIdentifier: "\(MapCell.self)", for: indexPath) as? MapCell else {
+                return UITableViewCell()
+            }
+            
+            let userLat = 1.2938
+            let userLon = 103.841114
+            
+            let destinationLat = 1.284066
+            let destinationLon = 103.841114
+            
+            // TODO: 座標等確定後接上實際座標
+            viewModel?.calculateDistanceAndETA(userLat: userLat, userLon: userLon,
+                                               destinationLat: destinationLat, destinationLon: destinationLon, completion: { distance, travelTime, error in
+                guard let distance = distance,
+                      let travelTime = travelTime,
+                      let address = self.viewModel?.assembleAddress() else { return }
                 
-                return cell
-            case .phone:
-                guard let cell = tableView.dequeueReusableCell(withIdentifier: "\(PhoneCell.self)", for: indexPath) as? PhoneCell else {
-                    return UITableViewCell()
-                }
-                
-                return cell
-            case .map:
-                guard let mapCell = tableView.dequeueReusableCell(withIdentifier: "\(MapCell.self)", for: indexPath) as? MapCell else {
-                    return UITableViewCell()
-                }
-                
-                let userLat = 1.2938
-                let userLon = 103.841114
-                
-                let destinationLat = 1.284066
-                let destinationLon = 103.841114
-                
-                // TODO: 座標等確定後接上實際座標
-                viewModel?.calculateDistanceAndETA(userLat: userLat, userLon: userLon,
-                                                   destinationLat: destinationLat, destinationLon: destinationLon, completion: { distance, travelTime, error in
-                    guard let distance = distance,
-                          let travelTime = travelTime,
-                          let address = self.viewModel?.assembleAddress() else { return }
-                    
-                    mapCell.convertCell(userLat: userLat, userLon: userLon,
-                                        destinationLat: destinationLat, destinationLon: destinationLon,
-                                        navigateTime: "\(travelTime)",
-                                        distance: "\(distance)",
-                                        address: address)
-                })
-                return mapCell
+                mapCell.convertCell(userLat: userLat, userLon: userLon,
+                                    destinationLat: destinationLat, destinationLon: destinationLon,
+                                    navigateTime: "\(travelTime)",
+                                    distance: "\(distance)",
+                                    address: address)
+            })
+            return mapCell
         }
     }
     
@@ -355,12 +358,12 @@ extension TravelDetailVC: UITableViewDelegate, UITableViewDataSource {
         }
         
         switch cellType {
-            case .businessHours:
-                return
-            case .phone:
-                callPhoneNumber()
-            case .map:
-                return
+        case .businessHours:
+            return
+        case .phone:
+            callPhoneNumber()
+        case .map:
+            return
         }
         
     }
@@ -394,12 +397,12 @@ extension TravelDetailVC: UITableViewDelegate, UITableViewDataSource {
         
         // 返回每個 section 需要的 cell 數量
         switch sectionType {
-            case .topArea:
-                return 0
-            case .placeAction:
-                return 1
-            case .information:
-                return 3
+        case .topArea:
+            return 0
+        case .placeAction:
+            return 1
+        case .information:
+            return 3
         }
         
     }
@@ -422,12 +425,12 @@ extension TravelDetailVC: UITableViewDelegate, UITableViewDataSource {
         }
         
         switch sectionType {
-            case .topArea:
-                return headerHeight
-            case .placeAction:
-                return 0
-            case .information:
-                return 30
+        case .topArea:
+            return headerHeight
+        case .placeAction:
+            return 0
+        case .information:
+            return 30
         }
     }
 }
