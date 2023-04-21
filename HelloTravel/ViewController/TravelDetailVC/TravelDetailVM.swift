@@ -70,6 +70,48 @@ class TravelDetailVM {
         return timeStatus
     }
     
+    /// 組合所有時間
+    /// 此函數用於將所有時間兩兩一組進行組合，並返回一個包含組合時間的新陣列。
+    /// 每組時間會用逗號分隔，例如："08:00-10:00,10:30-12:30"。
+    /// - Returns: 一個包含組合時間的新陣列
+    func combineAllTimes() -> [String] {
+        var newTimeTitles: [String] = []
+        
+        guard let timeTitles = getAllTimes() else { return [""]}
+        
+        for i in stride(from: 0, to: timeTitles.count, by: 2) {
+            
+            if i + 1 < timeTitles.count {
+                var titleItem: [String] = []
+                titleItem.append(timeTitles[i])
+                titleItem.append(timeTitles[i+1])
+                
+                var sumTitle = titleItem.joined(separator: ",")
+                newTimeTitles.append("\(sumTitle)")
+                
+            }
+        }
+        
+        return newTimeTitles
+    }
+    
+    /// 取得所有時間
+    /// 此函數用於從 businessTime 中取得所有的開放時間，並將每個開放時間範圍轉換為一個時間標題，例如："08:00-10:00"
+    /// 返回一個包含所有時間標題的陣列，如果無法取得 businessTime，則返回 nil
+    private func getAllTimes() -> [String]? {
+        var allTimeTitles: [String] = []
+        
+        guard let businessTime = businessTime,
+              let openTimes = businessTime.hours.first?.hourOpen else { return nil}
+        
+        for time in openTimes {
+            let timeTitle = "\(time.start) - \(time.end)"
+            allTimeTitles.append(timeTitle)
+        }
+        
+        return allTimeTitles
+    }
+    
     /// 取得今天的營業時間
     private func getTodayBusinessHours() -> String {
         
