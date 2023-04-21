@@ -11,6 +11,11 @@ import SnapKit
 /// 上方圓角 view
 class RoundedTopCornersView: UIView {
     
+    private lazy var viewModel: RoundedTopCornersViewVM = {
+        var viewModel = RoundedTopCornersViewVM()
+        return viewModel
+    }()
+    
     private lazy var tableView: UITableView = {
         var tableView = UITableView()
         tableView.delegate = self
@@ -107,7 +112,7 @@ class RoundedTopCornersView: UIView {
 extension RoundedTopCornersView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return 1
+        return viewModel.weekdayCount
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -116,7 +121,8 @@ extension RoundedTopCornersView: UITableViewDelegate, UITableViewDataSource {
             return UITableViewCell()
         }
         
-        cell.convertCell(title: "星期一", time: "1:00 AM - 10:00 PM")
+        let title = viewModel.getWeekday(index: indexPath)
+        cell.convertCell(title: title, time: "1:00 AM - 10:00 PM")
         
         return cell
     }
