@@ -108,7 +108,7 @@ class NearbyLandmarkVC: UIViewController {
         var collectionView = UICollectionView()
         return collectionView
     }()
-    
+
     // MARK: - 生命週期
     
     override func viewDidLoad() {
@@ -130,7 +130,7 @@ class NearbyLandmarkVC: UIViewController {
         viewModel.removeAllObservers()
         navigationController?.setNavigationBarHidden(true, animated: false)
     }
-    
+
     // MARK: - 其他
     
     private func setupUI() {
@@ -217,16 +217,16 @@ class NearbyLandmarkVC: UIViewController {
             let buttonContainerViewHeight = middleButtonContainerView.frame.height
             return superViewHeight - (topViewHeight + buttonContainerViewHeight)
         }()
-        
+
         layout.itemSize = CGSize(width: getWidth, height: lastHeight)
-        // 左右間距
-        layout.minimumLineSpacing = CGFloat(integerLiteral: 10)
+        layout.minimumLineSpacing = 0
         // 水平滑動
         layout.scrollDirection = .horizontal
         
         travelCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         // 關閉滾動條
         travelCollectionView.showsHorizontalScrollIndicator = false
+        travelCollectionView.isPagingEnabled = true
         
         view.addSubview(travelCollectionView)
         travelCollectionView.backgroundColor = .clear
@@ -339,7 +339,7 @@ extension NearbyLandmarkVC: UICollectionViewDelegate, UICollectionViewDataSource
                          isFavorite: travelItem.isFavorites,
                          buttonTag: indexPath.row)
         configurationCellEvent(cell: cell)
-        
+
         return cell
     }
 
@@ -349,7 +349,7 @@ extension NearbyLandmarkVC: UICollectionViewDelegate, UICollectionViewDataSource
 
         navigationController?.pushViewController(travelDetailVC, animated: true)
     }
-    
-    
+
+
 }
 
