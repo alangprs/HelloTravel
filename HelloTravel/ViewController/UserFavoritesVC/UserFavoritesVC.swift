@@ -25,6 +25,15 @@ class UserFavoritesVC: UIViewController {
         return tableView
     }()
 
+    /// 提示目前資料為空
+    private lazy var emptyLabel: UILabel = {
+        var label = UILabel()
+        label.text = "收藏清單是空的唷"
+        label.textColor = .black
+        label.font = .systemFont(ofSize: 32, weight: .bold)
+        return label
+    }()
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -35,6 +44,7 @@ class UserFavoritesVC: UIViewController {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(false, animated: false)
         viewModel.referenceData()
+        updateEmptyLabel()
     }
 
     override func viewDidDisappear(_ animated: Bool) {
@@ -43,12 +53,21 @@ class UserFavoritesVC: UIViewController {
         viewModel.removeAllObservers()
     }
 
+    func updateEmptyLabel() {
+        emptyLabel.isHidden = !viewModel.isDatabaseEmpty()
+    }
+
     private func setupUI() {
         view.backgroundColor = .bgLightBlue
         view.addSubview(favoriteTableView)
+        view.addSubview(emptyLabel)
 
         favoriteTableView.snp.makeConstraints { make in
             make.top.leading.trailing.bottom.equalToSuperview()
+        }
+
+        emptyLabel.snp.makeConstraints { make in
+            make.centerX.centerY.equalToSuperview()
         }
     }
 
@@ -92,6 +111,7 @@ extension UserFavoritesVC: UITableViewDelegate, UITableViewDataSource {
 
 extension UserFavoritesVC: UserFavoritesVMDelegate {
     func getLikeListSuccess() {
+        updateEmptyLabel()
         favoriteTableView.reloadData()
     }
 

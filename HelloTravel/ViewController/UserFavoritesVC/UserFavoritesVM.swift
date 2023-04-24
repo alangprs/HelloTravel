@@ -38,6 +38,11 @@ class UserFavoritesVM {
         }
     }
 
+    /// 判斷目前資料庫是否為空的
+    func isDatabaseEmpty() -> Bool {
+        return likeList.isEmpty
+    }
+
     /// 移除資料庫節點資料
     func removeDataValue() {
         // TODO: 節點名稱使用 adapter 內 func 取得
