@@ -46,6 +46,8 @@ class PhoneCell: UITableViewCell {
     }
 
     private func setupUI() {
+        self.selectionStyle = .none
+        
         contentView.addSubview(titleLabel)
         contentView.addSubview(phoneNumberLabel)
         contentView.addSubview(phoneImageView)

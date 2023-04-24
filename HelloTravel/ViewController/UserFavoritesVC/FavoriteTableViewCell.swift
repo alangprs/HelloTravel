@@ -75,6 +75,8 @@ class FavoriteTableViewCell: UITableViewCell {
         titleLabel.snp.makeConstraints { make in
             make.leading.equalToSuperview().inset(12)
             make.bottom.equalToSuperview().offset(-6)
+            // 限制最大寬度
+            make.width.lessThanOrEqualTo(contentView.bounds.width * 0.6)
         }
 
         starsCountImageView.snp.makeConstraints { make in

@@ -62,6 +62,7 @@ class SearchBusinessesUseCase {
     func getBusinessesData(completion: @escaping ((Result<SearchBusinessesStruct, Error>) -> Void)) {
 
         // api key 看文件
+        let apiKey = ""
         
         guard let url = components.url else {
             Logger.errorLog(message: "get url error")

@@ -124,6 +124,7 @@ class TravelDetailVC: UIViewController {
     init(travelItem: DisplayBusiness) {
         self.viewModel = TravelDetailVM(travelItem: travelItem)
         super.init(nibName: nil, bundle: nil)
+        self.viewModel?.delegate = self
     }
     
     required init?(coder: NSCoder) {
@@ -140,8 +141,13 @@ class TravelDetailVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setupHeaderDetail()
         navigationController?.setNavigationBarHidden(true, animated: false)
+        setupHeaderDetail()
+        
+        //        viewModel?.getBusinessById()
+#if DEBUG
+        viewModel?.decodeJson()
+#endif
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -223,7 +229,13 @@ class TravelDetailVC: UIViewController {
         } else {
             likeButton.setImage(UIImage(systemName: "bookmark"), for: .normal)
         }
-        
+    }
+    
+    private func presentBusinessHoursListVC() {
+        guard let data = viewModel?.combineAllTimes() else { return }
+        let vc = BusinessHoursListVC(data: data)
+        vc.modalPresentationStyle = .overCurrentContext
+        present(vc, animated: true)
     }
     
     // MARK: - action
@@ -245,7 +257,7 @@ class TravelDetailVC: UIViewController {
     
     /// 喜歡按鈕
     @objc private func didClickLikeButton() {
-        // TODO: 喜歡按鈕動作
+        viewModel?.toggleLikeStatus()
     }
     
     /// 更多圖片按鈕
@@ -278,9 +290,15 @@ extension TravelDetailVC: UITableViewDelegate, UITableViewDataSource {
             // TODO: 確定座標之後傳入
             let destinationLat = 1.284066
             let destinationLon = 103.841114
-            let plazceName = viewModel?.travelItem?.name ?? ""
+            let placeName = viewModel?.travelItem?.name ?? ""
+            let businessHours = viewModel?.getTodayBusinessStatusAndHours() ?? ""
             
-            placeActionCell.configureCell(lat: destinationLat, lon: destinationLon, placeName: plazceName)
+            placeActionCell.configureCell(lat: destinationLat, lon: destinationLon, placeName: placeName, businessHours: businessHours)
+            
+            placeActionCell.didClickAllBusinessHours = { [weak self] in
+                self?.presentBusinessHoursListVC()
+            }
+            
             
             return placeActionCell
             
@@ -289,7 +307,7 @@ extension TravelDetailVC: UITableViewDelegate, UITableViewDataSource {
         }
     }
     
-    /// cell 增加方式：增加 InformationCellType case 
+    /// cell 增加方式：增加 InformationCellType case
     /// 加入新 cell 時，numberOfRowsInSection 要增加數量
     private func configureInformationCell(at indexPath: IndexPath, tableView: UITableView) -> UITableViewCell {
         guard let cellType = InformationCellType(rawValue: indexPath.row) else {
@@ -301,6 +319,8 @@ extension TravelDetailVC: UITableViewDelegate, UITableViewDataSource {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "\(BusinessHoursCell.self)", for: indexPath) as? BusinessHoursCell else {
                 return UITableViewCell()
             }
+            let timeStatus = viewModel?.getTodayBusinessStatusAndHours() ?? ""
+            cell.convertCell(timeText: timeStatus)
             
             return cell
         case .phone:
@@ -347,7 +367,7 @@ extension TravelDetailVC: UITableViewDelegate, UITableViewDataSource {
         
         switch cellType {
         case .businessHours:
-            return
+            presentBusinessHoursListVC()
         case .phone:
             callPhoneNumber()
         case .map:
@@ -420,5 +440,17 @@ extension TravelDetailVC: UITableViewDelegate, UITableViewDataSource {
         case .information:
             return 30
         }
+    }
+}
+
+// MARK: - TravelDetailVMDelegate
+
+extension TravelDetailVC: TravelDetailVMDelegate {
+    func getBusinessByIdSuccess() {
+        detailTableView.reloadData()
+    }
+    
+    func getTravelItemSuccess(isLike: Bool) {
+        setLikeButtonImage(isFavorite: isLike)
     }
 }

@@ -23,7 +23,6 @@ class PlaceActionCell: UITableViewCell {
     /// 營業時間
     private lazy var businessHoursLabel: UILabel = {
         var label = UILabel()
-        label.text = "關門中 12:00-14:30, 17:30-21:00"
         label.textColor = .black
         label.font = .systemFont(ofSize: 14, weight: .regular)
         return label
@@ -108,6 +107,9 @@ class PlaceActionCell: UITableViewCell {
     private lazy var lon: Double = 0
     private lazy var placeName: String = ""
     
+    /// 點擊顯示全部營業時間
+    var didClickAllBusinessHours: (() -> Void)?
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -118,10 +120,11 @@ class PlaceActionCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configureCell(lat: Double, lon: Double, placeName: String) {
+    func configureCell(lat: Double, lon: Double, placeName: String, businessHours: String) {
         self.lat = lat
         self.lon = lon
         self.placeName = placeName
+        self.businessHoursLabel.text = businessHours
     }
     
     private func openMap() {
@@ -145,6 +148,7 @@ class PlaceActionCell: UITableViewCell {
     }
     
     private func setupUI() {
+        self.selectionStyle = .none
         
         contentView.addSubview(typeNameLabel)
         contentView.addSubview(businessHoursLabel)
@@ -179,7 +183,7 @@ class PlaceActionCell: UITableViewCell {
         contentView.addSubview(callPhoneButton)
         contentView.addSubview(lookMapButton)
         
-        let leading = 20
+        let leading = 10
         let bottom = 10
         
         addCommentButton.snp.makeConstraints { make in
@@ -209,6 +213,7 @@ class PlaceActionCell: UITableViewCell {
             make.leading.equalTo(callPhoneButton.snp.trailing).offset(leading)
             make.width.height.equalTo(addCommentButton)
             make.bottom.equalToSuperview().inset(bottom)
+            make.trailing.equalToSuperview().offset(-24)
         }
         
     }
@@ -218,6 +223,7 @@ class PlaceActionCell: UITableViewCell {
     /// 點擊觀看更多按鈕
     @objc private func didClickAllBusinessHoursButton() {
         // TODO: 看更多時間按鈕動作
+        didClickAllBusinessHours?()
     }
     
     @objc private func didClickRegisterStoreButton() {
