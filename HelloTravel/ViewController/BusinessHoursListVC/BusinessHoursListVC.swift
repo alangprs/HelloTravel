@@ -17,7 +17,16 @@ class BusinessHoursListVC: UIViewController {
         view.backgroundColor = .white
         return view
     }()
-    
+
+    init(data: [String]) {
+        super.init(nibName: nil, bundle: nil)
+        self.contenerView.viewModel.updateBusinessHoursData(data: data)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         

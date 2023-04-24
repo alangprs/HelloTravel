@@ -20,6 +20,7 @@ class BusinessHoursListCell: UITableViewCell {
     private lazy var timeLabel: UILabel = {
         var label = UILabel()
         label.textColor = .black
+        label.numberOfLines = 0
         label.font = .systemFont(ofSize: 14)
         return label
     }()

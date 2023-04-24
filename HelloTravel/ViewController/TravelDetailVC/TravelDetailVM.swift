@@ -86,7 +86,7 @@ class TravelDetailVM {
                 titleItem.append(timeTitles[i])
                 titleItem.append(timeTitles[i+1])
                 
-                var sumTitle = titleItem.joined(separator: ",")
+                var sumTitle = titleItem.joined(separator: "\n")
                 newTimeTitles.append("\(sumTitle)")
                 
             }

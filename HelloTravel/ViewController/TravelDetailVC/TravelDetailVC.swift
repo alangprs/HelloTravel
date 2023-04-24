@@ -232,7 +232,8 @@ class TravelDetailVC: UIViewController {
     }
     
     private func presentBusinessHoursListVC() {
-        let vc = BusinessHoursListVC()
+        guard let data = viewModel?.combineAllTimes() else { return }
+        let vc = BusinessHoursListVC(data: data)
         vc.modalPresentationStyle = .overCurrentContext
         present(vc, animated: true)
     }

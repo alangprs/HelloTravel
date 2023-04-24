@@ -8,19 +8,31 @@
 import Foundation
 
 class RoundedTopCornersViewVM {
-    
+
+    private var businessHoursArray: [String]?
+
     private(set) lazy var weekdayCount: Int = {
         return Weekday.allCases.count
     }()
-    
+
     /// 由於enum順序由1開始，所以index +1
     func getWeekday(index: IndexPath) -> String {
         guard let weekday = Weekday(rawValue: index.row + 1)?.weekDayString else {
-            print("w - not")
             return ""}
         return weekday
     }
-    
+
+    func updateBusinessHoursData(data: [String]) {
+        businessHoursArray = data
+    }
+
+    func getBusiness(index: IndexPath) -> String {
+        guard let businessItem = businessHoursArray else {
+            return ""
+        }
+
+        return businessItem[index.row]
+    }
 }
 
 // MARK: - 星期顯示

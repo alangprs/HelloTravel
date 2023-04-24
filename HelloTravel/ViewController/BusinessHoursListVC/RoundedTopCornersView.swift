@@ -17,11 +17,11 @@ class RoundedTopCornersView: UIView {
 
     weak var delegate: RoundedTopCornersViewDelegate?
     
-    private lazy var viewModel: RoundedTopCornersViewVM = {
+    lazy var viewModel: RoundedTopCornersViewVM = {
         var viewModel = RoundedTopCornersViewVM()
         return viewModel
     }()
-    
+
     private lazy var tableView: UITableView = {
         var tableView = UITableView()
         tableView.delegate = self
@@ -57,10 +57,10 @@ class RoundedTopCornersView: UIView {
     }()
     
     // MARK: - 生命週期
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
+
         setupUI()
     }
     
@@ -113,7 +113,7 @@ class RoundedTopCornersView: UIView {
     }
 }
 
-// MARK: - UITableVIewDelegate
+// MARK: - UITableViewDelegate
 
 extension RoundedTopCornersView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -128,7 +128,8 @@ extension RoundedTopCornersView: UITableViewDelegate, UITableViewDataSource {
         }
         
         let title = viewModel.getWeekday(index: indexPath)
-        cell.convertCell(title: title, time: "1:00 AM - 10:00 PM")
+        let timeList = viewModel.getBusiness(index: indexPath)
+        cell.convertCell(title: title, time: timeList)
         
         return cell
     }
