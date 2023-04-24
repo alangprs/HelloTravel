@@ -148,6 +148,7 @@ class PlaceActionCell: UITableViewCell {
     }
     
     private func setupUI() {
+        self.selectionStyle = .none
         
         contentView.addSubview(typeNameLabel)
         contentView.addSubview(businessHoursLabel)

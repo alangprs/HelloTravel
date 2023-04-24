@@ -140,6 +140,8 @@ class MapCell: UITableViewCell {
     }
 
     private func setupUI() {
+        self.selectionStyle = .none
+        
         contentView.addSubview(mapView)
         contentView.addSubview(titleLabel)
         contentView.addSubview(addressLabel)

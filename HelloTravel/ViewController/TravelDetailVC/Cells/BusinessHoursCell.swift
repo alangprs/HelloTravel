@@ -48,6 +48,7 @@ class BusinessHoursCell: UITableViewCell {
     }
     
     private func setupUI() {
+        self.selectionStyle = .none
         contentView.addSubview(titleLabel)
         contentView.addSubview(businessHoursLabel)
         contentView.addSubview(arrowImageView)
