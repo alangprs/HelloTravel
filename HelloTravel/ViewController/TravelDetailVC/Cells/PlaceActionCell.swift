@@ -183,7 +183,7 @@ class PlaceActionCell: UITableViewCell {
         contentView.addSubview(callPhoneButton)
         contentView.addSubview(lookMapButton)
         
-        let leading = 20
+        let leading = 10
         let bottom = 10
         
         addCommentButton.snp.makeConstraints { make in
@@ -213,6 +213,7 @@ class PlaceActionCell: UITableViewCell {
             make.leading.equalTo(callPhoneButton.snp.trailing).offset(leading)
             make.width.height.equalTo(addCommentButton)
             make.bottom.equalToSuperview().inset(bottom)
+            make.trailing.equalToSuperview().offset(-24)
         }
         
     }
