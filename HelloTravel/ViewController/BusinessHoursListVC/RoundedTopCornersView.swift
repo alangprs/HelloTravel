@@ -8,8 +8,14 @@
 import UIKit
 import SnapKit
 
+protocol RoundedTopCornersViewDelegate: AnyObject {
+    func didDismiss()
+}
+
 /// 上方圓角 view
 class RoundedTopCornersView: UIView {
+
+    weak var delegate: RoundedTopCornersViewDelegate?
     
     private lazy var viewModel: RoundedTopCornersViewVM = {
         var viewModel = RoundedTopCornersViewVM()
@@ -103,7 +109,7 @@ class RoundedTopCornersView: UIView {
     // MARK: - action
     
     @objc private func didClickClosedButton() {
-        
+        delegate?.didDismiss()
     }
 }
 
