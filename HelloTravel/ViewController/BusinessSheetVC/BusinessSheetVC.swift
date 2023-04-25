@@ -61,7 +61,7 @@ extension BusinessSheetVC: UITableViewDelegate, UITableViewDataSource {
             return UITableViewCell()
         }
 
-        cell.convertCell(image01: "testImage", image02: "testImage", image03: "testImage", title: travelItem.name, reviewCount: "\(travelItem.reviewCount)", starsstars: travelItem.rating)
+        cell.convertCell(image01: travelItem.imageURL, title: travelItem.name, reviewCount: "\(travelItem.reviewCount)", starsstars: travelItem.rating)
 
         return cell
     }

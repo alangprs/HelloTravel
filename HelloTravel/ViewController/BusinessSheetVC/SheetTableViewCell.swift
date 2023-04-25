@@ -17,16 +17,6 @@ class SheetTableViewCell: UITableViewCell {
         var imageView = UIImageView()
         return imageView
     }()
-    
-    private lazy var imageView02: UIImageView = {
-        var imageView = UIImageView()
-        return imageView
-    }()
-    
-    private lazy var imageView03: UIImageView = {
-        var imageView = UIImageView()
-        return imageView
-    }()
 
     private lazy var titleLabel: UILabel = {
         var label = UILabel()
@@ -67,20 +57,23 @@ class SheetTableViewCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+
+        imageView01.layer.cornerRadius = 10
+        imageView01.clipsToBounds = true
+    }
     
     /// cell UI 設定
     /// - Parameters:
     ///   - image01: 照片1
-    ///   - image02: 照片2
-    ///   - image03: 照片3
     ///   - title: 抬頭文字
     ///   - reviewCount: 留言數量文字
     ///   - starsImage: 星星數量
-    func convertCell(image01: String, image02: String, image03: String, title: String, reviewCount: String, starsstars: CGFloat) {
+    func convertCell(image01: String, title: String, reviewCount: String, starsstars: CGFloat) {
         
         sdWebImageAdapter.setImage(imageView: imageView01, imageString: image01)
-        sdWebImageAdapter.setImage(imageView: imageView02, imageString: image02)
-        sdWebImageAdapter.setImage(imageView: imageView03, imageString: image03)
         titleLabel.text = title
         starsCountLabel.text = "\(reviewCount)個評價"
         starsCountImageView.value = starsstars
@@ -90,41 +83,24 @@ class SheetTableViewCell: UITableViewCell {
         contentView.backgroundColor = .bgLightBlue
 
         contentView.addSubview(imageView01)
-        contentView.addSubview(imageView02)
-        contentView.addSubview(imageView03)
-        contentView.addSubview(titleLabel)
+        imageView01.addSubview(titleLabel)
         contentView.addSubview(starsCountImageView)
         contentView.addSubview(starsCountLabel)
 
         imageView01.snp.makeConstraints { make in
-            make.top.leading.equalToSuperview().inset(12)
-            make.width.equalToSuperview().multipliedBy(0.3)
+            make.top.leading.equalToSuperview().offset(12)
+            make.trailing.equalToSuperview().offset(-12)
             make.height.equalTo(imageView01.snp.width)
-            make.bottom.equalTo(titleLabel.snp.top).inset(-6)
-        }
-        
-        imageView02.snp.makeConstraints { make in
-            make.top.equalToSuperview().inset(12)
-            make.leading.equalTo(imageView01.snp.trailing).inset(-9)
-            make.width.equalToSuperview().multipliedBy(0.3)
-            make.height.equalTo(imageView02.snp.width)
-            make.bottom.equalTo(titleLabel.snp.top).inset(-6)
-        }
-        
-        imageView03.snp.makeConstraints { make in
-            make.top.equalToSuperview().inset(12)
-            make.trailing.equalToSuperview().inset(12)
-            make.width.equalToSuperview().multipliedBy(0.3)
-            make.height.equalTo(imageView03.snp.width)
-            make.bottom.equalTo(titleLabel.snp.top).inset(-6)
+            make.bottom.equalTo(starsCountLabel.snp.top).inset(-6)
         }
 
         titleLabel.snp.makeConstraints { make in
-            make.leading.equalToSuperview().inset(12)
+            make.leading.equalToSuperview()
+            make.bottom.equalToSuperview().offset(-6)
         }
 
         starsCountLabel.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(12)
+            make.top.equalTo(imageView01.snp.bottom).offset(12)
             make.leading.equalToSuperview().inset(12)
             make.bottom.equalToSuperview().offset(-6)
         }
